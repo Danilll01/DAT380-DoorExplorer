@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    private GameObject selectedObject;
+    private GameObject heldItem;
+    private Rigidbody heldItemRB;
+
+    [Header("Pick Up Settings")]
+    [SerializeField] private float pickupDistance = 50.0f;
+    [SerializeField] private float pickupForce = 20.0f;
+    [SerializeField] private float pickupDuration = 0.25f;
+
     private bool itemCanFollow = false;
-    private Vector3 initialForward;
+    private float carryDistance = 2.0f;
 
     void Update()
     {
-        RightClick();
-        if (selectedObject != null && itemCanFollow)
+        LeftClick();
+        if (heldItem != null && itemCanFollow)
         {
             CarryItem();
         }
@@ -19,25 +26,20 @@ public class PickUp : MonoBehaviour
 
     private void CarryItem()
     {
-        selectedObject.transform.position = transform.position + transform.forward * 2.0f;
-
-        RotateItem();
+        Vector3 holdArea = transform.position + transform.forward * carryDistance;
+        if (Vector3.Distance(heldItem.transform.position, holdArea) > 0.01f)
+        {
+            Vector3 direction = (holdArea - heldItem.transform.position);
+            heldItemRB.AddForce(direction * pickupForce);
+        }
     }
-
-    private void RotateItem()
-    {
-        Vector3 directionToCamera = transform.position - selectedObject.transform.position;
-        Quaternion targetRotation = Quaternion.FromToRotation(initialForward, directionToCamera);
-        selectedObject.transform.rotation = targetRotation;
-    }
-
-    private void RightClick()
+    private void LeftClick()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (selectedObject == null)
+            if (heldItem == null)
             {
-                PickUpItem();
+                PickupItem();
             }
             else
             {
@@ -47,22 +49,21 @@ public class PickUp : MonoBehaviour
         }
     }
 
-    private void PickUpItem()
+    private void PickupItem()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
-
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupDistance))
         {
-
-            PickAble pickAble = hit.collider.GetComponent<PickAble>();
-
-            if (pickAble != null)
+            if (hit.collider.GetComponent<PickAble>() != null)
             {
-                selectedObject = hit.collider.gameObject;
-                selectedObject.GetComponent<Rigidbody>().useGravity = false;
-                Debug.Log("Selected Object: " + selectedObject.name);
+                heldItem = hit.collider.gameObject;
+                heldItemRB = heldItem.GetComponent<Rigidbody>();
+
+                heldItemRB.useGravity = false;
+                heldItemRB.drag = 20.0f;
+                heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
+
+                Debug.Log("Selected Object: " + heldItem.name);
                 MoveObjectToCamera();
             }
         }
@@ -70,53 +71,37 @@ public class PickUp : MonoBehaviour
 
     private void DropItem()
     {
-        selectedObject.GetComponent<Rigidbody>().useGravity = true;
+        heldItemRB.useGravity = true;
+        heldItemRB.drag = 1.0f;
+        heldItemRB.constraints = RigidbodyConstraints.None;
         itemCanFollow = false;
-        selectedObject = null;
+        heldItem = null;
+        heldItemRB = null;
     }
 
     private void MoveObjectToCamera()
     {
         StopCoroutine("MoveObjectCoroutine");
-        Rigidbody rb = selectedObject.GetComponent<Rigidbody>();
-        rb.angularVelocity = Vector3.zero;
-        rb.velocity = Vector3.zero;
+        heldItemRB.angularVelocity = Vector3.zero;
+        heldItemRB.velocity = Vector3.zero;
         StartCoroutine(MoveObjectToCameraCoroutine());
     }
 
     private IEnumerator MoveObjectToCameraCoroutine()
     {
-        Vector3 start = selectedObject.transform.position;
-        float duration = 0.25f;
+        Vector3 start = heldItem.transform.position;
         float elapsed = 0f;
 
-        while (elapsed < duration)
+        while (elapsed < pickupDuration)
         {
-            Vector3 pointInFront = transform.position + transform.forward * 2.0f;
-            selectedObject.transform.position = Vector3.Lerp(start, pointInFront, elapsed / duration);
+            Vector3 pointInFront = transform.position + transform.forward * carryDistance;
+            heldItem.transform.position = Vector3.Lerp(start, pointInFront, elapsed / pickupDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.position = transform.position + transform.forward * 2.0f;
+        transform.position = transform.position + transform.forward * carryDistance;
         itemCanFollow = true;
-        initialForward = selectedObject.transform.forward;
-    }
-
-
-
-
-
-
-
-    private void ShrinkItem()
-    {
-        selectedObject.transform.localScale = selectedObject.transform.localScale * 0.5f;
-    }
-
-    private void GrowItem()
-    {
-        selectedObject.transform.localScale = selectedObject.transform.localScale * 2.0f;
     }
 
 
