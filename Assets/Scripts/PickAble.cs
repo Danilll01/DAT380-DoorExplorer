@@ -5,36 +5,14 @@ using UnityEngine;
 public class PickAble : MonoBehaviour
 {
 
-    private Material material;
+    private Outline script;
 
-    private void Start()
+    void Start()
     {
-        Material[] materials = GetComponent<Renderer>().materials;
-        foreach (Material mat in materials)
-        {
-            Debug.Log(mat.name);
-            if (mat.name == "PickAbleShader (Instance)")
-            {
-                material = mat;
-            }
+        script = GetComponent<Outline>();
+        if (script != null){
+            script.enabled = false;
         }
-        SetVisibility(false);
     }
 
-    private void OnMouseEnter()
-    {
-
-        SetVisibility(true);
-    }
-
-    private void OnMouseExit()
-    {
-
-        SetVisibility(false);
-    }
-
-    private void SetVisibility(bool isVisible)
-    {
-        material.color = isVisible ? Color.white : Color.clear;
-    }
 }

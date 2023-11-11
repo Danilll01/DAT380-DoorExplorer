@@ -1,26 +1,67 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
     private GameObject heldItem;
     private Rigidbody heldItemRB;
+    private bool itemCanFollow = false;
+    private float carryDistance = 2.0f;
+    private GameObject objectInFront;
+    private float highest = 0.0f; // for debugging
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 50.0f;
     [SerializeField] private float pickupForce = 20.0f;
     [SerializeField] private float pickupDuration = 0.25f;
 
-    private bool itemCanFollow = false;
-    private float carryDistance = 2.0f;
-
     void Update()
     {
+        MouseHover();
         LeftClick();
         if (heldItem != null && itemCanFollow)
         {
             CarryItem();
+        }
+    }
+
+    private void MouseHover()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
+        {
+            Outline outline = hit.collider.GetComponent<Outline>();
+            if (outline != null && heldItem == null) // Don't highlight objects if we're holding something
+            {
+                SetOutline(hit.collider.gameObject, outline);
+            }
+            else
+            {
+                ClearOutline();
+            }
+        }
+        else
+        {
+            ClearOutline();
+        }
+    }
+
+    private void SetOutline(GameObject obj, Outline outline)
+    {
+        if (obj != objectInFront)
+        {
+            ClearOutline();
+            objectInFront = obj;
+            outline.enabled = true;
+        }
+    }
+
+    private void ClearOutline()
+    {
+        if (objectInFront != null)
+        {
+            objectInFront.GetComponent<Outline>().enabled = false;
+            objectInFront = null;
         }
     }
 
@@ -32,7 +73,17 @@ public class PickUp : MonoBehaviour
             Vector3 direction = (holdArea - heldItem.transform.position);
             heldItemRB.AddForce(direction * pickupForce);
         }
+        if(heldItemRB.velocity.magnitude > highest){
+            highest = heldItemRB.velocity.magnitude;
+        }
+        Debug.Log(heldItemRB.velocity.magnitude + " " + highest);
+
+        //if(heldItemRB.velocity.magnitude > 0.01f)
+        //{
+        //    DropItem();
+        //}
     }
+
     private void LeftClick()
     {
         if (Input.GetMouseButtonDown(0))
@@ -45,16 +96,16 @@ public class PickUp : MonoBehaviour
             {
                 DropItem();
             }
-
         }
     }
 
     private void PickupItem()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
         {
-            if (hit.collider.GetComponent<PickAble>() != null)
+            Outline outline = hit.collider.GetComponent<Outline>();
+            if (outline != null)
             {
                 heldItem = hit.collider.gameObject;
                 heldItemRB = heldItem.GetComponent<Rigidbody>();
@@ -63,7 +114,6 @@ public class PickUp : MonoBehaviour
                 heldItemRB.drag = 20.0f;
                 heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
 
-                Debug.Log("Selected Object: " + heldItem.name);
                 MoveObjectToCamera();
             }
         }
@@ -103,6 +153,4 @@ public class PickUp : MonoBehaviour
         transform.position = transform.position + transform.forward * carryDistance;
         itemCanFollow = true;
     }
-
-
 }
