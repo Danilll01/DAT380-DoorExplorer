@@ -13,7 +13,7 @@ Shader "Unlit/PortalUnlit"
             "RenderPipeline" = "UniversalPipeline"
         }
         //LOD 100
-        //Cull Off
+        Cull Off
         
         HLSLINCLUDE
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
