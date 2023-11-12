@@ -21,6 +21,11 @@ public class Portal : MonoBehaviour {
     Material firstRecursionMat;
     List<PortalTraveller> trackedTravellers;
     MeshFilter screenMeshFilter;
+    private static readonly int SliceCentre = Shader.PropertyToID("sliceCentre");
+    private static readonly int SliceNormal = Shader.PropertyToID("sliceNormal");
+    private static readonly int SliceOffsetDst = Shader.PropertyToID("sliceOffsetDst");
+    private static readonly int MainTex = Shader.PropertyToID("_MainTex");
+    private static readonly int DisplayMask = Shader.PropertyToID("displayMask");
 
     void Awake () {
         playerCam = Camera.main;
@@ -110,7 +115,7 @@ public class Portal : MonoBehaviour {
 
         // Hide screen so that camera can see through portal
         screen.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
-        linkedPortal.screen.material.SetInt ("displayMask", 0);
+        linkedPortal.screen.material.SetInt (DisplayMask, 0);
 
         for (int i = startIndex; i < recursionLimit; i++) {
             portalCam.transform.SetPositionAndRotation(renderPositions[i], renderRotations[i]);
@@ -122,7 +127,7 @@ public class Portal : MonoBehaviour {
             //portalCam.Render();
 
             if (i == startIndex) {
-                linkedPortal.screen.material.SetInt ("displayMask", 1);
+                linkedPortal.screen.material.SetInt (DisplayMask, 1);
             }
         }
 
@@ -200,7 +205,7 @@ public class Portal : MonoBehaviour {
             // Render the view from the portal camera to the view texture
             portalCam.targetTexture = viewTexture;
             // Display the view texture on the screen of the linked portal
-            linkedPortal.screen.material.SetTexture ("_MainTex", viewTexture);
+            linkedPortal.screen.material.SetTexture (MainTex, viewTexture);
         }
     }
 
@@ -244,13 +249,13 @@ public class Portal : MonoBehaviour {
 
         // Apply parameters
         for (int i = 0; i < traveller.originalMaterials.Length; i++) {
-            traveller.originalMaterials[i].SetVector ("sliceCentre", slicePos);
-            traveller.originalMaterials[i].SetVector ("sliceNormal", sliceNormal);
-            traveller.originalMaterials[i].SetFloat ("sliceOffsetDst", sliceOffsetDst);
+            traveller.originalMaterials[i].SetVector (SliceCentre, slicePos);
+            traveller.originalMaterials[i].SetVector (SliceNormal, sliceNormal);
+            traveller.originalMaterials[i].SetFloat (SliceOffsetDst, sliceOffsetDst);
 
-            traveller.cloneMaterials[i].SetVector ("sliceCentre", cloneSlicePos);
-            traveller.cloneMaterials[i].SetVector ("sliceNormal", cloneSliceNormal);
-            traveller.cloneMaterials[i].SetFloat ("sliceOffsetDst", cloneSliceOffsetDst);
+            traveller.cloneMaterials[i].SetVector (SliceCentre, cloneSlicePos);
+            traveller.cloneMaterials[i].SetVector (SliceNormal, cloneSliceNormal);
+            traveller.cloneMaterials[i].SetFloat (SliceOffsetDst, cloneSliceOffsetDst);
 
         }
 

@@ -5,6 +5,8 @@ using UnityEngine.Rendering;
 public class PortalTraveller : MonoBehaviour {
 
     public GameObject graphicsObject;
+    private static readonly int SliceOffsetDst = Shader.PropertyToID("sliceOffsetDst");
+    private static readonly int SliceNormal = Shader.PropertyToID("sliceNormal");
     public GameObject graphicsClone { get; set; }
     public Vector3 previousOffsetFromPortal { get; set; }
 
@@ -46,16 +48,16 @@ public class PortalTraveller : MonoBehaviour {
         graphicsClone.SetActive (false);
         // Disable slicing
         for (int i = 0; i < originalMaterials.Length; i++) {
-            originalMaterials[i].SetVector ("sliceNormal", Vector3.zero);
+            originalMaterials[i].SetVector (SliceNormal, Vector3.zero);
         }
     }
 
     public void SetSliceOffsetDst (float dst, bool clone) {
         for (int i = 0; i < originalMaterials.Length; i++) {
             if (clone) {
-                cloneMaterials[i].SetFloat("sliceOffsetDst", dst);
+                cloneMaterials[i].SetFloat(SliceOffsetDst, dst);
             } else {
-                originalMaterials[i].SetFloat("sliceOffsetDst", dst);
+                originalMaterials[i].SetFloat(SliceOffsetDst, dst);
             }
 
         }
