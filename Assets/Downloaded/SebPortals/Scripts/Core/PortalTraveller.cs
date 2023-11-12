@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PortalTraveller : MonoBehaviour {
 
@@ -18,13 +19,25 @@ public class PortalTraveller : MonoBehaviour {
     // Called when first touches portal
     public virtual void EnterPortalThreshold () {
         if (graphicsClone == null) {
-            graphicsClone = Instantiate (graphicsObject);
+            graphicsClone = Instantiate(graphicsObject);
+            
+            
+            foreach (Renderer renderer in graphicsClone.GetComponents<Renderer>())
+            {
+                renderer.shadowCastingMode = ShadowCastingMode.Off;
+            }
+            
+            foreach (Renderer renderer in graphicsClone.GetComponentsInChildren<Renderer>())
+            {
+                renderer.shadowCastingMode = ShadowCastingMode.Off;
+            }
+
             graphicsClone.transform.parent = graphicsObject.transform.parent;
             graphicsClone.transform.localScale = graphicsObject.transform.localScale;
-            originalMaterials = GetMaterials (graphicsObject);
-            cloneMaterials = GetMaterials (graphicsClone);
+            originalMaterials = GetMaterials(graphicsObject);
+            cloneMaterials = GetMaterials(graphicsClone);
         } else {
-            graphicsClone.SetActive (true);
+            graphicsClone.SetActive(true);
         }
     }
 
@@ -40,9 +53,9 @@ public class PortalTraveller : MonoBehaviour {
     public void SetSliceOffsetDst (float dst, bool clone) {
         for (int i = 0; i < originalMaterials.Length; i++) {
             if (clone) {
-                cloneMaterials[i].SetFloat ("sliceOffsetDst", dst);
+                cloneMaterials[i].SetFloat("sliceOffsetDst", dst);
             } else {
-                originalMaterials[i].SetFloat ("sliceOffsetDst", dst);
+                originalMaterials[i].SetFloat("sliceOffsetDst", dst);
             }
 
         }

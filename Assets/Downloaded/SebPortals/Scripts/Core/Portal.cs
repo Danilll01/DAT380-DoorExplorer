@@ -56,7 +56,7 @@ public class Portal : MonoBehaviour {
                 
                 // Can't rely on OnTriggerEnter/Exit to be called next frame since it depends on when FixedUpdate runs
                 linkedPortal.OnTravellerEnterPortal(traveller);
-                trackedTravellers.RemoveAt (i);
+                trackedTravellers.RemoveAt(i);
                 i--;
 
             } else {
@@ -233,7 +233,7 @@ public class Portal : MonoBehaviour {
         float cloneSliceOffsetDst = 0;
         float screenThickness = screen.transform.localScale.z;
 
-        bool playerSameSideAsTraveller = SameSideOfPortal (playerCam.transform.position, traveller.transform.position);
+        bool playerSameSideAsTraveller = SameSideOfPortal(playerCam.transform.position, traveller.transform.position);
         if (!playerSameSideAsTraveller) {
             sliceOffsetDst = -screenThickness;
         }
@@ -274,7 +274,7 @@ public class Portal : MonoBehaviour {
 
             // Update projection based on new clip plane
             // Calculate matrix with player cam so that player camera settings (fov, etc) are used
-            portalCam.projectionMatrix = playerCam.CalculateObliqueMatrix (clipPlaneCameraSpace);
+            portalCam.projectionMatrix = playerCam.CalculateObliqueMatrix(clipPlaneCameraSpace);
         } else {
             portalCam.projectionMatrix = playerCam.projectionMatrix;
         }
@@ -284,7 +284,7 @@ public class Portal : MonoBehaviour {
         if (!trackedTravellers.Contains (traveller)) {
             traveller.EnterPortalThreshold ();
             traveller.previousOffsetFromPortal = traveller.transform.position - transform.position;
-            trackedTravellers.Add (traveller);
+            trackedTravellers.Add(traveller);
         }
     }
 
