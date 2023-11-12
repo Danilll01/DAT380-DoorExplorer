@@ -121,7 +121,7 @@ public class FPSController : PortalTraveller {
         smoothYaw += delta;
         transform.eulerAngles = Vector3.up * smoothYaw;
         velocity = toPortal.TransformVector (fromPortal.InverseTransformVector (velocity));
-        Physics.SyncTransforms ();
+        Physics.SyncTransforms();
     }
 
 }

@@ -29,11 +29,11 @@ public class Portal : MonoBehaviour {
 
     void Awake () {
         playerCam = Camera.main;
-        portalCam = GetComponentInChildren<Camera> ();
+        portalCam = GetComponentInChildren<Camera>();
         portalCam.enabled = false;
         trackedTravellers = new List<PortalTraveller> ();
         screenMeshFilter = screen.GetComponent<MeshFilter> ();
-        screen.material.SetInt ("displayMask", 1);
+        screen.material.SetInt (DisplayMask, 1);
     }
 
     void LateUpdate () {
@@ -56,7 +56,7 @@ public class Portal : MonoBehaviour {
                 
                 var positionOld = travellerT.position;
                 var rotOld = travellerT.rotation;
-                traveller.Teleport (transform, linkedPortal.transform, m.GetColumn (3), m.rotation);
+                traveller.Teleport(transform, linkedPortal.transform, m.GetColumn (3), m.rotation);
                 traveller.graphicsClone.transform.SetPositionAndRotation(positionOld, rotOld);
                 
                 // Can't rely on OnTriggerEnter/Exit to be called next frame since it depends on when FixedUpdate runs
