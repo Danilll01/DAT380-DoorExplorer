@@ -8,17 +8,33 @@ public class PickUp : MonoBehaviour
     private bool itemCanFollow = false;
     private float carryDistance = 2.0f;
     private GameObject objectInFront;
+    private GameObject itemHolder;
+    private Quaternion initialRotationDifference;
     private float highest = 0.0f; // for debugging
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 50.0f;
     [SerializeField] private float pickupForce = 20.0f;
     [SerializeField] private float pickupDuration = 0.25f;
+    [SerializeField] private float itemHolderDistance = 2f;
+
+    private void Start(){
+        CreateItemHolder();
+    }
+
+    private void CreateItemHolder(){
+        Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
+        itemHolder = new GameObject("ItemHolder");
+        itemHolder.transform.position = pointPosition;
+        itemHolder.SetActive(true); // hide the item holder
+        itemHolder.transform.parent = transform;
+    }
 
     void Update()
     {
         MouseHover();
         LeftClick();
+        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
         if (heldItem != null && itemCanFollow)
         {
             CarryItem();
@@ -67,12 +83,17 @@ public class PickUp : MonoBehaviour
 
     private void CarryItem()
     {
-        Vector3 holdArea = transform.position + transform.forward * carryDistance;
-        if (Vector3.Distance(heldItem.transform.position, holdArea) > 0.01f)
+        if (Vector3.Distance(heldItem.transform.position, itemHolder.transform.position) > 0.1f)
         {
-            Vector3 direction = (holdArea - heldItem.transform.position);
+            Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
             heldItemRB.AddForce(direction * pickupForce);
         }
+
+        //ForceDrop();
+
+    }
+
+    private void ForceDrop(){
         if(heldItemRB.velocity.magnitude > highest){
             highest = heldItemRB.velocity.magnitude;
         }
@@ -113,7 +134,7 @@ public class PickUp : MonoBehaviour
                 heldItemRB.useGravity = false;
                 heldItemRB.drag = 20.0f;
                 heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
-
+                heldItemRB.transform.parent = itemHolder.transform;
                 MoveObjectToCamera();
             }
         }
@@ -125,6 +146,7 @@ public class PickUp : MonoBehaviour
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
         itemCanFollow = false;
+        heldItem.transform.parent = null;
         heldItem = null;
         heldItemRB = null;
     }
@@ -144,8 +166,7 @@ public class PickUp : MonoBehaviour
 
         while (elapsed < pickupDuration)
         {
-            Vector3 pointInFront = transform.position + transform.forward * carryDistance;
-            heldItem.transform.position = Vector3.Lerp(start, pointInFront, elapsed / pickupDuration);
+            heldItem.transform.position = Vector3.Lerp(start, itemHolder.transform.position, elapsed / pickupDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
