@@ -9,6 +9,13 @@ public class Portal : MonoBehaviour {
     public Portal linkedPortal;
     public MeshRenderer screen;
     public int recursionLimit = 5;
+    private enum GoInSide
+    {
+        BOTH,
+        FRONT,
+        BACK
+    }
+    [SerializeField] private GoInSide portalGoInSide = GoInSide.BOTH;
 
     [Header ("Advanced Settings")]
     public float nearClipOffset = 0.05f;
@@ -36,11 +43,11 @@ public class Portal : MonoBehaviour {
         screen.material.SetInt (DisplayMask, 1);
     }
 
-    void LateUpdate () {
-        HandleTravellers ();
+    void LateUpdate() {
+        HandleTravellers();
     }
 
-    void HandleTravellers () {
+    void HandleTravellers() {
 
         for (int i = 0; i < trackedTravellers.Count; i++) {
             PortalTraveller traveller = trackedTravellers[i];
@@ -49,7 +56,7 @@ public class Portal : MonoBehaviour {
 
             Vector3 offsetFromPortal = travellerT.position - transform.position;
             int portalSide = System.Math.Sign (Vector3.Dot (offsetFromPortal, transform.forward));
-            int portalSideOld = System.Math.Sign (Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
+            int portalSideOld = System.Math.Sign(Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
             
             // Teleport the traveller if it has crossed from one side of the portal to the other
             if (portalSide != portalSideOld) {
@@ -87,6 +94,15 @@ public class Portal : MonoBehaviour {
         // Skip rendering the view from this portal if player is not looking at the linked portal
         if (!CameraUtility.VisibleFromCamera(linkedPortal.screen, playerCam)) {
             return;
+        }
+
+        if (portalGoInSide != GoInSide.BOTH)
+        {
+            bool frontSide = 0 > System.Math.Sign(Vector3.Dot((playerCam.transform.position - linkedPortal.transform.position), linkedPortal.transform.forward));
+            if ((portalGoInSide == GoInSide.FRONT && frontSide) || (portalGoInSide == GoInSide.BACK && !frontSide))
+            {
+                return;
+            }
         }
 
         CreateViewTexture();
