@@ -5,16 +5,14 @@ public class PickUp : MonoBehaviour
 {
     private GameObject heldItem;
     private Rigidbody heldItemRB;
-    private bool itemCanFollow = false;
-    private float carryDistance = 2.0f;
-    private GameObject objectInFront;
+    private bool coRoutineRunning = false;
+    private GameObject itemInFront;
     private GameObject itemHolder;
-    private Quaternion initialRotationDifference;
     private float highest = 0.0f; // for debugging
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 50.0f;
-    [SerializeField] private float pickupForce = 20.0f;
+    [SerializeField] private float carryForce = 20.0f;
     [SerializeField] private float pickupDuration = 0.25f;
     [SerializeField] private float itemHolderDistance = 2f;
 
@@ -26,16 +24,15 @@ public class PickUp : MonoBehaviour
         Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
         itemHolder = new GameObject("ItemHolder");
         itemHolder.transform.position = pointPosition;
-        itemHolder.SetActive(true); // hide the item holder
         itemHolder.transform.parent = transform;
     }
 
     void Update()
     {
+        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
         MouseHover();
         LeftClick();
-        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
-        if (heldItem != null && itemCanFollow)
+        if (heldItem != null && !coRoutineRunning)
         {
             CarryItem();
         }
@@ -47,7 +44,7 @@ public class PickUp : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
         {
             Outline outline = hit.collider.GetComponent<Outline>();
-            if (outline != null && heldItem == null) // Don't highlight objects if we're holding something
+            if (outline != null && heldItem == null)
             {
                 SetOutline(hit.collider.gameObject, outline);
             }
@@ -64,20 +61,20 @@ public class PickUp : MonoBehaviour
 
     private void SetOutline(GameObject obj, Outline outline)
     {
-        if (obj != objectInFront)
+        if (obj != itemInFront)
         {
             ClearOutline();
-            objectInFront = obj;
+            itemInFront = obj;
             outline.enabled = true;
         }
     }
 
     private void ClearOutline()
     {
-        if (objectInFront != null)
+        if (itemInFront != null)
         {
-            objectInFront.GetComponent<Outline>().enabled = false;
-            objectInFront = null;
+            itemInFront.GetComponent<Outline>().enabled = false;
+            itemInFront = null;
         }
     }
 
@@ -86,10 +83,10 @@ public class PickUp : MonoBehaviour
         if (Vector3.Distance(heldItem.transform.position, itemHolder.transform.position) > 0.1f)
         {
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
-            heldItemRB.AddForce(direction * pickupForce);
+            heldItemRB.AddForce(direction * carryForce);
         }
 
-        //ForceDrop();
+        ForceDrop();
 
     }
 
@@ -97,7 +94,7 @@ public class PickUp : MonoBehaviour
         if(heldItemRB.velocity.magnitude > highest){
             highest = heldItemRB.velocity.magnitude;
         }
-        Debug.Log(heldItemRB.velocity.magnitude + " " + highest);
+        Debug.Log(heldItemRB.velocity.magnitude + " --- " + highest);
 
         //if(heldItemRB.velocity.magnitude > 0.01f)
         //{
@@ -113,7 +110,7 @@ public class PickUp : MonoBehaviour
             {
                 PickupItem();
             }
-            else
+            else if(!coRoutineRunning)
             {
                 DropItem();
             }
@@ -122,22 +119,16 @@ public class PickUp : MonoBehaviour
 
     private void PickupItem()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
-        {
-            Outline outline = hit.collider.GetComponent<Outline>();
-            if (outline != null)
+        if (itemInFront != null)
             {
-                heldItem = hit.collider.gameObject;
+                heldItem = itemInFront.transform.GetComponent<Collider>().gameObject;
                 heldItemRB = heldItem.GetComponent<Rigidbody>();
 
                 heldItemRB.useGravity = false;
                 heldItemRB.drag = 20.0f;
                 heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
-                heldItemRB.transform.parent = itemHolder.transform;
                 MoveObjectToCamera();
             }
-        }
     }
 
     private void DropItem()
@@ -145,7 +136,6 @@ public class PickUp : MonoBehaviour
         heldItemRB.useGravity = true;
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
-        itemCanFollow = false;
         heldItem.transform.parent = null;
         heldItem = null;
         heldItemRB = null;
@@ -156,22 +146,27 @@ public class PickUp : MonoBehaviour
         StopCoroutine("MoveObjectCoroutine");
         heldItemRB.angularVelocity = Vector3.zero;
         heldItemRB.velocity = Vector3.zero;
+        coRoutineRunning = true;
         StartCoroutine(MoveObjectToCameraCoroutine());
     }
 
     private IEnumerator MoveObjectToCameraCoroutine()
     {
-        Vector3 start = heldItem.transform.position;
         float elapsed = 0f;
+        Vector3 start = heldItem.transform.position;
 
         while (elapsed < pickupDuration)
         {
-            heldItem.transform.position = Vector3.Lerp(start, itemHolder.transform.position, elapsed / pickupDuration);
-            elapsed += Time.deltaTime;
+            Debug.Log((elapsed / pickupDuration));
+            heldItem.transform.position = Vector3.Lerp(start, itemHolder.transform.position, (elapsed / pickupDuration));
+            elapsed += Time.deltaTime; // Something weird with Time.deltaTime
             yield return null;
+
         }
 
-        transform.position = transform.position + transform.forward * carryDistance;
-        itemCanFollow = true;
+        transform.position = itemHolder.transform.position;
+        heldItemRB.transform.parent = itemHolder.transform;
+        coRoutineRunning = false;
+        Debug.Log("Coroutine finished");
     }
 }

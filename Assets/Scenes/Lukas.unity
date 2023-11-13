@@ -625,8 +625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupDistance: 50
-  pickupForce: 100
-  pickupDuration: 0.25
+  carryForce: 20
+  pickupDuration: 4
   itemHolderDistance: 2
 --- !u!1 &1890373125
 GameObject:
