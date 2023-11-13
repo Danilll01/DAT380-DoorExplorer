@@ -8,12 +8,11 @@ public class PickUp : MonoBehaviour
     private bool coRoutineRunning = false;
     private GameObject itemInFront;
     private GameObject itemHolder;
-    private float highest = 0.0f; // for debugging
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 50.0f;
-    [SerializeField] private float carryForce = 20.0f;
-    [SerializeField] private float pickupDuration = 0.25f;
+    [SerializeField] private float carryForce = 400.0f;
+    [SerializeField] private float pickupDuration = 0.1f;
     [SerializeField] private float itemHolderDistance = 2f;
 
     private void Start(){
@@ -90,16 +89,8 @@ public class PickUp : MonoBehaviour
 
     }
 
-    private void ForceDrop(){
-        if(heldItemRB.velocity.magnitude > highest){
-            highest = heldItemRB.velocity.magnitude;
-        }
-        Debug.Log(heldItemRB.velocity.magnitude + " --- " + highest);
+    private void ForceDrop(){ // Change to Distance Break
 
-        //if(heldItemRB.velocity.magnitude > 0.01f)
-        //{
-        //    DropItem();
-        //}
     }
 
     private void LeftClick()
@@ -157,16 +148,14 @@ public class PickUp : MonoBehaviour
 
         while (elapsed < pickupDuration)
         {
-            Debug.Log((elapsed / pickupDuration));
             heldItem.transform.position = Vector3.Lerp(start, itemHolder.transform.position, (elapsed / pickupDuration));
             elapsed += Time.deltaTime; // Something weird with Time.deltaTime
             yield return null;
 
         }
 
-        transform.position = itemHolder.transform.position;
+        itemHolder.transform.position = heldItem.transform.position;
         heldItemRB.transform.parent = itemHolder.transform;
         coRoutineRunning = false;
-        Debug.Log("Coroutine finished");
     }
 }

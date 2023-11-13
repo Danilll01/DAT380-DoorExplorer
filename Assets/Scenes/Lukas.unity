@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -452,7 +452,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6032054695632120556, guid: ac7c04e9d68fcd44b80f58168d607d25,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1688533736}
+      addedObject: {fileID: 1688533742}
   m_SourcePrefab: {fileID: 100100000, guid: ac7c04e9d68fcd44b80f58168d607d25, type: 3}
 --- !u!1 &1410757187 stripped
 GameObject:
@@ -608,11 +608,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
+  outlineWidth: 10
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &1688533736
+--- !u!114 &1688533742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -625,8 +625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupDistance: 50
-  carryForce: 20
-  pickupDuration: 4
+  carryForce: 400
+  pickupDuration: 0.1
   itemHolderDistance: 2
 --- !u!1 &1890373125
 GameObject:
