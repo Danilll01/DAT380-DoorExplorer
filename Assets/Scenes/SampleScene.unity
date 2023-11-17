@@ -724,8 +724,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 2.2094102}
-  m_Center: {x: 0, y: 0, z: 0.6047051}
+  m_Size: {x: 0.5166607, y: 0.52240103, z: 1.3043535}
+  m_Center: {x: -0.0041098595, y: -0.00083997846, z: 0.7936133}
 --- !u!4 &254040342
 Transform:
   m_ObjectHideFlags: 0
@@ -734,13 +734,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254040338}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3, y: 0.91, z: -2.55}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.2, y: -0.119999945, z: 0.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1106225138}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 611318208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &254040343
 MonoBehaviour:
@@ -1986,6 +1986,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: -6.52, z: 0}
+--- !u!4 &611318208 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1535381019623673786, guid: 5101aee443b6c4e028aae23d799c5fa4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1993806502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &631307878 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5393215578589016642, guid: c5efc39a8aaf6e64ea40e9ad573e9b47,
@@ -4572,7 +4578,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 751477fdccd69d942b4bcec5ae968ae9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1535381019623673786, guid: 5101aee443b6c4e028aae23d799c5fa4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 254040342}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1535381020191089684, guid: 5101aee443b6c4e028aae23d799c5fa4,
         type: 3}
@@ -6015,7 +6025,6 @@ SceneRoots:
   - {fileID: 1923143604}
   - {fileID: 1675814342354028392}
   - {fileID: 1099443358}
-  - {fileID: 254040342}
   - {fileID: 882450460408875579}
   - {fileID: 557096250}
   - {fileID: 1993806502}
