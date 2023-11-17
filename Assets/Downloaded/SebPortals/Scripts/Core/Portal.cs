@@ -59,7 +59,7 @@ public class Portal : MonoBehaviour {
             int portalSideOld = System.Math.Sign(Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
             
             // Teleport the traveller if it has crossed from one side of the portal to the other
-            if (portalSide != portalSideOld) {
+            if (portalSide != portalSideOld && traveller.teleport) {
                 
                 var positionOld = travellerT.position;
                 var rotOld = travellerT.rotation;
