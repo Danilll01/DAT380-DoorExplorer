@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1b5be26d13a544cbf2d8ae82092bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraPosition: {fileID: 1475508726}
+  cameraPosition: {fileID: 0}
 --- !u!4 &42908812
 Transform:
   m_ObjectHideFlags: 0
@@ -3061,17 +3061,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d3a0497a8740445b5632a92f2655ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 1749806876}
-  wallDistance: 1
+  orientation: {fileID: 0}
+  wallDistance: 0.5
   minimumJumpHeight: 1.5
-  wallRunGravity: 1
-  wallRunJumpForce: 6
-  cam: {fileID: 1537627077}
-  fov: 90
-  wallRunfov: 100
-  wallRunfovTime: 20
-  camTilt: 20
-  camTiltTime: 20
+  wallRunGravity: 0
+  wallRunJumpForce: 0
+  cam: {fileID: 0}
+  fov: 0
+  wallRunfov: 0
+  wallRunfovTime: 0
+  camTilt: 0
+  camTiltTime: 0
 --- !u!114 &1822575772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3084,21 +3084,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710579d3ac533e843a289a9db9cf46f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 1749806876}
+  orientation: {fileID: 0}
   moveSpeed: 6
   airMultiplier: 0.4
   walkSpeed: 4
   sprintSpeed: 6
   acceleration: 10
-  jumpForce: 14
+  jumpForce: 5
   jumpKey: 32
   sprintKey: 304
   groundDrag: 6
   airDrag: 2
-  groundCheck: {fileID: 1738373283}
+  groundCheck: {fileID: 0}
   groundMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   groundDistance: 0.2
 --- !u!114 &1822575773
 MonoBehaviour:
@@ -3112,11 +3112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa1b204217ddd143bbb40cda2940286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallRun: {fileID: 1822575771}
-  sensX: 150
-  sensY: 150
-  cam: {fileID: 42908812}
-  orientation: {fileID: 1749806876}
+  wallRun: {fileID: 0}
+  sensX: 100
+  sensY: 100
+  cam: {fileID: 0}
+  orientation: {fileID: 0}
 --- !u!54 &1822575774
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3912,11 +3912,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PhysicsPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3156005616341659305, guid: 1594b3d41f616d74e8ea4a1f19500c5d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6933854662514142172, guid: 1594b3d41f616d74e8ea4a1f19500c5d,
         type: 3}

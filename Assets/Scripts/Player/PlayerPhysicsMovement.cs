@@ -22,21 +22,24 @@ public class PlayerPhysicsMovement : PortalTraveller
     Camera cam;
     [SerializeField] private float yaw;
     [SerializeField] private float pitch;
-    float smoothYaw;
-    float smoothPitch;
+    private float smoothYaw;
+    private float smoothPitch;
 
-    float yawSmoothV;
-    float pitchSmoothV;
-    float verticalVelocity;
-    Vector3 velocity;
-    Vector3 smoothV;
-    Vector3 rotationSmoothVelocity;
-    Vector3 currentRotation;
+    private float yawSmoothV;
+    private float pitchSmoothV;
+    private float verticalVelocity;
+    private Vector3 velocity;
+    private Vector3 smoothV;
+    private Vector3 rotationSmoothVelocity;
+    private Vector3 currentRotation;
+    
+    private Vector3 transformForward = Vector3.zero;
+    private Vector3 transformRight = Vector3.zero;
 
-    bool jumping;
-    float lastGroundedTime;
+    private bool jumping;
+    private float lastGroundedTime;
     [SerializeField] private bool isGrounded = true;
-    bool disabled;
+    private bool disabled;
 
     void Start () {
         cam = Camera.main;
@@ -73,7 +76,7 @@ public class PlayerPhysicsMovement : PortalTraveller
         float mY = Input.GetAxisRaw ("Mouse Y");
 
         // Verrrrrry gross hack to stop camera swinging down at start
-        float mMag = Mathf.Sqrt (mX * mX + mY * mY);
+        float mMag = Mathf.Sqrt(mX * mX + mY * mY);
         if (mMag > 5) {
             mX = 0;
             mY = 0;
@@ -81,12 +84,15 @@ public class PlayerPhysicsMovement : PortalTraveller
 
         yaw += mX * mouseSensitivity;
         pitch -= mY * mouseSensitivity;
-        pitch = Mathf.Clamp (pitch, pitchMinMax.x, pitchMinMax.y);
-        smoothPitch = Mathf.SmoothDampAngle (smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
-        smoothYaw = Mathf.SmoothDampAngle (smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
+        pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
+        smoothPitch = Mathf.SmoothDampAngle(smoothPitch, pitch, ref pitchSmoothV, rotationSmoothTime);
+        smoothYaw = Mathf.SmoothDampAngle(smoothYaw, yaw, ref yawSmoothV, rotationSmoothTime);
 
         transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
+
+        transformForward = transform.forward;
+        transformRight = transform.right;
         
         
         // Jumping
@@ -118,11 +124,14 @@ public class PlayerPhysicsMovement : PortalTraveller
             return;
         }
         
-        Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+        Vector2 input = new Vector2 (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
         Vector3 inputDir = new Vector3 (input.x, 0, input.y).normalized;
-        Vector3 worldInputDir = transform.TransformDirection(inputDir);
-
+        Debug.Log("Input: " + inputDir);
+        
+        //Vector3 worldInputDir = cam.transform.TransformDirection(inputDir);
+        Vector3 worldInputDir = transformForward * inputDir.z + transformRight * inputDir.x;
+        
         float currentSpeed = (Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed;
         Vector3 targetVelocity = worldInputDir * currentSpeed;
         
@@ -130,7 +139,7 @@ public class PlayerPhysicsMovement : PortalTraveller
         // velocityChange.x = Mathf.Clamp(velocityChange.x, -10, 10);
         // velocityChange.z = Mathf.Clamp(velocityChange.z, -10, 10);
         // velocityChange.y = 0;
-        
+        Debug.Log("Target: " + targetVelocity);
         
         velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
         
@@ -138,17 +147,21 @@ public class PlayerPhysicsMovement : PortalTraveller
         velocity = new Vector3 (velocity.x, controller.velocity.y, velocity.z);
         //velocity = new Vector3 (velocity.x, 0, velocity.z);
         
+        Debug.Log("Vel: " + velocity);
+        
+        print(transform.forward);
 
         //var flags = controller.Move(velocity * Time.deltaTime);
         //controller.AddForce(velocity, ForceMode.VelocityChange);
         controller.velocity = velocity;
-        
         
         if (!isGrounded)
         {
             controller.AddForce(0, -gravity, 0, ForceMode.Acceleration);
         }
     }
+    
+    
 
     // Sets isGrounded based on a raycast sent straigth down from the player object
     private void CheckGround()
