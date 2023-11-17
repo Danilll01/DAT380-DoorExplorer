@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PortalDoorMat
+  m_Name: OldPortalDoorMat
   m_Shader: {fileID: -6465566751694194690, guid: 20c49e02962bee546860dd1e5caaf3da,
     type: 3}
   m_Parent: {fileID: 0}

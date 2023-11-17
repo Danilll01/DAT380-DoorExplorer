@@ -986,7 +986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8058161084413970439}
   m_Layer: 0
-  m_Name: DoorPortalFront
+  m_Name: OldDoorPortalFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
