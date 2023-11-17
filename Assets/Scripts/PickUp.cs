@@ -15,11 +15,13 @@ public class PickUp : MonoBehaviour
     [SerializeField] private float pickupDuration = 0.1f;
     [SerializeField] private float itemHolderDistance = 2f;
 
-    private void Start(){
+    private void Start()
+    {
         CreateItemHolder();
     }
 
-    private void CreateItemHolder(){
+    private void CreateItemHolder()
+    {
         Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
         itemHolder = new GameObject("ItemHolder");
         itemHolder.transform.position = pointPosition;
@@ -28,13 +30,49 @@ public class PickUp : MonoBehaviour
 
     void Update()
     {
-        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+        MoveItemHolder();
         MouseHover();
         LeftClick();
         if (heldItem != null && !coRoutineRunning)
         {
             CarryItem();
         }
+    }
+
+    private void MoveItemHolder()
+    {
+        RaycastHit hit;
+        Vector3 forward = transform.TransformDirection(Vector3.forward) * itemHolderDistance;
+        Debug.DrawRay(transform.position, forward, Color.green);
+        if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
+        {
+            if (hit.collider.gameObject.name == "Screen")
+            {
+                //Get other portal
+                Transform grandparent = hit.collider.gameObject.transform.parent.parent;
+                Portal portal = grandparent.GetComponent<Portal>();
+                Portal otherPortal = portal.linkedPortal.GetComponent<Portal>();
+                GameObject otherPortalGameObject = otherPortal.gameObject;
+                GameObject simple = otherPortalGameObject.transform.Find("Simple Portal").gameObject;
+                GameObject screenT = simple.transform.Find("Screen").gameObject;
+                GameObject screen = screenT.gameObject;
+                BoxCollider box = screen.GetComponent<BoxCollider>();
+                Transform boxTransform = box.transform;
+
+                //Get hit position on other portal
+                Vector3 hitPositionLocal = boxTransform.InverseTransformPoint(hit.point);
+                Vector3 hitWorld = boxTransform.TransformPoint(hitPositionLocal);
+                Debug.Log(hitWorld);
+
+                //Crate Vector from oter portal
+                Vector3 normal = box.transform.TransformDirection(box.bounds.ClosestPoint(boxTransform.TransformPoint(hitPositionLocal)) - boxTransform.position).normalized;
+                Vector3 surfaceToOutsideVector = normal;
+
+                Debug.DrawLine(hitWorld, hitWorld + surfaceToOutsideVector, Color.red, 5.0f);
+            }
+        }
+
+        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
     }
 
     private void MouseHover()
@@ -89,7 +127,8 @@ public class PickUp : MonoBehaviour
 
     }
 
-    private void ForceDrop(){ // Change to Distance Break
+    private void ForceDrop()
+    { // Change to Distance Break
 
     }
 
@@ -101,7 +140,7 @@ public class PickUp : MonoBehaviour
             {
                 PickupItem();
             }
-            else if(!coRoutineRunning)
+            else if (!coRoutineRunning)
             {
                 DropItem();
             }
@@ -111,15 +150,15 @@ public class PickUp : MonoBehaviour
     private void PickupItem()
     {
         if (itemInFront != null)
-            {
-                heldItem = itemInFront.transform.GetComponent<Collider>().gameObject;
-                heldItemRB = heldItem.GetComponent<Rigidbody>();
+        {
+            heldItem = itemInFront.transform.GetComponent<Collider>().gameObject;
+            heldItemRB = heldItem.GetComponent<Rigidbody>();
 
-                heldItemRB.useGravity = false;
-                heldItemRB.drag = 20.0f;
-                heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
-                MoveObjectToCamera();
-            }
+            heldItemRB.useGravity = false;
+            heldItemRB.drag = 20.0f;
+            heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
+            MoveObjectToCamera();
+        }
     }
 
     private void DropItem()
