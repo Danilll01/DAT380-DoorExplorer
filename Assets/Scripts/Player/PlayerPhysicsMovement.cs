@@ -35,7 +35,7 @@ public class PlayerPhysicsMovement : PortalTraveller
 
     bool jumping;
     float lastGroundedTime;
-    private bool isGrounded = true;
+    [SerializeField] private bool isGrounded = true;
     bool disabled;
 
     void Start () {
@@ -88,7 +88,28 @@ public class PlayerPhysicsMovement : PortalTraveller
         transform.eulerAngles = Vector3.up * smoothYaw;
         cam.transform.localEulerAngles = Vector3.right * smoothPitch;
         
-        CheckGround();
+        
+        // Jumping
+        if (isGrounded) {
+            //jumping = false;
+            lastGroundedTime = Time.time;
+        }
+        else
+        {
+            CheckGround();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
+            if (isGrounded || (timeSinceLastTouchedGround < 0.15f)) {
+                //jumping = true;
+                
+                // Adds force to the player rigidbody to jump
+                controller.velocity = new Vector3(controller.velocity.x, 0, controller.velocity.z);
+                controller.AddForce(0f, jumpForce, 0f, ForceMode.Impulse); 
+                isGrounded = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -105,39 +126,23 @@ public class PlayerPhysicsMovement : PortalTraveller
         float currentSpeed = (Input.GetKey(KeyCode.LeftShift)) ? runSpeed : walkSpeed;
         Vector3 targetVelocity = worldInputDir * currentSpeed;
         
-        Vector3 velocityChange = (targetVelocity - controller.velocity);
-        velocityChange.x = Mathf.Clamp(velocityChange.x, -10, 10);
-        velocityChange.z = Mathf.Clamp(velocityChange.z, -10, 10);
-        velocityChange.y = 0;
+        //Vector3 velocityChange = (targetVelocity - controller.velocity);
+        // velocityChange.x = Mathf.Clamp(velocityChange.x, -10, 10);
+        // velocityChange.z = Mathf.Clamp(velocityChange.z, -10, 10);
+        // velocityChange.y = 0;
         
         
-        //velocity = Vector3.SmoothDamp(controller.velocity, targetVelocity, ref smoothV, smoothMoveTime);
-
-        Debug.Log("Target: " + targetVelocity);
-        Debug.Log("Velocity: " + velocity);
+        velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
         
         //verticalVelocity -= gravity * Time.deltaTime;
+        velocity = new Vector3 (velocity.x, controller.velocity.y, velocity.z);
         //velocity = new Vector3 (velocity.x, 0, velocity.z);
+        
 
         //var flags = controller.Move(velocity * Time.deltaTime);
-        controller.AddForce(velocityChange, ForceMode.VelocityChange);
-        if (isGrounded) {
-            jumping = false;
-            lastGroundedTime = Time.time;
-            //verticalVelocity = 0;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            float timeSinceLastTouchedGround = Time.time - lastGroundedTime;
-            if (isGrounded || (!jumping && timeSinceLastTouchedGround < 0.15f)) {
-                jumping = true;
-                
-                // Adds force to the player rigidbody to jump
-                controller.AddForce(0f, jumpForce, 0f, ForceMode.Impulse); 
-                isGrounded = false;
-                
-            }
-        }
+        //controller.AddForce(velocity, ForceMode.VelocityChange);
+        controller.velocity = velocity;
+        
         
         if (!isGrounded)
         {
