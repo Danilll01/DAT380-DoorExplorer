@@ -55,8 +55,8 @@ public class Portal : MonoBehaviour {
             var m = linkedPortal.transform.localToWorldMatrix * transform.worldToLocalMatrix * travellerT.localToWorldMatrix;
 
             Vector3 offsetFromPortal = travellerT.position - transform.position;
-            int portalSide = System.Math.Sign (Vector3.Dot (offsetFromPortal, transform.forward));
-            int portalSideOld = System.Math.Sign(Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
+            int portalSide = System.Math.Sign (Vector3.Dot(offsetFromPortal, transform.forward));
+            int portalSideOld = System.Math.Sign(Vector3.Dot(traveller.previousOffsetFromPortal, transform.forward));
             
             // Teleport the traveller if it has crossed from one side of the portal to the other
             if (portalSide != portalSideOld) {
