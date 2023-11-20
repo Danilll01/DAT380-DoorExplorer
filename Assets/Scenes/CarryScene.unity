@@ -573,6 +573,11 @@ PrefabInstance:
       propertyPath: portalGoInSide
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4687913276525833559, guid: ce71ddc64223549ed8fc19f77f5948b2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Portal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -656,7 +661,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.0299597, y: 2.768319, z: 0.9996013}
+  m_Size: {x: 4.0299597, y: 2.768319, z: 0}
   m_Center: {x: -0.00000023841852, y: 1.3851205, z: -0.0006583928}
 --- !u!1001 &1364456736
 PrefabInstance:
@@ -755,7 +760,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.029963, y: 2.768319, z: 0.9996021}
+  m_Size: {x: 4.029963, y: 2.768319, z: 0}
   m_Center: {x: -0.00000023841872, y: 1.3851205, z: -0.0006583933}
 --- !u!114 &1682488601 stripped
 MonoBehaviour:
@@ -1231,6 +1236,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3438419960765059613, guid: ce71ddc64223549ed8fc19f77f5948b2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1305,6 +1315,11 @@ PrefabInstance:
         type: 3}
       propertyPath: portalGoInSide
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687913276525833559, guid: ce71ddc64223549ed8fc19f77f5948b2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Portal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
