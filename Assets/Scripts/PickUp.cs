@@ -23,6 +23,7 @@ public class PickUp : MonoBehaviour
     [SerializeField] private float pickupDuration = 0.1f;
     [SerializeField] private float itemHolderDistance = 2f;
     [SerializeField] private float itemDropDistance = 1f;
+    int i = -1;
 
     private void Start()
     {
@@ -100,6 +101,7 @@ public class PickUp : MonoBehaviour
         if (Vector3.Distance(itemHolder.transform.position, lastPosition) > 1.0f)
         {
             teleported = true;
+            i = 3;
         }
     }
 
@@ -160,18 +162,22 @@ public class PickUp : MonoBehaviour
 
     private void CarryItem()
     {
-        if (teleported)
+        Debug.Log("Pos: " + heldItem.transform.position);
+        if (teleported || i > 0)
         {
-            Debug.Log("Teleported");
+            Debug.Log("Teleported -------------------");
             Debug.Log("Före: " + heldItem.transform.position);
             heldItemRB.velocity = Vector3.zero;
             heldItem.transform.position = itemHolder.transform.position; //This fix this
             Debug.Log("Efter: " + heldItem.transform.position);
-            return;
+            Physics.SyncTransforms();
+            i --;
         }
         if (Vector3.Distance(heldItem.transform.position, itemHolder.transform.position) > 0.1f)
         {
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
+            //Debug.DrawRay(heldItem.transform.position, direction, Color.red);
+            //Debug.Log(direction);
             heldItemRB.AddForce(direction * carryForce);
         }
 
