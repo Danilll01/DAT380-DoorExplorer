@@ -14,6 +14,7 @@ public class PickUp : MonoBehaviour
     private GameObject itemInFront;
     private GameObject itemHolder;
     private Vector3 lastPosition;
+    private Transform savedParent;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 50.0f;
@@ -188,7 +189,7 @@ public class PickUp : MonoBehaviour
         heldItemRB.useGravity = true;
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
-        heldItem.transform.parent = null;
+        heldItem.transform.parent = savedParent;
         heldItem.layer = 0;
         //heldItem.GetComponent<PortalPhysicsObject>().isHeld = false; // Change
         heldItem = null;
@@ -218,6 +219,7 @@ public class PickUp : MonoBehaviour
         }
 
         itemHolder.transform.position = heldItem.transform.position;
+        savedParent = heldItem.transform.parent;
         heldItemRB.transform.parent = itemHolder.transform;
         coRoutineRunning = false;
     }
