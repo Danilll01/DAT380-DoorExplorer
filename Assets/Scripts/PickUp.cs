@@ -15,6 +15,7 @@ public class PickUp : MonoBehaviour
     private GameObject itemHolder;
     private Vector3 lastPosition;
     private Transform savedParent;
+    private bool teleported = false;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 50.0f;
@@ -26,6 +27,7 @@ public class PickUp : MonoBehaviour
     private void Start()
     {
         CreateItemHolder();
+        lastPosition = itemHolder.transform.position;
     }
 
     private void CreateItemHolder()
@@ -45,6 +47,7 @@ public class PickUp : MonoBehaviour
         {
             CarryItem();
         }
+        teleported = false;
     }
 
     private void MoveItemHolder()
@@ -69,11 +72,15 @@ public class PickUp : MonoBehaviour
                 Debug.DrawLine(pos, pos + transform.forward * length, Color.blue);
 
                 itemHolder.transform.position = pos + transform.forward * length;
+
+                teleportedHolder();
+
                 lastPosition = itemHolder.transform.position;
             }
             else
             {
                 itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+                teleportedHolder();
                 DropItemDistance();
                 lastPosition = itemHolder.transform.position;
 
@@ -82,8 +89,17 @@ public class PickUp : MonoBehaviour
         else
         {
             itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+            teleportedHolder();
             DropItemDistance();
             lastPosition = itemHolder.transform.position;
+        }
+    }
+
+    private void teleportedHolder()
+    {
+        if (Vector3.Distance(itemHolder.transform.position, lastPosition) > 1.0f)
+        {
+            teleported = true;
         }
     }
 
@@ -91,10 +107,13 @@ public class PickUp : MonoBehaviour
     {
         if (heldItem != null && !coRoutineRunning)
         {
-            float distance = Vector3.Distance(itemHolder.transform.position, lastPosition);
-            if (distance > 1.0f)
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, itemHolderDistance + 0.2f))
             {
-                DropItem();
+                if (hit.collider.tag != "Portal" && Vector3.Distance(itemHolder.transform.position, lastPosition) > 1.0f)
+                {
+                    heldItem.transform.position = lastPosition;
+                    /* DropItem(); */
+                }
             }
         }
     }
@@ -141,15 +160,25 @@ public class PickUp : MonoBehaviour
 
     private void CarryItem()
     {
+        if (teleported)
+        {
+            Debug.Log("Teleported");
+            Debug.Log("Före: " + heldItem.transform.position);
+            heldItemRB.velocity = Vector3.zero;
+            heldItem.transform.position = itemHolder.transform.position; //This fix this
+            Debug.Log("Efter: " + heldItem.transform.position);
+            return;
+        }
         if (Vector3.Distance(heldItem.transform.position, itemHolder.transform.position) > 0.1f)
         {
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
             heldItemRB.AddForce(direction * carryForce);
         }
 
-        if(Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > itemDropDistance){
+        /* if (Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > itemDropDistance)
+        {
             DropItem();
-        }
+        } */
 
     }
 
@@ -220,7 +249,7 @@ public class PickUp : MonoBehaviour
 
         itemHolder.transform.position = heldItem.transform.position;
         savedParent = heldItem.transform.parent;
-        heldItemRB.transform.parent = itemHolder.transform;
+        //heldItemRB.transform.parent = itemHolder.transform;
         coRoutineRunning = false;
     }
 }
