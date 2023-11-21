@@ -975,6 +975,74 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.029963, y: 2.768319, z: 0}
   m_Center: {x: -0.00000023841872, y: 1.3851205, z: -0.0006583933}
+--- !u!1001 &1552310096
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1576190922494901840, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_Name
+      value: Physics Snake
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.5572124
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.17000048
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.4063587
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d74572c033f1d7a49af91990ff42da2e, type: 3}
 --- !u!114 &1682488601 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3743597651704331078, guid: ce71ddc64223549ed8fc19f77f5948b2,
@@ -1502,7 +1570,7 @@ PrefabInstance:
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.0274594
+      value: 0.21623106
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
@@ -1512,7 +1580,7 @@ PrefabInstance:
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.999623
+      value: -0.97634226
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
@@ -1527,7 +1595,7 @@ PrefabInstance:
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -183.147
+      value: -155.024
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
@@ -1584,3 +1652,4 @@ SceneRoots:
   - {fileID: 1364456736}
   - {fileID: 1292114750}
   - {fileID: 51555284}
+  - {fileID: 1552310096}

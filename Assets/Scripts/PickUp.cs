@@ -3,6 +3,7 @@ using UnityEngine;
 
 
 // Göra hållaren mer bouncey
+// Raycasten är skum i outside portal, kika på 
 // Plocka upp items genom portalen
 // Physics objects och carry...
 
@@ -162,7 +163,6 @@ public class PickUp : MonoBehaviour
 
     private void CarryItem()
     {
-        Debug.Log("Pos: " + heldItem.transform.position);
         if (teleported || i > 0)
         {
             Debug.Log("Teleported -------------------");
@@ -209,7 +209,7 @@ public class PickUp : MonoBehaviour
         {
             heldItem = itemInFront.transform.GetComponent<Collider>().gameObject;
             heldItemRB = heldItem.GetComponent<Rigidbody>();
-            //heldItem.GetComponent<PortalPhysicsObject>().isHeld = true; // Change
+            heldItem.GetComponent<PortalPhysicsObject>().enabled = false;
 
             heldItemRB.useGravity = false;
             heldItemRB.drag = 20.0f;
@@ -226,7 +226,6 @@ public class PickUp : MonoBehaviour
         heldItemRB.constraints = RigidbodyConstraints.None;
         heldItem.transform.parent = savedParent;
         heldItem.layer = 0;
-        //heldItem.GetComponent<PortalPhysicsObject>().isHeld = false; // Change
         heldItem = null;
         heldItemRB = null;
     }
