@@ -194,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 5039022380610021797}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &6452886
 Rigidbody:
@@ -970,6 +971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 1106225137}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &254040344
 Rigidbody:
@@ -1605,6 +1607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 1623612483157100321}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &462030313
 Rigidbody:
@@ -1792,6 +1795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 2849505922243949287}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &509209573
 Rigidbody:
@@ -2262,6 +2266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 6633376265417676810}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &591035894
 Rigidbody:
@@ -3897,6 +3902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 8301547929805382189}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &1259138851
 Rigidbody:
@@ -4634,6 +4640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 1318709515857178874}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &1661786977
 Rigidbody:
@@ -4943,6 +4950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 2906440958916076691}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &1701316530
 Rigidbody:
@@ -5484,6 +5492,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 5977692893166167774}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &1853671490
 Rigidbody:
@@ -6103,6 +6112,7 @@ MonoBehaviour:
   carryForce: 400
   pickupDuration: 0.1
   itemHolderDistance: 2
+  itemDropDistance: 1
 --- !u!1 &2115360410 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5896588202177574662, guid: 762ebd5efa4def448bd749eaf4d828fb,
@@ -6990,6 +7000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 4764764668774531693}
   teleport: 1
+  isHeld: 0
   force: 10
 --- !u!54 &4205491567938606066
 Rigidbody:

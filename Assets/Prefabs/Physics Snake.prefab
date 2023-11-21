@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 1424503586418744227}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &743150111396889690
 GameObject:
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 9055439499632220312}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &1424503586418744227
 GameObject:
@@ -432,6 +434,7 @@ GameObject:
   - component: {fileID: 3979196461655848893}
   - component: {fileID: 1135672228914313782}
   - component: {fileID: 8786005155405162684}
+  - component: {fileID: 6953683118589464370}
   m_Layer: 0
   m_Name: Physics Snake
   m_TagString: Untagged
@@ -503,6 +506,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 10.609895}
   m_Center: {x: 0, y: 0, z: -3.0617397}
+--- !u!114 &6953683118589464370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576190922494901840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8abf278831905b74b8c0ebd69e30d09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphicsObject: {fileID: 6974718745672436891}
+  teleport: 1
 --- !u!1 &1784283326252866555
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,6 +740,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 4129431216870703537}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &3434655329684917756
 GameObject:
@@ -944,6 +962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 5504586902436230525}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &4055908693526642947
 GameObject:
@@ -1454,6 +1473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 3434655329684917756}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &8015760118484429450
 GameObject:
@@ -1592,6 +1612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 8694460755202465782}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &8094191609001719399
 GameObject:
@@ -1730,6 +1751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 4055908693526642947}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &8099237575693831513
 GameObject:
@@ -1868,6 +1890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 743150111396889690}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &8145647012885555316
 GameObject:
@@ -2172,6 +2195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 1784283326252866555}
   teleport: 0
+  isHeld: 0
   force: 10
 --- !u!1 &8694460755202465782
 GameObject:
