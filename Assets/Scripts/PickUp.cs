@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 // Göra hållaren mer bouncey
-// Raycasten är skum i outside portal, kika på 
+// Raycasten är skum i outside portal, kika på
 // Plocka upp items genom portalen
 // Physics objects och carry...
 
@@ -65,18 +65,20 @@ public class PickUp : MonoBehaviour
                 var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
                 var outPortal = inPortal.linkedPortal;
 
-                Vector3 relativePos = inPortal.transform.InverseTransformPoint(hit.point);
-                relativePos = Quaternion.Euler(0.0f, 0.0f, 0.0f) * relativePos;
-                Vector3 mirroredRelativePos = new Vector3(relativePos.x, relativePos.y, -relativePos.z);
+                Vector3 playerPos = inPortal.transform.InverseTransformPoint(transform.position);
+                Vector3 hitPos = inPortal.transform.InverseTransformPoint(hit.point);
 
-                Vector3 pos = outPortal.transform.TransformPoint(mirroredRelativePos);
+                Vector3 worldPlayerPos = outPortal.transform.TransformPoint(playerPos);
+                Vector3 worldHitPos = outPortal.transform.TransformPoint(hitPos);
+
+                Vector3 direction = (worldHitPos - worldPlayerPos).normalized;
+
                 float length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
-                Debug.DrawLine(pos, pos + transform.forward * length, Color.blue);
+                Debug.DrawLine(worldHitPos, worldHitPos + direction * length, Color.blue);
 
-                itemHolder.transform.position = pos + transform.forward * length;
+                itemHolder.transform.position = worldHitPos + direction * length;
 
                 teleportedHolder();
-
                 lastPosition = itemHolder.transform.position;
             }
             else
@@ -115,7 +117,7 @@ public class PickUp : MonoBehaviour
                 if (hit.collider.tag != "Portal" && Vector3.Distance(itemHolder.transform.position, lastPosition) > 1.0f)
                 {
                     heldItem.transform.position = lastPosition;
-                    /* DropItem(); */
+                    DropItem();
                 }
             }
         }
@@ -165,26 +167,21 @@ public class PickUp : MonoBehaviour
     {
         if (teleported || i > 0)
         {
-            Debug.Log("Teleported -------------------");
-            Debug.Log("Före: " + heldItem.transform.position);
             heldItemRB.velocity = Vector3.zero;
             heldItem.transform.position = itemHolder.transform.position; //This fix this
-            Debug.Log("Efter: " + heldItem.transform.position);
             Physics.SyncTransforms();
             i --;
         }
         if (Vector3.Distance(heldItem.transform.position, itemHolder.transform.position) > 0.1f)
         {
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
-            //Debug.DrawRay(heldItem.transform.position, direction, Color.red);
-            //Debug.Log(direction);
             heldItemRB.AddForce(direction * carryForce);
         }
 
-        /* if (Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > itemDropDistance)
+        if (Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > itemDropDistance)
         {
             DropItem();
-        } */
+        }
 
     }
 
