@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 281512289}
   - component: {fileID: 281512288}
   - component: {fileID: 281512287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3561,6 +3561,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhysicsPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3156005616341659305, guid: 1594b3d41f616d74e8ea4a1f19500c5d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100338291502977864, guid: 1594b3d41f616d74e8ea4a1f19500c5d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6933854662514142172, guid: 1594b3d41f616d74e8ea4a1f19500c5d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3791,10 +3801,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 200744035616059977, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 514178694507328502, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240513831609019943, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972820397702400397, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4615951063839978647, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4864555633118740089, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5360441835549358563, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
       propertyPath: m_Name
       value: DoorPortal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523926145892580044, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5840362255038227541, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5847980492249172178, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
@@ -3851,6 +3901,41 @@ PrefabInstance:
       propertyPath: linkedPortal
       value: 
       objectReference: {fileID: 37276291}
+    - target: {fileID: 6912845948971872805, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475554863666966998, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739224805322888721, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851511411659664156, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8355424533618362693, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097211215939522711, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9121272793454426075, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
