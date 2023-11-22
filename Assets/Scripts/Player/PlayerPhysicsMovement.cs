@@ -33,7 +33,7 @@ public class PlayerPhysicsMovement : PortalTraveller
     private Vector3 rotationSmoothVelocity;
     private Vector3 currentRotation;
     
-    private Vector3 transformForward = Vector3.zero;
+    public Vector3 transformForward = Vector3.zero;
     private Vector3 transformRight = Vector3.zero;
 
     private bool jumping;
