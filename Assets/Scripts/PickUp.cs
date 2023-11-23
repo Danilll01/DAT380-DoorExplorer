@@ -99,7 +99,8 @@ public class PickUp : MonoBehaviour
         {
             Debug.Log("Dont Teleport");
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
-            Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + direction * 5, Color.red);
+            float length = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
+            Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + direction * length, Color.red);
             heldItemRB.AddForce(direction * carryForce);
         }
 
@@ -189,7 +190,6 @@ public class PickUp : MonoBehaviour
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
         heldItem.layer = 2;
-        //MoveObjectToCamera();
     }
 
     private void DropItem()
