@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -331,6 +331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Physics Cube (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860821565767043806, guid: 5780f48356625424bb18426d94187569,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -857,6 +862,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Physics Cube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3860821565767043806, guid: 5780f48356625424bb18426d94187569,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -943,6 +953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Physics Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 3860821565767043806, guid: 5780f48356625424bb18426d94187569,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1534,7 +1549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4894f8b3062da4183b5efa048565d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupDistance: 50
+  pickupDistance: 10
   carryForce: 50
   pickupDuration: 0.1
   itemHolderDistance: 2
