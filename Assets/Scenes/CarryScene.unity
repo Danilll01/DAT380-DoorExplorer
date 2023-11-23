@@ -1550,7 +1550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupDistance: 10
-  carryForce: 50
+  carryForce: 40
   pickupDuration: 0.1
   itemHolderDistance: 2
   itemDropDistance: 1

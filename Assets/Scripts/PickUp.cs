@@ -10,8 +10,8 @@ public class PickUp : MonoBehaviour
     private bool coRoutineRunning = false;
     private GameObject itemHolder;
     private Vector3 lastPosition;
-
     private Outline currentOutline;
+    private bool clearOutline;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -36,6 +36,15 @@ public class PickUp : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Time.timeScale = 0;
+        }
+        FakeUpdate();
+    }
+
+    void FakeUpdate()
+    {
         MoveItemHolder();
         if (heldItem != null)
         {
@@ -50,7 +59,7 @@ public class PickUp : MonoBehaviour
     private void MoveItemHolder()
     {
         RaycastHit hit;
-        //Debug.DrawRay(transform.position, transform.forward * itemHolderDistance, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * itemHolderDistance, Color.red);
         if (Physics.Raycast(transform.position, transform.forward, out hit, itemHolderDistance))
         {
             if (hit.collider.tag == "Portal")
@@ -61,7 +70,7 @@ public class PickUp : MonoBehaviour
                 Vector3 direction = (outPortalHitPos
                  - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
 
-                //Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
+                Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
                 itemHolder.transform.position = outPortalHitPos + direction * length;
             }
             else
@@ -88,16 +97,21 @@ public class PickUp : MonoBehaviour
             return;
         }
 
-        Vector3 outPortal = ClosestPortal(itemHolder.transform.position).linkedPortal.transform.position;
-        if (Vector3.Distance(itemHolder.transform.position, heldItem.transform.position)
-            > Vector3.Distance(itemHolder.transform.position, outPortal))
+        //OutPortal is the portal that is closest to the itemholder
+        Portal portal = ClosestPortal(itemHolder.transform.position);
+        float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
+        + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
+        float crowFlight = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
+
+        if (crowFlight > portalShortcut)
         {
-            Debug.Log("Teleport");
+            Debug.Log("Do Teleport");
+            Debug.DrawLine(portal.transform.position, portal.transform.position + new Vector3(0,5,0) * 5f, Color.red);
+            Debug.DrawLine(heldItem.transform.position, itemHolder.transform.position + DirectionThroughTeleport() * 3f, Color.red);
             heldItemRB.AddForce(DirectionThroughTeleport() * carryForce);
         }
         else
         {
-            Debug.Log("Dont Teleport");
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
             float length = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
             Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + direction * length, Color.red);
@@ -118,14 +132,16 @@ public class PickUp : MonoBehaviour
         return direction;
     }
 
+    //Returns the portal that is closest to the position
     private Portal ClosestPortal(Vector3 position)
     {
         GameObject[] portalArray = GameObject.FindGameObjectsWithTag("Portal");
         Portal closestPortal = portalArray[0].transform.parent.parent.GetComponent<Portal>();
         foreach (GameObject portal in portalArray)
         {
-            if (Vector3.Distance(position, portal.transform.parent.parent.GetComponent<Portal>().transform.position)
-                < Vector3.Distance(position, closestPortal.transform.position))
+            Vector3 portalPos = portal.transform.parent.parent.GetComponent<Portal>().transform.position;
+            Vector3 closestPortalPos = closestPortal.transform.position;
+            if (Vector3.Distance(position, portalPos) < Vector3.Distance(position, closestPortalPos))
             {
                 closestPortal = portal.transform.parent.parent.GetComponent<Portal>();
             }
@@ -135,6 +151,7 @@ public class PickUp : MonoBehaviour
 
     private void SelectItem()
     {
+        clearOutline = true;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
         {
@@ -146,19 +163,35 @@ public class PickUp : MonoBehaviour
                 Vector3 direction = (outPortalHitPos
                  - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
 
-                Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.green);
-                if (!Physics.Raycast(outPortalHitPos, direction, out hit, length))
-                {
-                    return;
-                }
+                HitItem(outPortalHitPos, direction, length);
             }
+            else
+            {
+                HitItem(transform.position, transform.forward, pickupDistance);
+            }
+        }
+        if (clearOutline && currentOutline != null)
+        {
+            currentOutline.enabled = false;
+            currentOutline = null;
+        }
+    }
+
+    private void HitItem(Vector3 start, Vector3 direction, float length)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(start, direction, out hit, length))
+        {
+            Debug.DrawLine(start, start + direction * length, Color.green);
             if (hit.collider.tag == "Item")
             {
-                if(currentOutline == null){
+                if (currentOutline == null)
+                {
                     currentOutline = hit.collider.gameObject.GetComponent<Outline>();
                     currentOutline.enabled = true;
                 }
-                else if(currentOutline.gameObject != hit.collider.gameObject){
+                else if (currentOutline.gameObject != hit.collider.gameObject)
+                {
                     currentOutline.enabled = false;
                     currentOutline = hit.collider.gameObject.GetComponent<Outline>();
                     currentOutline.enabled = true;
@@ -168,13 +201,8 @@ public class PickUp : MonoBehaviour
                 {
                     PickupItem(hit.collider.gameObject);
                 }
-                return;
+                clearOutline = false;
             }
-        }
-        if(currentOutline != null)
-        {
-            currentOutline.enabled = false;
-            currentOutline = null;
         }
     }
 
