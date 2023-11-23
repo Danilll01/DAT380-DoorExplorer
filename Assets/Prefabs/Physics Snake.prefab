@@ -304,8 +304,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 1.49}
+  m_Size: {x: 1, y: 1, z: 1.5557688}
+  m_Center: {x: -0.00000012663506, y: 0, z: 1.5990946}
 --- !u!114 &6782374533518303723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,8 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3979196461655848893}
-  - component: {fileID: 1135672228914313782}
-  - component: {fileID: 8786005155405162684}
+  - component: {fileID: 5289443542306700196}
   - component: {fileID: 6953683118589464370}
   m_Layer: 0
   m_Name: Physics Snake
@@ -466,35 +465,8 @@ Transform:
   - {fileID: 352157333300280692}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1135672228914313782
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1576190922494901840}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!65 &8786005155405162684
-BoxCollider:
+--- !u!135 &5289443542306700196
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -508,12 +480,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 10.609895}
-  m_Center: {x: 0, y: 0, z: -3.0617397}
+  m_Radius: 5.2
+  m_Center: {x: 0, y: 0, z: -2.76}
 --- !u!114 &6953683118589464370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,8 +498,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8abf278831905b74b8c0ebd69e30d09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 0}
+  graphicsObject: {fileID: 8145647012885555316}
   teleport: 1
+  coll: {fileID: 5289443542306700196}
+  colliderFollow: {fileID: 9024562425391150059}
+  collOffsetZ: -2.4
 --- !u!1 &1784283326252866555
 GameObject:
   m_ObjectHideFlags: 0
