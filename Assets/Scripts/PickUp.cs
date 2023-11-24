@@ -123,50 +123,33 @@ public class PickUp : MonoBehaviour
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
         float crowFlight = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
 
-        if (teleportBreak && heldItem.GetComponent<PortalPhysicsObject>().hasTeleported)
+        if (heldItem.GetComponent<PortalPhysicsObject>().hasTeleported
+        && Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > 2f)
         {
+            Debug.Log("Droped item");
             DropItem();
             return;
         }
         if (crowFlight > portalShortcut)
         {
-            Debug.Log("Do Teleport");
-            teleportBreak = false;
             if (InsideNoGoZone(portal.linkedPortal, heldItem.transform.position))
             {
+                Debug.Log("InsideNoGoZone");
                 DropItem();
                 return;
             }
-            Debug.DrawLine(portal.transform.position, portal.transform.position + new Vector3(0, 5, 0) * 5f, Color.red);
-            Debug.DrawLine(heldItem.transform.position, itemHolder.transform.position + DirectionThroughTeleport() * 3f, Color.red);
             heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
             heldItemRB.AddForce(DirectionThroughTeleport() * carryForce);
         }
         else
         {
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
-            breakWhenTeleport(direction);
             float length = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
-            Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + direction * length, Color.red);
             heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
             heldItemRB.AddForce(direction * carryForce);
 
         }
 
-    }
-
-    private void breakWhenTeleport(Vector3 direction)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(heldItem.transform.position, direction, out hit, 1f))
-        {
-            if (hit.collider.tag == "Portal")
-            {
-                teleportBreak = true;
-                return;
-            }
-        }
-        teleportBreak = false;
     }
 
     private Vector3 DirectionThroughTeleport()
@@ -271,7 +254,6 @@ public class PickUp : MonoBehaviour
 
     private void DropItem()
     {
-        teleportBreak = false;
         if (currentOutline != null)
         {
             currentOutline.enabled = false;
@@ -281,6 +263,7 @@ public class PickUp : MonoBehaviour
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
         heldItem.layer = 0;
+        heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
         heldItem = null;
         heldItemRB = null;
     }
