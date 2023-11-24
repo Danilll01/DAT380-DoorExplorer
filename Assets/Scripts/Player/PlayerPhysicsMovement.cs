@@ -33,9 +33,10 @@ public class PlayerPhysicsMovement : PortalTraveller
     private Vector3 rotationSmoothVelocity;
     private Vector3 currentRotation;
     
-    public Vector3 transformForward = Vector3.zero;
+    private Vector3 transformForward = Vector3.zero;
     private Vector3 transformRight = Vector3.zero;
-
+    public Vector3 lookVector = Vector3.one;
+    
     private bool jumping;
     private float lastGroundedTime;
     [SerializeField] private bool isGrounded = true;
@@ -93,7 +94,8 @@ public class PlayerPhysicsMovement : PortalTraveller
 
         transformForward = transform.forward;
         transformRight = transform.right;
-        
+
+        lookVector = cam.transform.forward;
         
         // Jumping
         if (isGrounded) {
@@ -127,7 +129,6 @@ public class PlayerPhysicsMovement : PortalTraveller
         Vector2 input = new Vector2 (Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
         Vector3 inputDir = new Vector3 (input.x, 0, input.y).normalized;
-        Debug.Log("Input: " + inputDir);
         
         //Vector3 worldInputDir = cam.transform.TransformDirection(inputDir);
         Vector3 worldInputDir = transformForward * inputDir.z + transformRight * inputDir.x;
@@ -139,7 +140,6 @@ public class PlayerPhysicsMovement : PortalTraveller
         // velocityChange.x = Mathf.Clamp(velocityChange.x, -10, 10);
         // velocityChange.z = Mathf.Clamp(velocityChange.z, -10, 10);
         // velocityChange.y = 0;
-        Debug.Log("Target: " + targetVelocity);
         
         velocity = Vector3.SmoothDamp(velocity, targetVelocity, ref smoothV, smoothMoveTime);
         
@@ -147,9 +147,6 @@ public class PlayerPhysicsMovement : PortalTraveller
         velocity = new Vector3 (velocity.x, controller.velocity.y, velocity.z);
         //velocity = new Vector3 (velocity.x, 0, velocity.z);
         
-        Debug.Log("Vel: " + velocity);
-        
-        print(transform.forward);
 
         //var flags = controller.Move(velocity * Time.deltaTime);
         //controller.AddForce(velocity, ForceMode.VelocityChange);
