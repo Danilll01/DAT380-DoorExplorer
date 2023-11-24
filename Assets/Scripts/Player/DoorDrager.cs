@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,47 +18,54 @@ public class DoorDrager : MonoBehaviour
     private Transform doorTransform;
     private Rigidbody doorBody;
     private float hitDistance = 0;
-    
-    // Update is called once per frame
-    void FixedUpdate()
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !holding)
         {
             holding = false;
-            RayCastStep(transform.position, transForward.lookVector, pickupDistance);
+            RayCastStep(transform.position, transForward.lookVector, pickupDistance,0);
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             holding = false;
         }
+    }
 
 
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         if (!holding) return;
 
-        Vector3 pullTo = RayCastStep(transform.position, transForward.lookVector, hitDistance);
+        Vector3 pullTo = RayCastStep(transform.position, transForward.lookVector, hitDistance, 0);
         
         // Add force to door in the direction that the player is pulling
         Vector3 doorWorldDragPos = doorTransform.TransformPoint(localHitDoor);
-        Vector3 pullDirection = (pullTo - doorWorldDragPos).normalized;
+        Vector3 pullDirection = (pullTo - doorWorldDragPos);
         pullDirection *= draggingForce;
-        doorBody.AddForceAtPosition(pullDirection,doorWorldDragPos, ForceMode.Force);
+        doorBody.AddForceAtPosition(pullDirection * pullDirection.magnitude,doorWorldDragPos, ForceMode.Force);
     }
 
-    private Vector3 RayCastStep(Vector3 origin, Vector3 direction, float distance)
+    private Vector3 RayCastStep(Vector3 origin, Vector3 direction, float distance, float totalDistance)
     {
+        Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
         // Cast rays if left mouse is down
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, distance, doorPortalLayer))
         {
-            Debug.DrawRay(origin, direction, Color.cyan);
+            Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Door"))
             {
-                GetDoorInformation(hit);
+                GetDoorInformation(hit, totalDistance);
                 return (origin + direction * distance);
             }
 
+            
+            // Cast ray through portal in recursive step
+            
             // Length left on other side
-            float outPortalRayLength = distance - Vector3.Distance(origin, hit.point);
+            float outPortalRayLength = distance - hit.distance;
             Portal inPortal = hit.collider.gameObject.transform.parent.GetComponent<Portal>();
             Transform outPortal = inPortal.linkedPortal.transform;
             Vector3 playerLocalPortalPosition = inPortal.transform.InverseTransformPoint(origin);
@@ -65,7 +73,7 @@ public class DoorDrager : MonoBehaviour
             Vector3 outPortalHitPos = outPortal.TransformPoint(hitLocalPortalPosition);
             Vector3 newRayDirection = (outPortalHitPos - outPortal.TransformPoint(playerLocalPortalPosition)).normalized;
 
-            return RayCastStep(outPortalHitPos, newRayDirection, outPortalRayLength);
+            return RayCastStep(outPortalHitPos, newRayDirection, outPortalRayLength, hit.distance);
         }
 
         // We missed door
@@ -73,12 +81,12 @@ public class DoorDrager : MonoBehaviour
     }
 
     // Get the information from a door hit
-    private void GetDoorInformation(RaycastHit hit)
+    private void GetDoorInformation(RaycastHit hit, float totalDistance)
     {
         doorBody = hit.transform.GetComponent<Rigidbody>();
         doorTransform = hit.transform;
         localHitDoor = hit.transform.InverseTransformPoint(hit.point);
-        hitDistance = hit.distance;
+        hitDistance = holding ? hitDistance : hit.distance + totalDistance;
         holding = true;
     }
 
@@ -92,7 +100,7 @@ public class DoorDrager : MonoBehaviour
             Gizmos.DrawSphere(doorTransform.TransformPoint(localHitDoor), 0.5f);
 
             Gizmos.color = Color.green;
-            Gizmos.DrawSphere(RayCastStep(transform.position, transForward.lookVector, hitDistance), 0.5f);
+            Gizmos.DrawSphere(RayCastStep(transform.position, transForward.lookVector, hitDistance, 0), 0.5f);
         }
     }
 }
