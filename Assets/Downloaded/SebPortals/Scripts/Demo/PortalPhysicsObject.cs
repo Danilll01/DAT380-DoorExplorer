@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PortalPhysicsObject : PortalTraveller
 {
-    public bool isHeld = false;
+    public bool hasTeleported = false;
     public float force = 10;
     new Rigidbody rigidbody;
     //public Color[] colors;
@@ -24,12 +24,10 @@ public class PortalPhysicsObject : PortalTraveller
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
-        if (!isHeld)
-        {
-            base.Teleport(fromPortal, toPortal, pos, rot);
-            rigidbody.velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rigidbody.velocity));
-            rigidbody.angularVelocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rigidbody.angularVelocity)); ;
-        }
+        hasTeleported = true;
+        base.Teleport(fromPortal, toPortal, pos, rot);
+        rigidbody.velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rigidbody.velocity));
+        rigidbody.angularVelocity = toPortal.TransformVector(fromPortal.InverseTransformVector(rigidbody.angularVelocity)); ;
 
 
     }

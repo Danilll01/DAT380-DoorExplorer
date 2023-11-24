@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using System;
+
 
 // The tag item should add the required components, like outline and rigidbody
 
@@ -7,11 +9,11 @@ public class PickUp : MonoBehaviour
 {
     private GameObject heldItem;
     private Rigidbody heldItemRB;
-    private bool coRoutineRunning = false;
     private GameObject itemHolder;
     private Vector3 lastPosition;
     private Outline currentOutline;
     private bool clearOutline;
+    private bool teleportBreak = false;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -23,7 +25,6 @@ public class PickUp : MonoBehaviour
     private void Start()
     {
         CreateItemHolder();
-        lastPosition = itemHolder.transform.position;
     }
 
     private void CreateItemHolder()
@@ -83,10 +84,29 @@ public class PickUp : MonoBehaviour
         itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
     }
 
-    private void TeleportCrack()
+    private bool InsideNoGoZone(Portal portal, Vector3 checkPos)
     {
-        //Calculate if the vector between itemholder can't go through the portal
-        DropItem();
+        float angle = 15f;
+        float width = portal.GetComponent<Collider>().bounds.size.x * 2f;
+        Vector3 checkPos_L = portal.transform.InverseTransformPoint(checkPos);
+        float xLength = (Mathf.Abs(checkPos_L.x) - (Math.Abs(width) / 2));
+        float maxHeight = Mathf.Tan(angle) * xLength;
+        //float maxHeight = tan v = a/b
+        if ((Math.Abs(checkPos_L.z) < maxHeight))
+        {
+            return false;
+        }
+        else
+        {
+            if ((Math.Abs(checkPos_L.x) < (Math.Abs(width) / 2)))
+            {
+                return false;
+            }
+            Debug.Log("maxZ: " + maxHeight + " ,width: " + width / 2 + " ,xLength: " + xLength);
+            Debug.Log("InsideNoGoZone: " + (Math.Abs(width) / 2) + " - " + (Math.Abs(checkPos_L.x)));
+            return true;
+        }
+
     }
 
     private void MoveItem()
@@ -103,21 +123,50 @@ public class PickUp : MonoBehaviour
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
         float crowFlight = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
 
+        if (teleportBreak && heldItem.GetComponent<PortalPhysicsObject>().hasTeleported)
+        {
+            DropItem();
+            return;
+        }
         if (crowFlight > portalShortcut)
         {
             Debug.Log("Do Teleport");
-            Debug.DrawLine(portal.transform.position, portal.transform.position + new Vector3(0,5,0) * 5f, Color.red);
+            teleportBreak = false;
+            if (InsideNoGoZone(portal.linkedPortal, heldItem.transform.position))
+            {
+                DropItem();
+                return;
+            }
+            Debug.DrawLine(portal.transform.position, portal.transform.position + new Vector3(0, 5, 0) * 5f, Color.red);
             Debug.DrawLine(heldItem.transform.position, itemHolder.transform.position + DirectionThroughTeleport() * 3f, Color.red);
+            heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
             heldItemRB.AddForce(DirectionThroughTeleport() * carryForce);
         }
         else
         {
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
+            breakWhenTeleport(direction);
             float length = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
             Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + direction * length, Color.red);
+            heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
             heldItemRB.AddForce(direction * carryForce);
+
         }
 
+    }
+
+    private void breakWhenTeleport(Vector3 direction)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(heldItem.transform.position, direction, out hit, 1f))
+        {
+            if (hit.collider.tag == "Portal")
+            {
+                teleportBreak = true;
+                return;
+            }
+        }
+        teleportBreak = false;
     }
 
     private Vector3 DirectionThroughTeleport()
@@ -222,6 +271,7 @@ public class PickUp : MonoBehaviour
 
     private void DropItem()
     {
+        teleportBreak = false;
         if (currentOutline != null)
         {
             currentOutline.enabled = false;
