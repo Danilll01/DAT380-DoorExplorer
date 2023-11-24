@@ -300,7 +300,7 @@ GameObject:
   - component: {fileID: 3562492769129817322}
   - component: {fileID: 2406197180174966750}
   - component: {fileID: 9221730989892538477}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Screen
   m_TagString: Portal
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 4.0299606, y: 2.7683187, z: 0}
-  m_Center: {x: -0.0000011920929, y: 1.3851204, z: 0}
+  m_Center: {x: -0.0000011920929, y: 1.3851204, z: 0.5}
 --- !u!1 &2437883939989372543
 GameObject:
   m_ObjectHideFlags: 0
