@@ -14,6 +14,7 @@ public class PickUp : MonoBehaviour
     private Outline currentOutline;
     private bool clearOutline;
     private bool teleportBreak = false;
+    private bool lastPortal = false;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -73,15 +74,62 @@ public class PickUp : MonoBehaviour
 
                 Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
                 itemHolder.transform.position = outPortalHitPos + direction * length;
+
+                if (!lastPortal && heldItem != null) //Gone Inside
+                {
+                    if (!InsideVeryGoodZone(itemHolder.transform.position))
+                    {
+                        DropItem();
+                    }
+                }
+                lastPortal = true;
             }
             else
             {
                 float distance = Vector3.Distance(transform.position, hit.point);
                 itemHolder.transform.position = transform.position + transform.forward * distance;
+                if (lastPortal && heldItem != null) //Gone Outside
+                {
+                    if (!InsideVeryGoodZone(itemHolder.transform.position))
+                    {
+                        DropItem();
+                    }
+                }
+                lastPortal = false;
             }
             return;
         }
+
         itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+        if (lastPortal && heldItem != null) //Gone Outside
+        {
+            if (!InsideVeryGoodZone(itemHolder.transform.position))
+            {
+                DropItem();
+            }
+        }
+        lastPortal = false;
+    }
+
+    private bool InsideVeryGoodZone(Vector3 checkPos)
+    {
+        Portal portal = ClosestPortal(checkPos);
+        Vector3 checkPos_L = portal.transform.InverseTransformPoint(checkPos);
+        float width = portal.GetComponent<Collider>().bounds.size.x * 2f;
+        float height = portal.GetComponent<Collider>().bounds.size.y * 2f; // Check 2f
+        float maxY = height / 2;
+        float maxX = width / 2;
+        float maxZ = 2f;
+        if (Mathf.Abs(checkPos_L.x) < maxX && Mathf.Abs(checkPos_L.y) < maxY && Mathf.Abs(checkPos_L.z) < maxZ)
+        {
+            return true;
+        }
+        else
+        {
+            Debug.Log("maxX: " + maxX + " ,maxY: " + maxY + " ,maxZ: " + maxZ);
+            Debug.Log("InsideVeryGoodZone: " + (Math.Abs(checkPos_L.x)) + " - " + (Math.Abs(checkPos_L.y)) + " - " + (Math.Abs(checkPos_L.z)));
+            return false;
+        }
     }
 
     private bool InsideNoGoZone(Portal portal, Vector3 checkPos)
@@ -370,7 +418,7 @@ public class PickUp : MonoBehaviour
 } */
 
 
-/* 
+/*
     private void SetOutline(GameObject obj, Outline outline)
     {
         if (obj != itemInFront)
