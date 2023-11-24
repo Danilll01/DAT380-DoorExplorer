@@ -11,32 +11,30 @@ public class DoorDrager : MonoBehaviour
     [SerializeField] private float draggingForce = 100f;
 
     private bool holding = false;
-    private Vector3 localHitPlayer = Vector3.zero;
     private Vector3 localHitDoor = Vector3.zero;
     private Transform doorTransform;
     private Rigidbody doorBody;
+    private float hitDistance = 0;
     
     // Update is called once per frame
     void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !holding)
         {
+            // Cast rays if left mouse is down
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transForward.lookVector, out hit, 3, doorLayer))
             {
-                Debug.DrawRay(transform.position, transForward.lookVector * hit.distance, Color.yellow);
-                Debug.Log("Did Hit");
-
+                // Get all info we need
                 doorBody = hit.transform.GetComponent<Rigidbody>();
                 doorTransform = hit.transform;
-                localHitPlayer = transform.InverseTransformPoint(hit.point);
                 localHitDoor = hit.transform.InverseTransformPoint(hit.point);
+                hitDistance = hit.distance;
                 holding = true;
             }
             else
             {
-                Debug.DrawRay(transform.position, transForward.lookVector * 1000, Color.blue);
-                Debug.Log("Did not Hit");
+                // We missed door
                 holding = false;
             }
 
@@ -47,18 +45,16 @@ public class DoorDrager : MonoBehaviour
             holding = false;
         }
 
-        print("Hold: " + holding);
+
+        if (!holding) return;
         
-        if (holding)
-        {
-            print("HOLDING!!!!!!!!!!!!!!: " + holding);
-            Vector3 doorWorldDragPos = doorTransform.TransformPoint(localHitDoor);
-            Vector3 pullDirection = (transform.position + transForward.lookVector.normalized * 2) - doorWorldDragPos;
-            pullDirection = pullDirection.normalized * draggingForce;
-            doorBody.AddForceAtPosition(pullDirection,doorWorldDragPos, ForceMode.Force);
-        }
-        
-        
+        // Add force to door in the direction that the player is pulling
+        Vector3 doorWorldDragPos = doorTransform.TransformPoint(localHitDoor);
+        Vector3 pullDirection = ((transform.position + transForward.lookVector.normalized * hitDistance) - doorWorldDragPos).normalized;
+        pullDirection *= draggingForce;
+        doorBody.AddForceAtPosition(pullDirection,doorWorldDragPos, ForceMode.Force);
+
+
     }
     
     void OnDrawGizmos()

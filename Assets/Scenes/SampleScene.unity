@@ -353,7 +353,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   transForward: {fileID: 1641187825}
-  draggingForce: 1000
+  draggingForce: 15
 --- !u!1 &254040338
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 281512289}
   - component: {fileID: 281512288}
   - component: {fileID: 281512287}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
