@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car : PortalTraveller {
+public class Car : MonoBehaviour {
     public float maxSpeed = 1;
     float speed;
     float targetSpeed;

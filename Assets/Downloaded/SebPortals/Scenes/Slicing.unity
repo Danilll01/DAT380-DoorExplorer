@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -932,8 +932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9ca21e14c4977bdcfea060291485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 140773150}
-  teleport: 1
   maxSpeed: 1
 --- !u!114 &328537967
 MonoBehaviour:
@@ -1337,6 +1335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289443542306700196, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_Radius
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 8786005155405162684, guid: d74572c033f1d7a49af91990ff42da2e,
         type: 3}
@@ -2516,8 +2519,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9ca21e14c4977bdcfea060291485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 993943154}
-  teleport: 0
   maxSpeed: 0.5
 --- !u!1 &810995634
 GameObject:
@@ -3132,12 +3133,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 984894342}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &993943154 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8145647012885555316, guid: d74572c033f1d7a49af91990ff42da2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 411119484}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1000477805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3570,8 +3565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9ca21e14c4977bdcfea060291485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 140773150}
-  teleport: 1
   maxSpeed: 1
 --- !u!135 &1063496862
 SphereCollider:
@@ -3681,12 +3674,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9ac771c9e070a4970b0e30d23ccb2244,
     type: 3}
   m_PrefabInstance: {fileID: 1072982152}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1083364217 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3046640853595292204, guid: a04daebc8637f7a478615436e947ea1c,
-    type: 3}
-  m_PrefabInstance: {fileID: 293541553}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1100233324
 PrefabInstance:
@@ -3910,8 +3897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9ca21e14c4977bdcfea060291485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 1083364217}
-  teleport: 1
   maxSpeed: 1
 --- !u!1001 &1264655844
 PrefabInstance:
@@ -6072,8 +6057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a50f9ca21e14c4977bdcfea060291485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 8701999832695005502}
-  teleport: 1
   maxSpeed: 1
 --- !u!54 &4419675243467998438
 Rigidbody:

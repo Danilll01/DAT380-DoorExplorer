@@ -10,7 +10,7 @@ public class PhysicsTeleporter : PortalTraveller
 
     [SerializeField] private Transform colliderFollow;
     [SerializeField] private float collOffsetZ = -2.4f;
-    
+
     private void FixedUpdate()
     {
         if (coll != null)
