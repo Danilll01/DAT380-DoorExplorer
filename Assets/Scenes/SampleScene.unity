@@ -349,11 +349,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5188a34019cc3224caa8396525b9f4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLayer:
+  doorPortalLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   transForward: {fileID: 1641187825}
   draggingForce: 15
+  pickupDistance: 3
 --- !u!1 &254040338
 GameObject:
   m_ObjectHideFlags: 0
@@ -3840,60 +3841,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 200744035616059977, guid: 34f720f461efe124e83acb153506791d,
+    - target: {fileID: 1861848462844744892, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
       propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 514178694507328502, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3240513831609019943, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3972820397702400397, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4615951063839978647, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4864555633118740089, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5278193810954407708, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_UseSpring
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5278193810954407708, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Spring.damper
-      value: 0.2
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5360441835549358563, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
       propertyPath: m_Name
       value: DoorPortal
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523926145892580044, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5840362255038227541, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5847980492249172178, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
@@ -3950,41 +3906,6 @@ PrefabInstance:
       propertyPath: linkedPortal
       value: 
       objectReference: {fileID: 37276291}
-    - target: {fileID: 6912845948971872805, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7475554863666966998, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7739224805322888721, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7851511411659664156, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8355424533618362693, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9097211215939522711, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9121272793454426075, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
