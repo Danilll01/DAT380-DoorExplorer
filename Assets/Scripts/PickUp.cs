@@ -13,8 +13,8 @@ public class PickUp : MonoBehaviour
     private Vector3 lastPosition;
     private Outline currentOutline;
     private bool clearOutline;
-    private bool teleportBreak = false;
     private bool lastPortal = false;
+    private float lastExtraDistance = 0f;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -38,15 +38,6 @@ public class PickUp : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Time.timeScale = 0;
-        }
-        FakeUpdate();
-    }
-
-    void FakeUpdate()
-    {
         MoveItemHolder();
         if (heldItem != null)
         {
@@ -60,13 +51,14 @@ public class PickUp : MonoBehaviour
 
     private void MoveItemHolder()
     {
+        float length;
         RaycastHit hit;
         Debug.DrawRay(transform.position, transform.forward * itemHolderDistance, Color.red);
         if (Physics.Raycast(transform.position, transform.forward, out hit, itemHolderDistance))
         {
             if (hit.collider.tag == "Portal")
             {
-                float length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
+                length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
                 var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
                 Vector3 outPortalHitPos = inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(hit.point));
                 Vector3 direction = (outPortalHitPos
@@ -75,61 +67,29 @@ public class PickUp : MonoBehaviour
                 Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
                 itemHolder.transform.position = outPortalHitPos + direction * length;
 
-                if (!lastPortal && heldItem != null) //Gone Inside
-                {
-                    if (!InsideVeryGoodZone(itemHolder.transform.position))
-                    {
-                        DropItem();
-                    }
-                }
-                lastPortal = true;
             }
             else
             {
                 float distance = Vector3.Distance(transform.position, hit.point);
-                itemHolder.transform.position = transform.position + transform.forward * distance;
-                if (lastPortal && heldItem != null) //Gone Outside
-                {
-                    if (!InsideVeryGoodZone(itemHolder.transform.position))
-                    {
-                        DropItem();
-                    }
-                }
-                lastPortal = false;
+                length = 0f;
+                itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
             }
+            if(Math.Abs(lastExtraDistance - length) > 0.1f && heldItem != null)
+            {
+                Debug.Log("Change to great: " + Math.Abs(lastExtraDistance - length));
+                DropItem();
+            }
+            lastExtraDistance = length;
             return;
         }
 
+        if(lastExtraDistance > 0.1f && heldItem != null)
+        {
+            Debug.Log("Change to great, to nil");
+            DropItem();
+        }
+        lastExtraDistance = 0f;
         itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
-        if (lastPortal && heldItem != null) //Gone Outside
-        {
-            if (!InsideVeryGoodZone(itemHolder.transform.position))
-            {
-                DropItem();
-            }
-        }
-        lastPortal = false;
-    }
-
-    private bool InsideVeryGoodZone(Vector3 checkPos)
-    {
-        Portal portal = ClosestPortal(checkPos);
-        Vector3 checkPos_L = portal.transform.InverseTransformPoint(checkPos);
-        float width = portal.GetComponent<Collider>().bounds.size.x * 2f;
-        float height = portal.GetComponent<Collider>().bounds.size.y * 2f; // Check 2f
-        float maxY = height / 2;
-        float maxX = width / 2;
-        float maxZ = 2f;
-        if (Mathf.Abs(checkPos_L.x) < maxX && Mathf.Abs(checkPos_L.y) < maxY && Mathf.Abs(checkPos_L.z) < maxZ)
-        {
-            return true;
-        }
-        else
-        {
-            Debug.Log("maxX: " + maxX + " ,maxY: " + maxY + " ,maxZ: " + maxZ);
-            Debug.Log("InsideVeryGoodZone: " + (Math.Abs(checkPos_L.x)) + " - " + (Math.Abs(checkPos_L.y)) + " - " + (Math.Abs(checkPos_L.z)));
-            return false;
-        }
     }
 
     private bool InsideNoGoZone(Portal portal, Vector3 checkPos)
@@ -139,17 +99,12 @@ public class PickUp : MonoBehaviour
         Vector3 checkPos_L = portal.transform.InverseTransformPoint(checkPos);
         float xLength = (Mathf.Abs(checkPos_L.x) - (Math.Abs(width) / 2));
         float maxHeight = Mathf.Tan(angle) * xLength;
-        //float maxHeight = tan v = a/b
-        if ((Math.Abs(checkPos_L.z) < maxHeight))
+        if ((Math.Abs(checkPos_L.z) < maxHeight) && (Math.Abs(checkPos_L.x) < (Math.Abs(width) / 2)))
         {
             return false;
         }
         else
         {
-            if ((Math.Abs(checkPos_L.x) < (Math.Abs(width) / 2)))
-            {
-                return false;
-            }
             Debug.Log("maxZ: " + maxHeight + " ,width: " + width / 2 + " ,xLength: " + xLength);
             Debug.Log("InsideNoGoZone: " + (Math.Abs(width) / 2) + " - " + (Math.Abs(checkPos_L.x)));
             return true;
