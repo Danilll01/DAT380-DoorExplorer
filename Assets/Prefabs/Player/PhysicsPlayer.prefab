@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1546005949028705779}
   - component: {fileID: 8821380750476988902}
   - component: {fileID: 4414162115055565800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   rotationSmoothTime: 0.1
   yaw: 0
   pitch: 0
+  lookVector: {x: 1, y: 1, z: 1}
   isGrounded: 1
 --- !u!54 &1829557735654585450
 Rigidbody:
@@ -207,6 +208,7 @@ GameObject:
   - component: {fileID: 6824464446537490633}
   - component: {fileID: 5314265290583995447}
   - component: {fileID: 5999183719498015559}
+  - component: {fileID: 7430482116617977517}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -344,3 +346,21 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &7430482116617977517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100338291502977864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5188a34019cc3224caa8396525b9f4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorPortalLayer:
+    serializedVersion: 2
+    m_Bits: 384
+  transForward: {fileID: 6611509305674398360}
+  draggingForce: 5
+  pickupDistance: 3
