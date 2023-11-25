@@ -436,7 +436,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   transForward: {fileID: 1641187825}
-  draggingForce: 10
+  draggingForce: 5
   pickupDistance: 3
 --- !u!1 &254040338
 GameObject:
@@ -4169,6 +4169,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5217014245148293824, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278193810954407708, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Spring.damper
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278193810954407708, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_Limits.bounciness
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5360441835549358563, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
       propertyPath: m_Name
