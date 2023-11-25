@@ -54,7 +54,6 @@ public class DoorDrager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, distance, doorPortalLayer))
         {
-            Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Door"))
             {
                 GetDoorInformation(hit, totalDistance);
