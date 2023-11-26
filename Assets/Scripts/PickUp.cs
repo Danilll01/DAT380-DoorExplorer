@@ -11,13 +11,12 @@ public class PickUp : MonoBehaviour
     private Rigidbody heldItemRB;
     private GameObject itemHolder;
     private Outline currentOutline;
+    private Vector3 forceDirection;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
     [SerializeField] private float carryForce = 400.0f;
-    [SerializeField] private float pickupDuration = 0.1f;
     [SerializeField] private float itemHolderDistance = 2f;
-    [SerializeField] private float itemDropDistance = 1f;
 
     private void Start()
     {
@@ -45,12 +44,24 @@ public class PickUp : MonoBehaviour
         }
     }
 
+    void FixedUpdate() {
+        if(heldItem != null)
+        {
+            float magnitude = forceDirection.magnitude;
+            if(magnitude > 1) //Threshold for force
+            {
+                magnitude = 1;
+            }
+            float strength = carryForce * magnitude;
+            heldItemRB.AddForce(forceDirection * strength);
+        }
+    }
+
     private RaycastHit SendRaycast(Vector3 start, Vector3 direction, float length)
     {
         RaycastHit hit;
         if (Physics.Raycast(start, direction, out hit, length))
         {
-            //Debug.DrawLine(start, start + direction * length, Color.green);
             return hit;
         }
         return hit;
@@ -72,6 +83,7 @@ public class PickUp : MonoBehaviour
         {
             length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
             var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
+            Debug.Log("Hit portal: " + inPortal.transform.InverseTransformPoint(hit.point));
             Vector3 outPortalHitPos = inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(hit.point));
             Vector3 direction = (outPortalHitPos
              - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
@@ -116,15 +128,10 @@ public class PickUp : MonoBehaviour
         Portal portal = ClosestPortal(itemHolder.transform.position);
         float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
+        Debug.DrawLine(heldItem.transform.position, portal.transform.position, Color.green);
+        Debug.DrawLine(itemHolder.transform.position, portal.linkedPortal.transform.position, Color.green);
         float crowFlight = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
 
-        if (heldItem.GetComponent<PortalPhysicsObject>().hasTeleported
-        && Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > 2f)
-        {
-            Debug.Log("Droped item");
-            DropItem();
-            return;
-        }
         if (crowFlight > portalShortcut)
         {
             Debug.Log("Portal Shortcut");
@@ -137,20 +144,14 @@ public class PickUp : MonoBehaviour
             {
                 heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
                 Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + DirectionThroughTeleport() * 5, Color.blue, 5f);
-                heldItemRB.AddForce(DirectionThroughTeleport() * carryForce);
+                forceDirection = DirectionThroughTeleport();
             }
 
         }
         else
         {
-            Debug.Log("Crow Flight");
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
-            float length = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
-            heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
-            Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
-            Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
-            heldItemRB.AddForce(direction * carryForce);
-
+            forceDirection = direction;
         }
 
     }
@@ -159,6 +160,18 @@ public class PickUp : MonoBehaviour
     {
         Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
         Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
+        // If the item has teleported add or remove to z based on itemholder pos
+        if (heldItem.GetComponent<PortalPhysicsObject>().hasTeleported)
+        {
+            if (itemholder_L.z > 0)
+            {
+                item_L = item_L - new Vector3(0, 0, 1.0f);
+            }
+            else
+            {
+                item_L = item_L + new Vector3(0, 0, 1.0f);
+            }
+        }
         Debug.Log("Shortcut - item_L: " + item_L + " itemholder_L: " + itemholder_L);
         return (item_L.z > 0 == itemholder_L.z > 0);
     }
@@ -170,7 +183,7 @@ public class PickUp : MonoBehaviour
         Vector3 itemholder_W = targetPortal.transform.TransformPoint(itemholder_L);
         Vector3 item_W = heldItem.transform.position;
 
-        Vector3 direction = -(item_W - itemholder_W).normalized;
+        Vector3 direction = -(item_W - itemholder_W);
         return direction;
     }
 
@@ -222,7 +235,6 @@ public class PickUp : MonoBehaviour
         }
         if (hit.collider.tag == "Item")
         {
-            Debug.Log("Hit Item");
             SmartOutLine(hit.collider.gameObject);
             if (Input.GetMouseButtonDown(0))
             {
@@ -271,8 +283,6 @@ public class PickUp : MonoBehaviour
 
     private void PickupItem(GameObject item)
     {
-        Debug.Log("PickupItem");
-
         currentOutline.enabled = false;
         heldItem = item.transform.GetComponent<Collider>().gameObject;
         heldItemRB = heldItem.GetComponent<Rigidbody>();
