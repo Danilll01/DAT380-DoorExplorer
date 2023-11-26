@@ -11,7 +11,6 @@ public class PickUp : MonoBehaviour
     private Rigidbody heldItemRB;
     private GameObject itemHolder;
     private Outline currentOutline;
-    private bool clearOutline;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -193,7 +192,6 @@ public class PickUp : MonoBehaviour
 
     private void SelectItem(Vector3 startPos, Vector3 direction, float length)
     {
-        clearOutline = true;
         RaycastHit hit = SendRaycast(startPos, direction, length);
         Debug.DrawLine(startPos, startPos + direction * length, Color.red);
 
@@ -204,15 +202,22 @@ public class PickUp : MonoBehaviour
         }
         if (hit.collider.tag == "Portal")
         {
-            float remainingLength = pickupDistance - Vector3.Distance(startPos, hit.point);
+            float smallExtra = 0.1f; // This is used to help the raycast after the portal
+            float remainingLength = pickupDistance - Vector3.Distance(startPos, hit.point) + smallExtra;
             var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
             var outPortal = inPortal.linkedPortal;
             Vector3 hitPosIn = inPortal.transform.InverseTransformPoint(hit.point);
             Vector3 hitPosOut = outPortal.transform.TransformPoint(hitPosIn);
             Vector3 startPosOut = outPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(startPos));
+
+            if(hitPosIn.z < 0)
+            {
+                smallExtra = -smallExtra;
+            }
+
             Vector3 directionToPortal = (hitPosOut - startPosOut).normalized;
 
-            SelectItem(hitPosOut, directionToPortal, remainingLength);
+            SelectItem(hitPosOut + new Vector3(0,0,smallExtra), directionToPortal, remainingLength);
             return;
         }
         if (hit.collider.tag == "Item")
