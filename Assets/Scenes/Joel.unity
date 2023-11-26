@@ -1586,6 +1586,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4599663831597512113, guid: 92df8337bf458ae44a986502d72edf24,
         type: 3}
+      propertyPath: joints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599663831597512113, guid: 92df8337bf458ae44a986502d72edf24,
+        type: 3}
       propertyPath: joints.Array.data[0]
       value: 
       objectReference: {fileID: 764511832}
@@ -1598,12 +1603,12 @@ PrefabInstance:
         type: 3}
       propertyPath: joints.Array.data[2]
       value: 
-      objectReference: {fileID: 1078238930}
+      objectReference: {fileID: 1006905816}
     - target: {fileID: 4599663831597512113, guid: 92df8337bf458ae44a986502d72edf24,
         type: 3}
       propertyPath: joints.Array.data[3]
       value: 
-      objectReference: {fileID: 1006905816}
+      objectReference: {fileID: 1078238930}
     - target: {fileID: 4741517931995436881, guid: 92df8337bf458ae44a986502d72edf24,
         type: 3}
       propertyPath: m_LocalPosition.x

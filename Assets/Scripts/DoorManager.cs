@@ -31,7 +31,6 @@ public class DoorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(openJoint.velocity);
         foreach (HingeJoint joint in joints)
         {
             // Turn on/off motor to close non active doors
