@@ -12,8 +12,6 @@ public class PickUp : MonoBehaviour
     private GameObject itemHolder;
     private Outline currentOutline;
     private bool clearOutline;
-    private float lastLength = 2f;
-    private bool dropNextTeleport = false;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -44,7 +42,7 @@ public class PickUp : MonoBehaviour
         }
         else
         {
-            SelectItem();
+            SelectItem(transform.position, transform.forward, pickupDistance);
         }
     }
 
@@ -67,8 +65,6 @@ public class PickUp : MonoBehaviour
 
         if (hit.collider == null)
         {
-            CheckHolderBreak(0f);
-            lastLength = 0f;
             itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
             return;
         }
@@ -83,28 +79,11 @@ public class PickUp : MonoBehaviour
 
             Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
             itemHolder.transform.position = outPortalHitPos + direction * length;
-            CheckHolderBreak(length);
-            lastLength = length;
             return;
         }
 
-
         float distance = Vector3.Distance(transform.position, hit.point);
         itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
-        CheckHolderBreak(2f);
-        lastLength = 2f;
-    }
-
-    private void CheckHolderBreak(float length)
-    {
-        /* if (heldItem != null)
-        {
-            if (Math.Abs(lastLength - length) > 0.1f)
-            {
-                Debug.Log("Change to great: " + Math.Abs(lastLength - length));
-                DropItem();
-            }
-        } */
     }
 
     private bool InsideNoGoZone(Portal portal, Vector3 checkPos)
@@ -135,7 +114,6 @@ public class PickUp : MonoBehaviour
             return;
         }
 
-        //OutPortal is the portal that is closest to the itemholder
         Portal portal = ClosestPortal(itemHolder.transform.position);
         float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
@@ -151,12 +129,6 @@ public class PickUp : MonoBehaviour
         if (crowFlight > portalShortcut)
         {
             Debug.Log("Portal Shortcut");
-            /* if (InsideNoGoZone(portal.linkedPortal, heldItem.transform.position))
-            {
-                Debug.Log("InsideNoGoZone");
-                DropItem();
-                return;
-            } */
             if (BadTeleport())
             {
                 Debug.Log("BadTeleport");
@@ -178,7 +150,6 @@ public class PickUp : MonoBehaviour
             heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
             Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
             Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
-            Debug.Log("Crow - item_L: " + item_L + " itemholder_L: " + itemholder_L);
             heldItemRB.AddForce(direction * carryForce);
 
         }
@@ -204,7 +175,6 @@ public class PickUp : MonoBehaviour
         return direction;
     }
 
-    //Returns the portal that is closest to the position
     private Portal ClosestPortal(Vector3 position)
     {
         GameObject[] portalArray = GameObject.FindGameObjectsWithTag("Portal");
@@ -221,61 +191,77 @@ public class PickUp : MonoBehaviour
         return closestPortal;
     }
 
-    private void SelectItem()
+    private void SelectItem(Vector3 startPos, Vector3 direction, float length)
     {
         clearOutline = true;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
-        {
-            if (hit.collider.tag == "Portal")
-            {
-                float length = pickupDistance - Vector3.Distance(transform.position, hit.point);
-                var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
-                Vector3 outPortalHitPos = inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(hit.point));
-                Vector3 direction = (outPortalHitPos
-                 - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
+        RaycastHit hit = SendRaycast(startPos, direction, length);
+        Debug.DrawLine(startPos, startPos + direction * length, Color.red);
 
-                HitItem(outPortalHitPos, direction, length);
-            }
-            else
-            {
-                HitItem(transform.position, transform.forward, pickupDistance);
-            }
-        }
-        if (clearOutline && currentOutline != null)
+        if (hit.collider == null)
         {
-            currentOutline.enabled = false;
-            currentOutline = null;
+            SmartOutLine(null);
+            return;
         }
+        if (hit.collider.tag == "Portal")
+        {
+            float remainingLength = pickupDistance - Vector3.Distance(startPos, hit.point);
+            var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
+            var outPortal = inPortal.linkedPortal;
+            Vector3 hitPosIn = inPortal.transform.InverseTransformPoint(hit.point);
+            Vector3 hitPosOut = outPortal.transform.TransformPoint(hitPosIn);
+            Vector3 startPosOut = outPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(startPos));
+            Vector3 directionToPortal = (hitPosOut - startPosOut).normalized;
+
+            SelectItem(hitPosOut, directionToPortal, remainingLength);
+            return;
+        }
+        if (hit.collider.tag == "Item")
+        {
+            Debug.Log("Hit Item");
+            SmartOutLine(hit.collider.gameObject);
+            if (Input.GetMouseButtonDown(0))
+            {
+                PickupItem(hit.collider.gameObject);
+            }
+            return;
+        }
+        SmartOutLine(null);
     }
 
-    private void HitItem(Vector3 start, Vector3 direction, float length)
+    private void SmartOutLine(GameObject itemHit)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(start, direction, out hit, length))
+        if(itemHit == null)
         {
-            Debug.DrawLine(start, start + direction * length, Color.green);
-            if (hit.collider.tag == "Item")
+            if(currentOutline != null)
             {
-                if (currentOutline == null)
-                {
-                    currentOutline = hit.collider.gameObject.GetComponent<Outline>();
-                    currentOutline.enabled = true;
-                }
-                else if (currentOutline.gameObject != hit.collider.gameObject)
-                {
-                    currentOutline.enabled = false;
-                    currentOutline = hit.collider.gameObject.GetComponent<Outline>();
-                    currentOutline.enabled = true;
-                }
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    PickupItem(hit.collider.gameObject);
-                }
-                clearOutline = false;
+                currentOutline.enabled = false;
+                currentOutline = null;
             }
+            return;
         }
+        if(itemHit.GetComponent<Outline>() == null)
+        {
+            if(currentOutline != null)
+            {
+                currentOutline.enabled = false;
+                currentOutline = null;
+            }
+            return;
+        }
+        if(currentOutline == null)
+        {
+            currentOutline = itemHit.GetComponent<Outline>();
+            currentOutline.enabled = true;
+            return;
+        }
+        if(currentOutline.gameObject != itemHit)
+        {
+            currentOutline.enabled = false;
+            currentOutline = itemHit.GetComponent<Outline>();
+            currentOutline.enabled = true;
+            return;
+        }
+
     }
 
     private void PickupItem(GameObject item)
@@ -299,7 +285,7 @@ public class PickUp : MonoBehaviour
             currentOutline.enabled = false;
             currentOutline = null;
         }
-        dropNextTeleport = false;
+
         heldItemRB.useGravity = true;
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
