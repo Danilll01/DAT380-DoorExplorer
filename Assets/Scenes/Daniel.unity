@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2127223238}
-  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4816,12 +4816,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd4a47e9a3662a045a9c15717b341a41, type: 3}
---- !u!1 &8433263897695166410 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4951285615787394303, guid: bfc5ff390ad8449469273ac2e76accb1,
-    type: 3}
-  m_PrefabInstance: {fileID: 8965462037924834949}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8965462037924834949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4838,12 +4832,12 @@ PrefabInstance:
     - target: {fileID: 8577541374031520333, guid: bfc5ff390ad8449469273ac2e76accb1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.4564
+      value: 6.309
       objectReference: {fileID: 0}
     - target: {fileID: 8577541374031520333, guid: bfc5ff390ad8449469273ac2e76accb1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.3840939
+      value: 2.383
       objectReference: {fileID: 0}
     - target: {fileID: 8577541374031520333, guid: bfc5ff390ad8449469273ac2e76accb1,
         type: 3}
@@ -4888,61 +4882,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4951285615787394303, guid: bfc5ff390ad8449469273ac2e76accb1,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9098160176628712818}
-    - targetCorrespondingSourceObject: {fileID: 4951285615787394303, guid: bfc5ff390ad8449469273ac2e76accb1,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9098160176628712817}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfc5ff390ad8449469273ac2e76accb1, type: 3}
---- !u!54 &9098160176628712817
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8433263897695166410}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &9098160176628712818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8433263897695166410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 10
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
