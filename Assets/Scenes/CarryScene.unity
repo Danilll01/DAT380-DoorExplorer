@@ -1550,10 +1550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupDistance: 10
-  carryForce: 15
-  pickupDuration: 0.1
+  carryForce: 40
   itemHolderDistance: 2
-  itemDropDistance: 1
 --- !u!1001 &882450460408875579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1575,7 +1573,7 @@ PrefabInstance:
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 13.04
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331073, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}

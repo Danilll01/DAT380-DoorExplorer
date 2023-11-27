@@ -12,6 +12,11 @@ public class PickUp : MonoBehaviour
     private GameObject itemHolder;
     private Outline currentOutline;
     private Vector3 forceDirection;
+    private Vector3 saved;
+    private Vector3 saved2;
+    private Portal saved3;
+    private bool savedBool = false;
+    private Vector3 saved4;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -42,13 +47,18 @@ public class PickUp : MonoBehaviour
         {
             SelectItem(transform.position, transform.forward, pickupDistance);
         }
+        if (savedBool)
+        {
+            DebDraw();
+        }
     }
 
-    void FixedUpdate() {
-        if(heldItem != null)
+    void FixedUpdate()
+    {
+        if (heldItem != null)
         {
             float magnitude = forceDirection.magnitude;
-            if(magnitude > 1) //Threshold for force
+            if (magnitude > 1) //Threshold for force
             {
                 magnitude = 1;
             }
@@ -72,6 +82,19 @@ public class PickUp : MonoBehaviour
         float length;
         RaycastHit hit = SendRaycast(transform.position, transform.forward, itemHolderDistance);
 
+        /* if (ContingencyPlan())
+        {
+            Debug.Log("ContingencyPlan");
+            var closePortal = ClosestPortal(transform.position);
+            var closeOtherPortal = closePortal.linkedPortal;
+            Vector3 closePortalHitPos = closePortal.transform.InverseTransformPoint(transform.position);
+            Vector3 closeOtherPortalHitPos = closeOtherPortal.transform.TransformPoint(closePortalHitPos);
+            Vector3 direction_L = closePortal.transform.InverseTransformPoint(transform.position);
+            Vector3 direction_W = closeOtherPortal.transform.TransformPoint(direction_L);
+
+            Debug.DrawLine(closeOtherPortalHitPos, closeOtherPortalHitPos + direction_W * itemHolderDistance, Color.yellow);
+            return;
+        } */
 
         if (hit.collider == null)
         {
@@ -83,7 +106,6 @@ public class PickUp : MonoBehaviour
         {
             length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
             var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
-            Debug.Log("Hit portal: " + inPortal.transform.InverseTransformPoint(hit.point));
             Vector3 outPortalHitPos = inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(hit.point));
             Vector3 direction = (outPortalHitPos
              - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
@@ -97,24 +119,23 @@ public class PickUp : MonoBehaviour
         itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
     }
 
-    private bool InsideNoGoZone(Portal portal, Vector3 checkPos)
+    private bool ContingencyPlan()
     {
-        float angle = 15f;
-        float width = portal.GetComponent<Collider>().bounds.size.x * 2f;
-        Vector3 checkPos_L = portal.transform.InverseTransformPoint(checkPos);
-        float xLength = (Mathf.Abs(checkPos_L.x) - (Math.Abs(width) / 2));
-        float maxHeight = Mathf.Tan(angle) * xLength;
-        if ((Math.Abs(checkPos_L.z) < maxHeight) && (Math.Abs(checkPos_L.x) < (Math.Abs(width) / 2)))
+        var portal = ClosestPortal(transform.position);
+        Vector3 playerPos_L = portal.transform.InverseTransformPoint(transform.position);
+        if (playerPos_L.z > -0.1f && playerPos_L.z < 0.1f)
         {
-            return false;
-        }
-        else
-        {
-            Debug.Log("maxZ: " + maxHeight + " ,width: " + width / 2 + " ,xLength: " + xLength);
-            Debug.Log("InsideNoGoZone: " + (Math.Abs(width) / 2) + " - " + (Math.Abs(checkPos_L.x)));
             return true;
         }
+        return false;
+    }
 
+    private void DebDraw()
+    {
+        Debug.DrawLine(saved, saved3.linkedPortal.transform.position, Color.green); //
+        Debug.DrawLine(saved2, saved3.transform.position, Color.green);
+        Debug.DrawLine(saved, saved2, Color.red); //Normal
+        Debug.DrawLine(saved2, saved4, Color.blue); //Normal
     }
 
     private void MoveItem()
@@ -128,8 +149,7 @@ public class PickUp : MonoBehaviour
         Portal portal = ClosestPortal(itemHolder.transform.position);
         float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
-        Debug.DrawLine(heldItem.transform.position, portal.transform.position, Color.green);
-        Debug.DrawLine(itemHolder.transform.position, portal.linkedPortal.transform.position, Color.green);
+        saved3 = portal;
         float crowFlight = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
 
         if (crowFlight > portalShortcut)
@@ -138,18 +158,28 @@ public class PickUp : MonoBehaviour
             if (BadTeleport())
             {
                 Debug.Log("BadTeleport");
+                saved = heldItem.transform.position;
+                saved2 = itemHolder.transform.position;
+                saved4 = transform.position;
+                DebDraw();
                 DropItem();
+                savedBool = true;
             }
             else
             {
                 heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
-                Debug.DrawLine(heldItem.transform.position, heldItem.transform.position + DirectionThroughTeleport() * 5, Color.blue, 5f);
                 forceDirection = DirectionThroughTeleport();
             }
 
         }
         else
         {
+            if(Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > 5f)
+            {
+                Debug.Log("Too far away");
+                DropItem();
+                return;
+            }
             Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
             forceDirection = direction;
         }
@@ -160,20 +190,19 @@ public class PickUp : MonoBehaviour
     {
         Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
         Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
-        // If the item has teleported add or remove to z based on itemholder pos
-        if (heldItem.GetComponent<PortalPhysicsObject>().hasTeleported)
+        // Summan av kaddemumman, Teleport blir kallad för sent
+        if (item_L.z > -0.2f && item_L.z < 0.2f)
         {
-            if (itemholder_L.z > 0)
-            {
-                item_L = item_L - new Vector3(0, 0, 1.0f);
-            }
-            else
-            {
-                item_L = item_L + new Vector3(0, 0, 1.0f);
-            }
+            Debug.Log("In the middle of the portal");
+            return false;
         }
-        Debug.Log("Shortcut - item_L: " + item_L + " itemholder_L: " + itemholder_L);
-        return (item_L.z > 0 == itemholder_L.z > 0);
+        if (itemholder_L.z > -0.2f && itemholder_L.z < 0.2f)
+        {
+            Debug.Log("In the middle of the portal");
+            return false;
+        }
+        Debug.Log("Shortcut - item_L: " + item_L + " itemholder_L: " + itemholder_L + " player_L: " + ClosestPortal(transform.position).transform.InverseTransformPoint(transform.position));
+        return ((item_L.z >= 0) == (itemholder_L.z > 0));
     }
 
     private Vector3 DirectionThroughTeleport()
@@ -206,8 +235,6 @@ public class PickUp : MonoBehaviour
     private void SelectItem(Vector3 startPos, Vector3 direction, float length)
     {
         RaycastHit hit = SendRaycast(startPos, direction, length);
-        Debug.DrawLine(startPos, startPos + direction * length, Color.red);
-
         if (hit.collider == null)
         {
             SmartOutLine(null);
@@ -223,14 +250,14 @@ public class PickUp : MonoBehaviour
             Vector3 hitPosOut = outPortal.transform.TransformPoint(hitPosIn);
             Vector3 startPosOut = outPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(startPos));
 
-            if(hitPosIn.z < 0)
+            if (hitPosIn.z < 0)
             {
                 smallExtra = -smallExtra;
             }
 
             Vector3 directionToPortal = (hitPosOut - startPosOut).normalized;
 
-            SelectItem(hitPosOut + new Vector3(0,0,smallExtra), directionToPortal, remainingLength);
+            SelectItem(hitPosOut + new Vector3(0, 0, smallExtra), directionToPortal, remainingLength);
             return;
         }
         if (hit.collider.tag == "Item")
@@ -247,31 +274,31 @@ public class PickUp : MonoBehaviour
 
     private void SmartOutLine(GameObject itemHit)
     {
-        if(itemHit == null)
+        if (itemHit == null)
         {
-            if(currentOutline != null)
+            if (currentOutline != null)
             {
                 currentOutline.enabled = false;
                 currentOutline = null;
             }
             return;
         }
-        if(itemHit.GetComponent<Outline>() == null)
+        if (itemHit.GetComponent<Outline>() == null)
         {
-            if(currentOutline != null)
+            if (currentOutline != null)
             {
                 currentOutline.enabled = false;
                 currentOutline = null;
             }
             return;
         }
-        if(currentOutline == null)
+        if (currentOutline == null)
         {
             currentOutline = itemHit.GetComponent<Outline>();
             currentOutline.enabled = true;
             return;
         }
-        if(currentOutline.gameObject != itemHit)
+        if (currentOutline.gameObject != itemHit)
         {
             currentOutline.enabled = false;
             currentOutline = itemHit.GetComponent<Outline>();
