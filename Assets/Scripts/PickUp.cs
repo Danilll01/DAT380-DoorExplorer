@@ -106,7 +106,7 @@ public class PickUp : MonoBehaviour
         if (hit.collider.tag == "Portal") //It goes through the portal sometimes
         {
             length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
-            var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
+            var inPortal = hit.collider.gameObject.transform.parent.GetComponent<Portal>();
             Vector3 outPortalHitPos = inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(hit.point));
             Vector3 direction = (outPortalHitPos
              - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
@@ -229,14 +229,14 @@ public class PickUp : MonoBehaviour
     private Portal ClosestPortal(Vector3 position)
     {
         GameObject[] portalArray = GameObject.FindGameObjectsWithTag("Portal");
-        Portal closestPortal = portalArray[0].transform.parent.parent.GetComponent<Portal>();
+        Portal closestPortal = portalArray[0].transform.parent.GetComponent<Portal>();
         foreach (GameObject portal in portalArray)
         {
-            Vector3 portalPos = portal.transform.parent.parent.GetComponent<Portal>().transform.position;
+            Vector3 portalPos = portal.transform.parent.GetComponent<Portal>().transform.position;
             Vector3 closestPortalPos = closestPortal.transform.position;
             if (Vector3.Distance(position, portalPos) < Vector3.Distance(position, closestPortalPos))
             {
-                closestPortal = portal.transform.parent.parent.GetComponent<Portal>();
+                closestPortal = portal.transform.parent.GetComponent<Portal>();
             }
         }
         return closestPortal;
@@ -254,7 +254,7 @@ public class PickUp : MonoBehaviour
         {
             float smallExtra = 0.1f; // This is used to help the raycast after the portal
             float remainingLength = pickupDistance - Vector3.Distance(startPos, hit.point) + smallExtra;
-            var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
+            var inPortal = hit.collider.gameObject.transform.parent.GetComponent<Portal>();
             var outPortal = inPortal.linkedPortal;
             Vector3 hitPosIn = inPortal.transform.InverseTransformPoint(hit.point);
             Vector3 hitPosOut = outPortal.transform.TransformPoint(hitPosIn);
