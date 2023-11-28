@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2127223238}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3935,7 +3935,7 @@ PrefabInstance:
     - target: {fileID: 8942913716085442140, guid: 3d71ede39c8b87743a7b07542ac4b549,
         type: 3}
       propertyPath: m_Name
-      value: SM_Veh_Car_Muscle_01
+      value: SelfPropelledCar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
