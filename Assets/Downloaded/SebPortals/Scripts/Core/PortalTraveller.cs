@@ -13,6 +13,8 @@ public class PortalTraveller : MonoBehaviour {
     public Material[] originalMaterials { get; set; }
     public Material[] cloneMaterials { get; set; }
 
+    public bool teleport = true;
+
     public virtual void Teleport (Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot) {
         transform.position = pos;
         transform.rotation = rot;
@@ -63,7 +65,7 @@ public class PortalTraveller : MonoBehaviour {
         }
     }
 
-    Material[] GetMaterials (GameObject g) {
+    protected Material[] GetMaterials (GameObject g) {
         var renderers = g.GetComponentsInChildren<MeshRenderer> ();
         var matList = new List<Material> ();
         foreach (var renderer in renderers) {
