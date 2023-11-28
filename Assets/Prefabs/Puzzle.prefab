@@ -235,6 +235,7 @@ MonoBehaviour:
   hasCube: 0
   hasTriangle: 0
   hasCylinder: 0
+  particleSystem: {fileID: 952403762122271853}
 --- !u!1 &1161315439203350222
 GameObject:
   m_ObjectHideFlags: 0
@@ -8011,6 +8012,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed962e35f7fa6f34f8d27aa6d19ea293, type: 3}
+--- !u!198 &952403762122271853 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9169966119468206341, guid: ed962e35f7fa6f34f8d27aa6d19ea293,
+    type: 3}
+  m_PrefabInstance: {fileID: 8247742062415193448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8696907793295801782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 775817854216231134, guid: ed962e35f7fa6f34f8d27aa6d19ea293,
