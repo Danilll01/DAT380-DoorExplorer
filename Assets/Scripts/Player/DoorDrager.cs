@@ -42,6 +42,13 @@ public class DoorDrager : MonoBehaviour
         
         // Add force to door in the direction that the player is pulling
         Vector3 doorWorldDragPos = doorTransform.TransformPoint(localHitDoor);
+
+        if (Vector3.Distance(pullTo, doorWorldDragPos) > pickupDistance)
+        {
+            holding = false;
+            return;
+        }
+        
         Vector3 pullDirection = (pullTo - doorWorldDragPos);
         pullDirection *= draggingForce;
         doorBody.AddForceAtPosition(pullDirection * pullDirection.magnitude,doorWorldDragPos, ForceMode.Force);
