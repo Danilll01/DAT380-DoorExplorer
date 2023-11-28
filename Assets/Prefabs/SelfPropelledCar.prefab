@@ -807,7 +807,7 @@ GameObject:
   - component: {fileID: 3385225201433284105}
   m_Layer: 0
   m_Name: SelfPropelledCar
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -890,7 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 5011344201668896959}
   teleport: 1
-  isHeld: 0
+  hasTeleported: 0
   force: 10
 --- !u!114 &5083976161244024647
 MonoBehaviour:

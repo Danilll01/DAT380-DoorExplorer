@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9000770682658898976}
   m_Layer: 0
   m_Name: SM_Prop_SmartPhone_01
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   graphicsObject: {fileID: 7232330665137166619}
   teleport: 1
-  isHeld: 0
+  hasTeleported: 0
   force: 10
 --- !u!114 &9000770682658898976
 MonoBehaviour:

@@ -26,6 +26,8 @@ public class PickUp : MonoBehaviour
     [SerializeField] private float pickupDistance = 10.0f;
     [SerializeField] private float carryForce = 400.0f;
     [SerializeField] private float itemHolderDistance = 2f;
+    [SerializeField] private PlayerPhysicsMovement transForward;
+
 
     private void Start()
     {
@@ -35,7 +37,7 @@ public class PickUp : MonoBehaviour
     private void CreateItemHolder()
     {
         itemHolder = new GameObject("ItemHolder");
-        Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
+        Vector3 pointPosition = transform.position + transForward.lookVector * itemHolderDistance;
         itemHolder.transform.position = pointPosition;
         itemHolder.transform.parent = transform;
         backupHolder = itemHolder.transform.position;
@@ -50,7 +52,7 @@ public class PickUp : MonoBehaviour
         }
         else
         {
-            SelectItem(transform.position, transform.forward, pickupDistance);
+            SelectItem(transform.position, transForward.lookVector, pickupDistance);
         }
         if (savedBool)
         {
@@ -85,7 +87,7 @@ public class PickUp : MonoBehaviour
     private void MoveItemHolder()
     {
         float length;
-        RaycastHit hit = SendRaycast(transform.position, transform.forward, itemHolderDistance);
+        RaycastHit hit = SendRaycast(transform.position, transForward.lookVector, itemHolderDistance);
 
         if (ContingencyPlan())
         {
@@ -97,7 +99,7 @@ public class PickUp : MonoBehaviour
 
         if (hit.collider == null)
         {
-            itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+            itemHolder.transform.position = transform.position + transForward.lookVector * itemHolderDistance;
             backupHolder = itemHolder.transform.position;
             lastHit = false;
             return;
@@ -122,7 +124,7 @@ public class PickUp : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, hit.point);
-        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+        itemHolder.transform.position = transform.position + transForward.lookVector * itemHolderDistance;
         lastHit = false;
         backupHolder = itemHolder.transform.position;
     }
@@ -176,7 +178,6 @@ public class PickUp : MonoBehaviour
             else
             {
                 Debug.DrawLine(heldItem.transform.position, itemHolder.transform.position, Color.green, 10f); //
-                heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
                 forceDirection = DirectionThroughTeleport();
             }
 
@@ -342,7 +343,6 @@ public class PickUp : MonoBehaviour
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
         heldItem.layer = 0;
-        heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
         heldItem = null;
         heldItemRB = null;
     }
