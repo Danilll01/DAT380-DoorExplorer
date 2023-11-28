@@ -9,17 +9,16 @@ public class Puzzle : MonoBehaviour
     public bool hasTriangle = false;
     public bool hasCylinder = false;
 
+    [SerializeField] private ParticleSystem particleSystem;
+
     
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        
+        // If all pieces are in the puzzle, spawn particles
+        if (hasCube && hasTriangle && hasCylinder)
+        {
+            if (particleSystem != null && !particleSystem.isPlaying)
+            particleSystem.Play();
+        }
     }
 }
