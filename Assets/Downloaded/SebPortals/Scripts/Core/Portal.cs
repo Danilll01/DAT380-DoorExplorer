@@ -83,7 +83,7 @@ public class Portal : MonoBehaviour {
     }
 
     // Called before any portal cameras are rendered for the current frame
-    public void PrePortalRender () {
+    public void PrePortalRender() {
         foreach (var traveller in trackedTravellers) {
             UpdateSliceParams(traveller);
         }
@@ -339,7 +339,7 @@ public class Portal : MonoBehaviour {
      */
 
     int SideOfPortal (Vector3 pos) {
-        return System.Math.Sign (Vector3.Dot (pos - transform.position, transform.forward));
+        return System.Math.Sign(Vector3.Dot(pos - transform.position, transform.forward));
     }
 
     bool SameSideOfPortal (Vector3 posA, Vector3 posB) {
