@@ -55,12 +55,14 @@ public class Portal : MonoBehaviour {
             var m = linkedPortal.transform.localToWorldMatrix * transform.worldToLocalMatrix * travellerT.localToWorldMatrix;
 
             Vector3 offsetFromPortal = travellerT.position - transform.position;
-            int portalSide = System.Math.Sign (Vector3.Dot(offsetFromPortal, transform.forward));
-            int portalSideOld = System.Math.Sign(Vector3.Dot(traveller.previousOffsetFromPortal, transform.forward));
+            int portalSide = System.Math.Sign (Vector3.Dot (offsetFromPortal, transform.forward));
+            int portalSideOld = System.Math.Sign(Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
+
+            //print("Side: " + portalSide + " object: " + traveller.name + "pos: " + (traveller.transform.position));
             
+
             // Teleport the traveller if it has crossed from one side of the portal to the other
-            if (portalSide != portalSideOld) {
-                
+            if (portalSide != portalSideOld && traveller.teleport) {
                 var positionOld = travellerT.position;
                 var rotOld = travellerT.rotation;
                 traveller.Teleport(transform, linkedPortal.transform, m.GetColumn (3), m.rotation);
@@ -241,7 +243,15 @@ public class Portal : MonoBehaviour {
 
     void UpdateSliceParams (PortalTraveller traveller) {
         // Calculate slice normal
-        int side = SideOfPortal(traveller.transform.position);
+        int side = 0;
+
+        if (!traveller.teleport)
+        {
+            side = SideOfPortal(traveller.transform.parent.position);
+        } else
+        {
+            side = SideOfPortal (traveller.transform.position);
+        }
         Vector3 sliceNormal = transform.forward * -side;
         Vector3 cloneSliceNormal = linkedPortal.transform.forward * side;
 
