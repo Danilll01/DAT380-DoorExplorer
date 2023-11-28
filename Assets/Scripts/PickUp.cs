@@ -1,27 +1,31 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 
-// Göra hållaren mer bouncey
-// Plocka upp items genom portalen
-// Physics objects och carry...
+// The tag item should add the required components, like outline and rigidbody
 
 public class PickUp : MonoBehaviour
 {
     private GameObject heldItem;
     private Rigidbody heldItemRB;
-    private bool coRoutineRunning = false;
-    private GameObject itemInFront;
     private GameObject itemHolder;
-    private Vector3 lastPosition;
-    private Transform savedParent;
+    private Outline currentOutline;
+    private Vector3 forceDirection;
+
+    private Vector3 saved;
+    private Vector3 saved2;
+    private Portal saved3;
+    private bool savedBool = false;
+    private Vector3 saved4;
+
+    private Vector3 backupHolder;
+    private bool lastHit = false;
 
     [Header("Pick Up Settings")]
-    [SerializeField] private float pickupDistance = 50.0f;
+    [SerializeField] private float pickupDistance = 10.0f;
     [SerializeField] private float carryForce = 400.0f;
-    [SerializeField] private float pickupDuration = 0.1f;
     [SerializeField] private float itemHolderDistance = 2f;
-    [SerializeField] private float itemDropDistance = 1f;
 
     private void Start()
     {
@@ -30,197 +34,317 @@ public class PickUp : MonoBehaviour
 
     private void CreateItemHolder()
     {
-        Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
         itemHolder = new GameObject("ItemHolder");
+        Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
         itemHolder.transform.position = pointPosition;
         itemHolder.transform.parent = transform;
+        backupHolder = itemHolder.transform.position;
     }
 
     void Update()
     {
         MoveItemHolder();
-        MouseHover();
-        LeftClick();
-        if (heldItem != null && !coRoutineRunning)
+        if (heldItem != null)
         {
-            CarryItem();
+            MoveItem();
         }
+        else
+        {
+            SelectItem(transform.position, transform.forward, pickupDistance);
+        }
+        if (savedBool)
+        {
+            DebDraw();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (heldItem != null)
+        {
+            float magnitude = forceDirection.magnitude;
+            if (magnitude > 0.5f) //Threshold for force
+            {
+                magnitude = 0.5f;
+            }
+            float strength = carryForce * magnitude;
+            heldItemRB.AddForce(forceDirection * strength);
+        }
+    }
+
+    private RaycastHit SendRaycast(Vector3 start, Vector3 direction, float length)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(start, direction, out hit, length))
+        {
+            return hit;
+        }
+        return hit;
     }
 
     private void MoveItemHolder()
     {
-        Vector3 forward = transform.TransformDirection(Vector3.forward) * itemHolderDistance;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        float length;
+        RaycastHit hit = SendRaycast(transform.position, transform.forward, itemHolderDistance);
 
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, itemHolderDistance))
+        if (ContingencyPlan())
         {
-            if (hit.collider.tag == "Portal")
-            {
-                var inPortal = hit.collider.gameObject.transform.parent.parent.GetComponent<Portal>();
-                var outPortal = inPortal.linkedPortal;
-
-                Vector3 relativePos = inPortal.transform.InverseTransformPoint(hit.point);
-                relativePos = Quaternion.Euler(0.0f, 0.0f, 0.0f) * relativePos;
-                Vector3 mirroredRelativePos = new Vector3(relativePos.x, relativePos.y, -relativePos.z);
-
-                Vector3 pos = outPortal.transform.TransformPoint(mirroredRelativePos);
-                float length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
-                Debug.DrawLine(pos, pos + transform.forward * length, Color.blue);
-
-                itemHolder.transform.position = pos + transform.forward * length;
-                lastPosition = itemHolder.transform.position;
-            }
-            else
-            {
-                itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
-                DropItemDistance();
-                lastPosition = itemHolder.transform.position;
-
-            }
+            itemHolder.transform.position = backupHolder;
+            Debug.Log("ContingencyPlan");
+            lastHit = false;
+            return;
         }
-        else
+
+        if (hit.collider == null)
         {
             itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
-            DropItemDistance();
-            lastPosition = itemHolder.transform.position;
+            backupHolder = itemHolder.transform.position;
+            lastHit = false;
+            return;
         }
-    }
 
-    private void DropItemDistance()
-    {
-        if (heldItem != null && !coRoutineRunning)
+        if (hit.collider.tag == "Portal") //It goes through the portal sometimes
         {
-            float distance = Vector3.Distance(itemHolder.transform.position, lastPosition);
-            if (distance > 1.0f)
-            {
-                DropItem();
+            length = itemHolderDistance - Vector3.Distance(transform.position, hit.point);
+            var inPortal = hit.collider.gameObject.transform.parent.GetComponent<Portal>();
+            Vector3 outPortalHitPos = inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(hit.point));
+            Vector3 direction = (outPortalHitPos
+             - inPortal.linkedPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(transform.position))).normalized;
+
+            Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
+            itemHolder.transform.position = outPortalHitPos + direction * length;
+            backupHolder = itemHolder.transform.position;
+            if(!lastHit){
+                Debug.Log("Missed");
             }
+            lastHit = true;
+            return;
         }
+
+        float distance = Vector3.Distance(transform.position, hit.point);
+        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
+        lastHit = false;
+        backupHolder = itemHolder.transform.position;
     }
 
-    private void MouseHover()
+    private bool ContingencyPlan()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, pickupDistance))
+        var portal = ClosestPortal(transform.position);
+        Vector3 playerPos_L = portal.transform.InverseTransformPoint(transform.position);
+        if (playerPos_L.z > -0.21f && playerPos_L.z < 0.21f)
         {
-            Outline outline = hit.collider.GetComponent<Outline>();
-            if (outline != null && heldItem == null)
-            {
-                SetOutline(hit.collider.gameObject, outline);
-            }
-            else
-            {
-                ClearOutline();
-            }
+            return true;
         }
-        else
-        {
-            ClearOutline();
-        }
+        return false;
     }
 
-    private void SetOutline(GameObject obj, Outline outline)
+    private void DebDraw()
     {
-        if (obj != itemInFront)
-        {
-            ClearOutline();
-            itemInFront = obj;
-            outline.enabled = true;
-        }
+        Debug.DrawLine(saved, saved3.linkedPortal.transform.position, Color.green); //
+        Debug.DrawLine(saved2, saved3.transform.position, Color.green);
+        Debug.DrawLine(saved, saved2, Color.red); //Normal
+        Debug.DrawLine(saved2, saved4, Color.blue); //Normal
     }
 
-    private void ClearOutline()
-    {
-        if (itemInFront != null)
-        {
-            itemInFront.GetComponent<Outline>().enabled = false;
-            itemInFront = null;
-        }
-    }
-
-    private void CarryItem()
-    {
-        if (Vector3.Distance(heldItem.transform.position, itemHolder.transform.position) > 0.1f)
-        {
-            Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
-            heldItemRB.AddForce(direction * carryForce);
-        }
-
-        if(Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > itemDropDistance){
-            DropItem();
-        }
-
-    }
-
-    private void LeftClick()
+    private void MoveItem()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (heldItem == null)
-            {
-                PickupItem();
-            }
-            else if (!coRoutineRunning)
-            {
-                DropItem();
-            }
+            DropItem();
+            return;
         }
+
+        Portal portal = ClosestPortal(itemHolder.transform.position);
+        float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
+        + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
+        saved3 = portal;
+        float crowFlight = Vector3.Distance(itemHolder.transform.position, heldItem.transform.position);
+
+        if (crowFlight > portalShortcut)
+        {
+            Debug.Log("Portal Shortcut");
+            if (BadTeleport())
+            {
+                Debug.Log("BadTeleport");
+                saved = heldItem.transform.position;
+                saved2 = itemHolder.transform.position;
+                saved4 = transform.position;
+                DebDraw();
+                DropItem();
+                savedBool = true;
+            }
+            else
+            {
+                Debug.DrawLine(heldItem.transform.position, itemHolder.transform.position, Color.green, 10f); //
+                heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
+                forceDirection = DirectionThroughTeleport();
+            }
+
+        }
+        else
+        {
+            if(Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > 5f)
+            {
+                Debug.Log("Too far away");
+                DropItem();
+                return;
+            }
+            Vector3 direction = (itemHolder.transform.position - heldItem.transform.position);
+            forceDirection = direction;
+        }
+
     }
 
-    private void PickupItem()
+    private bool BadTeleport()
     {
-        if (itemInFront != null)
+        Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
+        Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
+        // Summan av kaddemumman, Teleport blir kallad för sent
+        // Ditt fuck detta funkar inte
+        if (item_L.z > -0.2f && item_L.z < 0.2f)
         {
-            heldItem = itemInFront.transform.GetComponent<Collider>().gameObject;
-            heldItemRB = heldItem.GetComponent<Rigidbody>();
-            //heldItem.GetComponent<PortalPhysicsObject>().isHeld = true; // Change
-
-            heldItemRB.useGravity = false;
-            heldItemRB.drag = 20.0f;
-            heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
-            heldItem.layer = 2;
-            MoveObjectToCamera();
+            Debug.Log("In the middle of the portal");
+            return false;
         }
+        if (itemholder_L.z > -0.2f && itemholder_L.z < 0.2f)
+        {
+            Debug.Log("In the middle of the portal");
+            return false;
+        }
+        Debug.Log("Shortcut - item_L: " + item_L + " itemholder_L: " + itemholder_L + " player_L: " + ClosestPortal(transform.position).transform.InverseTransformPoint(transform.position));
+        return ((item_L.z >= 0) == (itemholder_L.z > 0));
+    }
+
+    private Vector3 DirectionThroughTeleport()
+    {
+        Portal targetPortal = ClosestPortal(heldItem.transform.position);
+        Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
+        Vector3 itemholder_W = targetPortal.transform.TransformPoint(itemholder_L);
+        Vector3 item_W = heldItem.transform.position;
+
+        Vector3 direction = -(item_W - itemholder_W);
+        return direction;
+    }
+
+    private Portal ClosestPortal(Vector3 position)
+    {
+        GameObject[] portalArray = GameObject.FindGameObjectsWithTag("Portal");
+        Portal closestPortal = portalArray[0].transform.parent.GetComponent<Portal>();
+        foreach (GameObject portal in portalArray)
+        {
+            Vector3 portalPos = portal.transform.parent.GetComponent<Portal>().transform.position;
+            Vector3 closestPortalPos = closestPortal.transform.position;
+            if (Vector3.Distance(position, portalPos) < Vector3.Distance(position, closestPortalPos))
+            {
+                closestPortal = portal.transform.parent.GetComponent<Portal>();
+            }
+        }
+        return closestPortal;
+    }
+
+    private void SelectItem(Vector3 startPos, Vector3 direction, float length)
+    {
+        RaycastHit hit = SendRaycast(startPos, direction, length);
+        if (hit.collider == null)
+        {
+            SmartOutLine(null);
+            return;
+        }
+        if (hit.collider.tag == "Portal")
+        {
+            float smallExtra = 0.1f; // This is used to help the raycast after the portal
+            float remainingLength = pickupDistance - Vector3.Distance(startPos, hit.point) + smallExtra;
+            var inPortal = hit.collider.gameObject.transform.parent.GetComponent<Portal>();
+            var outPortal = inPortal.linkedPortal;
+            Vector3 hitPosIn = inPortal.transform.InverseTransformPoint(hit.point);
+            Vector3 hitPosOut = outPortal.transform.TransformPoint(hitPosIn);
+            Vector3 startPosOut = outPortal.transform.TransformPoint(inPortal.transform.InverseTransformPoint(startPos));
+
+            if (hitPosIn.z < 0)
+            {
+                smallExtra = -smallExtra;
+            }
+
+            Vector3 directionToPortal = (hitPosOut - startPosOut).normalized;
+
+            SelectItem(hitPosOut + new Vector3(0, 0, smallExtra), directionToPortal, remainingLength);
+            return;
+        }
+        if (hit.collider.tag == "Item")
+        {
+            SmartOutLine(hit.collider.gameObject);
+            if (Input.GetMouseButtonDown(0))
+            {
+                PickupItem(hit.collider.gameObject);
+            }
+            return;
+        }
+        SmartOutLine(null);
+    }
+
+    private void SmartOutLine(GameObject itemHit)
+    {
+        if (itemHit == null)
+        {
+            if (currentOutline != null)
+            {
+                currentOutline.enabled = false;
+                currentOutline = null;
+            }
+            return;
+        }
+        if (itemHit.GetComponent<Outline>() == null)
+        {
+            if (currentOutline != null)
+            {
+                currentOutline.enabled = false;
+                currentOutline = null;
+            }
+            return;
+        }
+        if (currentOutline == null)
+        {
+            currentOutline = itemHit.GetComponent<Outline>();
+            currentOutline.enabled = true;
+            return;
+        }
+        if (currentOutline.gameObject != itemHit)
+        {
+            currentOutline.enabled = false;
+            currentOutline = itemHit.GetComponent<Outline>();
+            currentOutline.enabled = true;
+            return;
+        }
+
+    }
+
+    private void PickupItem(GameObject item)
+    {
+        currentOutline.enabled = false;
+        heldItem = item.transform.GetComponent<Collider>().gameObject;
+        heldItemRB = heldItem.GetComponent<Rigidbody>();
+
+        heldItemRB.useGravity = false;
+        heldItemRB.drag = 20.0f;
+        heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
+        heldItem.layer = 2;
     }
 
     private void DropItem()
     {
+        if (currentOutline != null)
+        {
+            currentOutline.enabled = false;
+            currentOutline = null;
+        }
+
         heldItemRB.useGravity = true;
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
-        heldItem.transform.parent = savedParent;
         heldItem.layer = 0;
-        //heldItem.GetComponent<PortalPhysicsObject>().isHeld = false; // Change
+        heldItem.GetComponent<PortalPhysicsObject>().hasTeleported = false;
         heldItem = null;
         heldItemRB = null;
     }
 
-    private void MoveObjectToCamera()
-    {
-        StopCoroutine("MoveObjectCoroutine");
-        heldItemRB.angularVelocity = Vector3.zero;
-        heldItemRB.velocity = Vector3.zero;
-        coRoutineRunning = true;
-        StartCoroutine(MoveObjectToCameraCoroutine());
-    }
-
-    private IEnumerator MoveObjectToCameraCoroutine()
-    {
-        float elapsed = 0f;
-        Vector3 start = heldItem.transform.position;
-
-        while (elapsed < pickupDuration)
-        {
-            heldItem.transform.position = Vector3.Lerp(start, itemHolder.transform.position, (elapsed / pickupDuration));
-            elapsed += Time.deltaTime; // Something weird with Time.deltaTime
-            yield return null;
-
-        }
-
-        itemHolder.transform.position = heldItem.transform.position;
-        savedParent = heldItem.transform.parent;
-        heldItemRB.transform.parent = itemHolder.transform;
-        coRoutineRunning = false;
-    }
 }

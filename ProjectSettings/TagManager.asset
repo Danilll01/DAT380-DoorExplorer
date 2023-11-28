@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Portal
+  - Item
   layers:
   - Default
   - TransparentFX
