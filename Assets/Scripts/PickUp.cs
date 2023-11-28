@@ -116,7 +116,8 @@ public class PickUp : MonoBehaviour
             Debug.DrawLine(outPortalHitPos, outPortalHitPos + direction * length, Color.blue);
             itemHolder.transform.position = outPortalHitPos + direction * length;
             backupHolder = itemHolder.transform.position;
-            if(!lastHit){
+            if (!lastHit)
+            {
                 Debug.Log("Missed");
             }
             lastHit = true;
@@ -133,9 +134,12 @@ public class PickUp : MonoBehaviour
     {
         var portal = ClosestPortal(transform.position);
         Vector3 playerPos_L = portal.transform.InverseTransformPoint(transform.position);
-        if (playerPos_L.z > -0.21f && playerPos_L.z < 0.21f)
+        if (playerPos_L.x > -2.2f && playerPos_L.x < 2.2f)
         {
-            return true;
+            if (playerPos_L.z > -0.21f && playerPos_L.z < 0.21f)
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -184,7 +188,7 @@ public class PickUp : MonoBehaviour
         }
         else
         {
-            if(Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > 5f)
+            if (Vector3.Distance(itemHolder.transform.position, heldItem.transform.position) > 5f)
             {
                 Debug.Log("Too far away");
                 DropItem();
