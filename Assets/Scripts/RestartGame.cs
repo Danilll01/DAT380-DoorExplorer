@@ -15,8 +15,21 @@ public class RestartGame : MonoBehaviour
         {
             exitMenu.SetActive(!exitMenu.activeSelf);
             
+        } 
+
+        if (exitMenu.active)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
+
+
 
     public void ResetGame()
     {
