@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ARCameraTeleporter : PortalTraveller
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform cameraOffset;
 
-    // Update is called once per frame
-    void Update()
+    public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
-        
+        cameraOffset.position = pos;
+        transform.localPosition = Vector3.zero;
     }
 }

@@ -1489,8 +1489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3df7cbf7dc74f47bc84922a1c8dce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  graphicsObject: {fileID: 0}
+  graphicsObject: {fileID: 2075368593}
   teleport: 1
+  cameraOffset: {fileID: 1689938873}
 --- !u!1 &2075368593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1503,7 +1504,7 @@ GameObject:
   - component: {fileID: 2075368596}
   - component: {fileID: 2075368595}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: CameraGraphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
