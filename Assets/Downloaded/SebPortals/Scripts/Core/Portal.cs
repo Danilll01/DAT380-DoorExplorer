@@ -56,7 +56,7 @@ public class Portal : MonoBehaviour {
             var m = linkedPortal.transform.localToWorldMatrix * transform.worldToLocalMatrix * travellerT.localToWorldMatrix;
 
             Vector3 offsetFromPortal = travellerT.position - transform.position;
-            int portalSide = System.Math.Sign (Vector3.Dot (offsetFromPortal, transform.forward));
+            int portalSide = System.Math.Sign(Vector3.Dot(offsetFromPortal, transform.forward));
             int portalSideOld = System.Math.Sign(Vector3.Dot (traveller.previousOffsetFromPortal, transform.forward));
 
             //print("Side: " + portalSide + " object: " + traveller.name + "pos: " + (traveller.transform.position));
@@ -66,7 +66,7 @@ public class Portal : MonoBehaviour {
             if (portalSide != portalSideOld && traveller.teleport) {
                 var positionOld = travellerT.position;
                 var rotOld = travellerT.rotation;
-                traveller.Teleport(transform, linkedPortal.transform, m.GetColumn (3), m.rotation);
+                traveller.Teleport(transform, linkedPortal.transform, m.GetColumn(3), m.rotation);
                 traveller.graphicsClone.transform.SetPositionAndRotation(positionOld, rotOld);
                 
                 // Can't rely on OnTriggerEnter/Exit to be called next frame since it depends on when FixedUpdate runs
