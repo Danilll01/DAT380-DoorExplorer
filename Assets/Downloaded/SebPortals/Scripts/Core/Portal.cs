@@ -44,6 +44,7 @@ public class Portal : MonoBehaviour {
     }
 
     void LateUpdate() {
+        if (linkedPortal == null) return;
         HandleTravellers();
     }
 

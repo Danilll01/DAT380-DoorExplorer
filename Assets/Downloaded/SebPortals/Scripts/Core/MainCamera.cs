@@ -26,16 +26,19 @@ public class MainCamera : MonoBehaviour {
     {
         foreach (Portal t in portals)
         {
+            if (t.linkedPortal == null) continue;
             t.PrePortalRender();
         }
         
         foreach (Portal t in portals)
         {
+            if (t.linkedPortal == null) continue;
             t.Render(SRC);
         }
 
         foreach (Portal t in portals)
         {
+            if (t.linkedPortal == null) continue;
             t.PostPortalRender();
         }
     }
