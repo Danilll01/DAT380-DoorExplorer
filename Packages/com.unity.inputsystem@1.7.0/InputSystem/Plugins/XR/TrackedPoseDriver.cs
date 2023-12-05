@@ -19,6 +19,10 @@ namespace UnityEngine.InputSystem.XR
     [AddComponentMenu("XR/Tracked Pose Driver (Input System)")]
     public class TrackedPoseDriver : MonoBehaviour, ISerializationCallbackReceiver
     {
+        [SerializeField] private bool mockMovement = false;
+
+        [SerializeField] private FreeFlyCamera flyCamera;
+
         /// <summary>
         /// Options for which <see cref="Transform"/> properties to update.
         /// </summary>
@@ -69,6 +73,7 @@ namespace UnityEngine.InputSystem.XR
 
         [SerializeField, Tooltip("Which Transform properties to update.")]
         TrackingType m_TrackingType;
+
         /// <summary>
         /// The tracking type being used by the Tracked Pose Driver
         /// to control which <see cref="Transform"/> properties to update.
@@ -114,8 +119,10 @@ namespace UnityEngine.InputSystem.XR
             BeforeRender,
         }
 
-        [SerializeField, Tooltip("Updates the Transform properties after these phases of Input System event processing.")]
+        [SerializeField,
+         Tooltip("Updates the Transform properties after these phases of Input System event processing.")]
         UpdateType m_UpdateType = UpdateType.UpdateAndBeforeRender;
+
         /// <summary>
         /// The update type being used by the Tracked Pose Driver
         /// to control which phases of the player loop will update <see cref="Transform"/> properties.
@@ -129,6 +136,7 @@ namespace UnityEngine.InputSystem.XR
 
         [SerializeField, Tooltip("Ignore Tracking State and always treat the input pose as valid.")]
         bool m_IgnoreTrackingState;
+
         /// <summary>
         /// Ignore tracking state and always treat the input pose as valid when updating the <see cref="Transform"/> properties.
         /// The recommended value is <see langword="false"/> so the tracking state input is used.
@@ -140,8 +148,10 @@ namespace UnityEngine.InputSystem.XR
             set => m_IgnoreTrackingState = value;
         }
 
-        [SerializeField, Tooltip("The input action to read the position value of a tracked device. Must be a Vector 3 control type.")]
+        [SerializeField,
+         Tooltip("The input action to read the position value of a tracked device. Must be a Vector 3 control type.")]
         InputActionProperty m_PositionInput;
+
         /// <summary>
         /// The input action to read the position value of a tracked device.
         /// Must support reading a value of type <see cref="Vector3"/>.
@@ -162,8 +172,10 @@ namespace UnityEngine.InputSystem.XR
             }
         }
 
-        [SerializeField, Tooltip("The input action to read the rotation value of a tracked device. Must be a Quaternion control type.")]
+        [SerializeField,
+         Tooltip("The input action to read the rotation value of a tracked device. Must be a Quaternion control type.")]
         InputActionProperty m_RotationInput;
+
         /// <summary>
         /// The input action to read the rotation value of a tracked device.
         /// Must support reading a value of type <see cref="Quaternion"/>.
@@ -184,8 +196,11 @@ namespace UnityEngine.InputSystem.XR
             }
         }
 
-        [SerializeField, Tooltip("The input action to read the tracking state value of a tracked device. Identifies if position and rotation have valid data. Must be an Integer control type.")]
+        [SerializeField,
+         Tooltip(
+             "The input action to read the tracking state value of a tracked device. Identifies if position and rotation have valid data. Must be an Integer control type.")]
         InputActionProperty m_TrackingStateInput;
+
         /// <summary>
         /// The input action to read the tracking state value of a tracked device.
         /// Identifies if position and rotation have valid data.
@@ -399,7 +414,8 @@ namespace UnityEngine.InputSystem.XR
         {
             m_PositionInput = new InputActionProperty(new InputAction("Position", expectedControlType: "Vector3"));
             m_RotationInput = new InputActionProperty(new InputAction("Rotation", expectedControlType: "Quaternion"));
-            m_TrackingStateInput = new InputActionProperty(new InputAction("Tracking State", expectedControlType: "Integer"));
+            m_TrackingStateInput =
+                new InputActionProperty(new InputAction("Tracking State", expectedControlType: "Integer"));
         }
 
         /// <summary>
@@ -566,7 +582,14 @@ namespace UnityEngine.InputSystem.XR
         /// <seealso cref="SetLocalTransform"/>
         protected virtual void PerformUpdate()
         {
-            SetLocalTransform(m_CurrentPosition, m_CurrentRotation);
+            if (mockMovement)
+            {
+                SetLocalTransform(flyCamera.mockPosition, flyCamera.mockRotation);
+            }
+            else
+            {
+                SetLocalTransform(m_CurrentPosition, m_CurrentRotation);
+            }
         }
 
         /// <summary>
@@ -612,9 +635,9 @@ namespace UnityEngine.InputSystem.XR
         // Disable warnings that these fields are never assigned to. They are set during Unity deserialization and migrated.
         // ReSharper disable UnassignedField.Local
 #pragma warning disable 0649
-        [Obsolete]
-        [SerializeField, HideInInspector]
+        [Obsolete] [SerializeField, HideInInspector]
         InputAction m_PositionAction;
+
         /// <summary>
         /// (Deprecated) The action to read the position value of a tracked device.
         /// Must support reading a value of type <see cref="Vector3"/>.
@@ -626,9 +649,9 @@ namespace UnityEngine.InputSystem.XR
             set => positionInput = new InputActionProperty(value);
         }
 
-        [Obsolete]
-        [SerializeField, HideInInspector]
+        [Obsolete] [SerializeField, HideInInspector]
         InputAction m_RotationAction;
+
         /// <summary>
         /// (Deprecated) The action to read the rotation value of a tracked device.
         /// Must support reading a value of type <see cref="Quaternion"/>.
@@ -654,10 +677,12 @@ namespace UnityEngine.InputSystem.XR
 #pragma warning disable UNT0029 // Pattern matching with null on Unity objects -- Using true null is intentional, not operator== evaluation.
             // We're checking for true null here since we don't want to migrate if the new field is already being used, even if the reference is missing.
             // Migrate the old fields to the new properties added in Input System 1.1.0-pre.6.
-            if (m_PositionInput.serializedReference is null && m_PositionInput.serializedAction is null && !(m_PositionAction is null))
+            if (m_PositionInput.serializedReference is null && m_PositionInput.serializedAction is null &&
+                !(m_PositionAction is null))
                 m_PositionInput = new InputActionProperty(m_PositionAction);
 
-            if (m_RotationInput.serializedReference is null && m_RotationInput.serializedAction is null && !(m_RotationAction is null))
+            if (m_RotationInput.serializedReference is null && m_RotationInput.serializedAction is null &&
+                !(m_RotationAction is null))
                 m_RotationInput = new InputActionProperty(m_RotationAction);
 #pragma warning restore UNT0029
 #pragma warning restore 0612

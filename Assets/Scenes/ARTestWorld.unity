@@ -1193,6 +1193,7 @@ GameObject:
   - component: {fileID: 1934091480}
   - component: {fileID: 1934091479}
   - component: {fileID: 1934091478}
+  - component: {fileID: 1934091485}
   - component: {fileID: 1934091477}
   - component: {fileID: 1934091476}
   - component: {fileID: 1934091482}
@@ -1277,6 +1278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mockMovement: 0
+  flyCamera: {fileID: 1934091485}
   m_TrackingType: 0
   m_UpdateType: 0
   m_IgnoreTrackingState: 0
@@ -1505,6 +1508,35 @@ MonoBehaviour:
   graphicsObject: {fileID: 2075368593}
   teleport: 1
   cameraOffset: {fileID: 1689938873}
+--- !u!114 &1934091485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934091474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c589d7c9d63c1cd43a66e20df670d899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _active: 0
+  _enableRotation: 1
+  _mouseSense: 1.8
+  _enableTranslation: 1
+  _translationSpeed: 55
+  _enableMovement: 1
+  _movementSpeed: 10
+  _boostedSpeed: 50
+  _boostSpeed: 304
+  _moveUp: 32
+  _moveDown: 304
+  _enableSpeedAcceleration: 1
+  _speedAccelerationFactor: 1.5
+  _initPositonButton: 114
+  mockPosition: {x: 0, y: 0, z: 0}
+  mockRotation: {x: 0, y: 0, z: 0, w: 1}
+  canMove: 1
 --- !u!1 &2075368593
 GameObject:
   m_ObjectHideFlags: 0
