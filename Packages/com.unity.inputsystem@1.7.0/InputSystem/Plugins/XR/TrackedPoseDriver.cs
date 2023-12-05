@@ -585,6 +585,7 @@ namespace UnityEngine.InputSystem.XR
             if (mockMovement)
             {
                 SetLocalTransform(flyCamera.mockPosition, flyCamera.mockRotation);
+                print(flyCamera.mockRotation);
             }
             else
             {

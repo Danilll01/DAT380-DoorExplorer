@@ -211,12 +211,12 @@ public class FreeFlyCamera : MonoBehaviour
         {
             // Pitch
             mockRotation *= Quaternion.AngleAxis(
-                Input.GetAxis("Mouse X") * _mouseSense,
+                Input.GetAxis("Mouse Y") * _mouseSense,
                 Vector3.right
             );
             
             mockRotation *= Quaternion.AngleAxis(
-                Input.GetAxis("Mouse Y") * _mouseSense,
+                Input.GetAxis("Mouse X") * _mouseSense,
                 Vector3.up
             );
 
