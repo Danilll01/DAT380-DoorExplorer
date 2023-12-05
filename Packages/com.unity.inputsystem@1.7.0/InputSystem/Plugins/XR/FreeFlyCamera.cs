@@ -212,7 +212,7 @@ public class FreeFlyCamera : MonoBehaviour
             // Pitch
             mockRotation *= Quaternion.AngleAxis(
                 Input.GetAxis("Mouse Y") * _mouseSense,
-                Vector3.right
+                Vector3.left
             );
             
             mockRotation *= Quaternion.AngleAxis(
@@ -222,9 +222,9 @@ public class FreeFlyCamera : MonoBehaviour
 
             // Paw
             mockRotation = Quaternion.Euler(
-                transform.eulerAngles.x,
-                transform.eulerAngles.y,
-                transform.eulerAngles.z + Input.GetAxis("Roll")
+                mockRotation.eulerAngles.x,
+                mockRotation.eulerAngles.y,
+                transform.eulerAngles.z - Input.GetAxis("Roll")
             );
         }
 
