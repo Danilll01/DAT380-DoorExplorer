@@ -503,7 +503,7 @@ PrefabInstance:
     - target: {fileID: 6410513167142479733, guid: a04daebc8637f7a478615436e947ea1c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.85
+      value: -14.95
       objectReference: {fileID: 0}
     - target: {fileID: 6410513167142479733, guid: a04daebc8637f7a478615436e947ea1c,
         type: 3}
@@ -513,7 +513,7 @@ PrefabInstance:
     - target: {fileID: 6410513167142479733, guid: a04daebc8637f7a478615436e947ea1c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.91
+      value: -0.73
       objectReference: {fileID: 0}
     - target: {fileID: 6410513167142479733, guid: a04daebc8637f7a478615436e947ea1c,
         type: 3}
@@ -751,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_Size.z
-      value: 3.3836796
+      value: 6.1731677
       objectReference: {fileID: 0}
     - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
@@ -1285,6 +1285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Physics Snake (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576190922494901840, guid: d74572c033f1d7a49af91990ff42da2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3979196461655848893, guid: d74572c033f1d7a49af91990ff42da2e,
         type: 3}
@@ -2167,7 +2172,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: bf21357a8f9c64384b7d98941b0082bb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.63
+      value: -2.22
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bf21357a8f9c64384b7d98941b0082bb,
         type: 3}
@@ -2177,7 +2182,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: bf21357a8f9c64384b7d98941b0082bb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.61
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bf21357a8f9c64384b7d98941b0082bb,
         type: 3}
@@ -6013,7 +6018,7 @@ PrefabInstance:
     - target: {fileID: 3743597651704331079, guid: ce71ddc64223549ed8fc19f77f5948b2,
         type: 3}
       propertyPath: m_Size.z
-      value: 3.6876955
+      value: 6.212055
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6216,13 +6221,30 @@ GameObject:
   - component: {fileID: 4419675243467998438}
   - component: {fileID: 4419675243467998432}
   - component: {fileID: 4419675243467998433}
+  - component: {fileID: 8015746605717688254}
   m_Layer: 8
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &8015746605717688254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8015746605717688253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a657e3e5efa94ad39b8b5dcb5eda8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphicsObject: {fileID: 8701999832695005502}
+  teleport: 1
+  hasTeleported: 0
+  force: 10
 --- !u!1 &8701999832695005502
 GameObject:
   m_ObjectHideFlags: 0
