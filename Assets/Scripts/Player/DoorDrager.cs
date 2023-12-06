@@ -56,11 +56,16 @@ public class DoorDrager : MonoBehaviour
 
     private Vector3 RayCastStep(Vector3 origin, Vector3 direction, float distance, float totalDistance)
     {
-        Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
+        
         // Cast rays if left mouse is down
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, distance, doorPortalLayer))
         {
+            Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
+            
+            print(hit.transform.gameObject.layer.ToString());
+            print("NAME: " + hit.transform.gameObject.name + hit.transform.gameObject.GetHashCode());
+            
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Door"))
             {
                 GetDoorInformation(hit, totalDistance);
@@ -106,7 +111,7 @@ public class DoorDrager : MonoBehaviour
             Gizmos.DrawSphere(doorTransform.TransformPoint(localHitDoor), 0.5f);
 
             Gizmos.color = Color.green;
-            Gizmos.DrawSphere(RayCastStep(transform.position, transForward.lookVector, hitDistance, 0), 0.5f);
+            //Gizmos.DrawSphere(RayCastStep(transform.position, transForward.lookVector, hitDistance, 0), 0.5f);
         }
     }
 }
