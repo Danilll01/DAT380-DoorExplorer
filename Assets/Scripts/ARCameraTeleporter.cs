@@ -9,7 +9,6 @@ public class ARCameraTeleporter : PortalTraveller
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
-        cameraOffset.position = pos;
-        transform.localPosition = Vector3.zero;
+        cameraOffset.position = pos - transform.localPosition;
     }
 }
