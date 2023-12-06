@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1224,6 +1224,7 @@ GameObject:
   - component: {fileID: 1934091482}
   - component: {fileID: 1934091483}
   - component: {fileID: 1934091484}
+  - component: {fileID: 1934091486}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1465,7 +1466,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.03
   far clip plane: 20
   field of view: 90
   orthographic: 0
@@ -1545,7 +1546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c589d7c9d63c1cd43a66e20df670d899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _active: 0
+  _active: 1
   _enableRotation: 1
   _mouseSense: 1.8
   _enableTranslation: 1
@@ -1562,6 +1563,22 @@ MonoBehaviour:
   mockPosition: {x: 0, y: 0, z: 0}
   mockRotation: {x: 0, y: 0, z: 0, w: 1}
   canMove: 1
+--- !u!114 &1934091486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934091474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd4894f8b3062da4183b5efa048565d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupDistance: 10
+  carryForce: 400
+  itemHolderDistance: 2
+  transForward: {fileID: 0}
 --- !u!1 &2075368593
 GameObject:
   m_ObjectHideFlags: 0
