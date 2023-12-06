@@ -58,6 +58,7 @@ public class PickUpAr : MonoBehaviour
         {
             DebDraw();
         }
+        pickUpButtonClicked = false;
     }
 
     void FixedUpdate()
@@ -201,7 +202,7 @@ public class PickUpAr : MonoBehaviour
     {
         Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
         Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
-        // Summan av kaddemumman, Teleport blir kallad för sent
+        // Summan av kaddemumman, Teleport blir kallad fï¿½r sent
         // Ditt fuck detta funkar inte
         if (item_L.z > -0.2f && item_L.z < 0.2f)
         {
