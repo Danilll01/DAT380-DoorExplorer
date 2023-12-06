@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CanvasOverlay : MonoBehaviour
 {
-    [Header("Landscape")]
-    [SerializeField] private GameObject canvasLandscape;
-    [Header("Portrait")]
-    [SerializeField] private GameObject canvasPortrait;
+
+    private GameObject landScape;
+    private GameObject portrait;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +16,9 @@ public class CanvasOverlay : MonoBehaviour
         Screen.autorotateToLandscapeRight = true;
         Screen.autorotateToPortraitUpsideDown = true;
         Screen.orientation = ScreenOrientation.AutoRotation;
+
+        landScape = transform.Find("Landscape").gameObject;
+        portrait = transform.Find("Portrait").gameObject;
     }
 
     // Update is called once per frame
@@ -23,13 +26,13 @@ public class CanvasOverlay : MonoBehaviour
     {
         if (Screen.orientation == ScreenOrientation.Portrait || Screen.orientation == ScreenOrientation.PortraitUpsideDown)
         {
-            canvasPortrait.SetActive(true);
-            canvasLandscape.SetActive(false);
+            portrait.SetActive(true);
+            landScape.SetActive(false);
         }
         else
         {
-            canvasPortrait.SetActive(false);
-            canvasLandscape.SetActive(true);
+            portrait.SetActive(false);
+            landScape.SetActive(true);
         }
     }
 }
