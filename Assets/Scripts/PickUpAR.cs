@@ -5,7 +5,7 @@ using System;
 
 // The tag item should add the required components, like outline and rigidbody
 
-public class PickUp : MonoBehaviour
+public class PickUpAr : MonoBehaviour
 {
     private GameObject heldItem;
     private Rigidbody heldItemRB;
@@ -21,12 +21,12 @@ public class PickUp : MonoBehaviour
 
     private Vector3 backupHolder;
     private bool lastHit = false;
+    private bool pickUpButtonClicked = false;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
     [SerializeField] private float carryForce = 400.0f;
     [SerializeField] private float itemHolderDistance = 2f;
-    [SerializeField] private PlayerPhysicsMovement transForward;
 
 
     private void Start()
@@ -37,7 +37,7 @@ public class PickUp : MonoBehaviour
     private void CreateItemHolder()
     {
         itemHolder = new GameObject("ItemHolder");
-        Vector3 pointPosition = transform.position + transForward.lookVector * itemHolderDistance;
+        Vector3 pointPosition = transform.position + transform.forward * itemHolderDistance;
         itemHolder.transform.position = pointPosition;
         itemHolder.transform.parent = transform;
         backupHolder = itemHolder.transform.position;
@@ -52,7 +52,7 @@ public class PickUp : MonoBehaviour
         }
         else
         {
-            SelectItem(transform.position, transForward.lookVector, pickupDistance);
+            SelectItem(transform.position, transform.forward, pickupDistance);
         }
         if (savedBool)
         {
@@ -87,7 +87,8 @@ public class PickUp : MonoBehaviour
     private void MoveItemHolder()
     {
         float length;
-        RaycastHit hit = SendRaycast(transform.position, transForward.lookVector, itemHolderDistance);
+        RaycastHit hit = SendRaycast(transform.position, transform.forward, itemHolderDistance);
+        if (hit.collider != null) Debug.DrawLine(transform.position, hit.transform.position, Color.red);
 
         if (ContingencyPlan())
         {
@@ -99,7 +100,7 @@ public class PickUp : MonoBehaviour
 
         if (hit.collider == null)
         {
-            itemHolder.transform.position = transform.position + transForward.lookVector * itemHolderDistance;
+            itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
             backupHolder = itemHolder.transform.position;
             lastHit = false;
             return;
@@ -125,7 +126,7 @@ public class PickUp : MonoBehaviour
         }
 
         float distance = Vector3.Distance(transform.position, hit.point);
-        itemHolder.transform.position = transform.position + transForward.lookVector * itemHolderDistance;
+        itemHolder.transform.position = transform.position + transform.forward * itemHolderDistance;
         lastHit = false;
         backupHolder = itemHolder.transform.position;
     }
@@ -200,7 +201,7 @@ public class PickUp : MonoBehaviour
     {
         Vector3 itemholder_L = ClosestPortal(itemHolder.transform.position).transform.InverseTransformPoint(itemHolder.transform.position);
         Vector3 item_L = ClosestPortal(heldItem.transform.position).transform.InverseTransformPoint(heldItem.transform.position);
-        // Summan av kaddemumman, Teleport blir kallad fÃ¶r sent
+        // Summan av kaddemumman, Teleport blir kallad för sent
         // Ditt fuck detta funkar inte
         if (item_L.z > -0.2f && item_L.z < 0.2f)
         {
@@ -280,23 +281,29 @@ public class PickUp : MonoBehaviour
         SmartOutLine(null);
     }
 
-    protected virtual void PickupItemCheck(GameObject hitGameObject)
+    protected void PickupItemCheck(GameObject hitGameObject)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (pickUpButtonClicked)
         {
+            print("Picking up item");
             PickupItem(hitGameObject);
+            pickUpButtonClicked = false;
         }
     }
 
     protected bool DropItemCheck()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (pickUpButtonClicked)
         {
+            print("Dropping item");
             DropItem();
+            pickUpButtonClicked = false;
             return true;
         }
         return false;
     }
+
+
 
     private void SmartOutLine(GameObject itemHit)
     {
@@ -362,4 +369,9 @@ public class PickUp : MonoBehaviour
         heldItemRB = null;
     }
 
+
+    public void PickupTouch()
+    {
+        pickUpButtonClicked = true;
+    }
 }
