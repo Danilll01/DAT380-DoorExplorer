@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CanvasOverlay : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CanvasOverlay : MonoBehaviour
     private GameObject portrait;
     private GameObject settingsL;
     private GameObject settingsP;
+    
 
 
     // Start is called before the first frame update
@@ -90,6 +92,12 @@ public class CanvasOverlay : MonoBehaviour
         {
             settingsP.SetActive(true);
         }
+    }
+
+    public void ResetGame()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 }
