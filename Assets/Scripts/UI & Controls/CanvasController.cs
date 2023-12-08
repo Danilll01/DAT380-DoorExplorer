@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasOverlay : MonoBehaviour
 {
 
+    private bool isLandscape;
     private GameObject landScape;
     private GameObject portrait;
     private GameObject settingsL;
     private GameObject settingsP;
-    private bool keepSettings = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,9 @@ public class CanvasOverlay : MonoBehaviour
         portrait = transform.Find("Portrait").gameObject;
         settingsL = landScape.transform.Find("SettingsMenu").gameObject;
         settingsP = portrait.transform.Find("SettingsMenu").gameObject;
+
+        settingsL.SetActive(false);
+        settingsP.SetActive(false);
     }
 
     // Update is called once per frame
@@ -66,6 +71,24 @@ public class CanvasOverlay : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
+        }
+    }
+
+    public void CloseSettings()
+    {
+        settingsL.SetActive(false);
+        settingsP.SetActive(false);
+    }
+
+    public void OpenSettings()
+    {
+        if(isLandscape)
+        {
+            settingsL.SetActive(true);
+        }
+        else
+        {
+            settingsP.SetActive(true);
         }
     }
 
