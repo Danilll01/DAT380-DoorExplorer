@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0da812ca6e36b2141b65f41f0b681467
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - arRaycastManager: {instanceID: 0}
+  - arPointCloudManager: {instanceID: 0}
+  - arCameraTransform: {instanceID: 0}
+  - doorPrefab: {fileID: 5360441835549358563, guid: 34f720f461efe124e83acb153506791d,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
