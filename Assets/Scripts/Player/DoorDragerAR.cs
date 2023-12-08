@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DoorDragerAR : MonoBehaviour
@@ -14,6 +16,14 @@ public class DoorDragerAR : MonoBehaviour
     private Transform doorTransform;
     private Rigidbody doorBody;
     private float hitDistance = 0;
+
+    // Used for debugging
+    //[SerializeField] private TextMeshProUGUI FOV;
+    //[SerializeField] private TextMeshProUGUI farClip;
+    //[SerializeField] private TextMeshProUGUI closeClip;
+    //FOV.text = "FOV: " + GetComponent<Camera>().fieldOfView;
+    //farClip.text = "FarClip: " + GetComponent<Camera>().farClipPlane;
+    //closeClip.text = "CloseClip: " + GetComponent<Camera>().nearClipPlane;
 
     private void Update()
     {
@@ -53,11 +63,13 @@ public class DoorDragerAR : MonoBehaviour
 
     private Vector3 RayCastStep(Vector3 origin, Vector3 direction, float distance, float totalDistance)
     {
-        Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
+        //Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
+        
         // Cast rays if left mouse / touch is down
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, distance, doorPortalLayer))
         {
+            Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
             print(hit.transform.gameObject.layer.ToString());
             print("NAME: " + hit.transform.gameObject.name + hit.transform.gameObject.GetHashCode());
             
