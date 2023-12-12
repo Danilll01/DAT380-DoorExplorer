@@ -279,6 +279,17 @@ public class PickUpAr : MonoBehaviour
             PickupItemCheck(hit.collider.gameObject);
             return;
         }
+        
+        if (hit.collider.tag == "Button")
+        {
+            SmartOutLine(hit.collider.gameObject);
+            if (pickUpButtonClicked)
+            {
+                hit.collider.gameObject.GetComponent<PhysicalButton>().PressButton();
+                pickUpButtonClicked = false;
+            }
+            return;
+        }
         SmartOutLine(null);
     }
 
