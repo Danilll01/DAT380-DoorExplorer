@@ -1,16 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ARRotation : MonoBehaviour
 {
     [SerializeField] private Transform rotationObject;
-
+    [SerializeField ][Range(0, 1)] private float dampening = 0.9f;
+    
     private Vector2 originalScreenPos = Vector2.zero;
     private Quaternion originalRot = Quaternion.identity;
     private Quaternion modifierRot = Quaternion.identity;
-    
+    private Quaternion rotationDelta = Quaternion.identity;
+    private bool endRotation = false;
+    private float dampeningAngle = 0;
+    private Vector3 dampeningVector = Vector3.zero;
+   
+
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +27,7 @@ public class ARRotation : MonoBehaviour
             originalRot = rotationObject.rotation;
             modifierRot = Quaternion.identity;
             originalScreenPos = Input.GetTouch(0).position;
+            endRotation = false;
         }
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -30,9 +37,20 @@ public class ARRotation : MonoBehaviour
             // Create correct rotation based on coordinate diff and camera rotation
             modifierRot = Quaternion.AngleAxis(coordinateDiff.y / 8, transform.right) *
                           Quaternion.AngleAxis(-coordinateDiff.x / 8, transform.up);
-            rotationObject.rotation =  modifierRot * originalRot;
-            
+            rotationDelta = ((modifierRot * originalRot) * Quaternion.Inverse(rotationObject.rotation));
+            rotationObject.rotation = modifierRot * originalRot;
         }
         
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            endRotation = true;
+            rotationDelta.ToAngleAxis(out dampeningAngle, out dampeningVector);
+        }
+
+        if (endRotation)
+        {
+            dampeningAngle *= dampening;
+            rotationObject.rotation = Quaternion.AngleAxis(dampeningAngle, dampeningVector) * rotationObject.rotation;
+        }
     }
 }
