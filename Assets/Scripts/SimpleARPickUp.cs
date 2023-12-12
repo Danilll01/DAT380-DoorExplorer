@@ -160,7 +160,7 @@ public class SimpleARPickUp : MonoBehaviour
             DropItem();
             return;
         }
-
+        
         Portal portal = ClosestPortal(itemHolder.transform.position);
         float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
@@ -279,9 +279,10 @@ public class SimpleARPickUp : MonoBehaviour
         if (hit.collider.tag == "Item")
         {
             SmartOutLine(hit.collider.gameObject);
-            if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began))
+            if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
             {
                 PickupItem(hit.collider.gameObject);
+                
             }
             return;
         }
@@ -339,7 +340,8 @@ public class SimpleARPickUp : MonoBehaviour
 
     private void DropItem()
     {
-        return;
+        if (rotationObject.HasRotatedObject()) { return; }
+        
         if (currentOutline != null)
         {
             currentOutline.enabled = false;
