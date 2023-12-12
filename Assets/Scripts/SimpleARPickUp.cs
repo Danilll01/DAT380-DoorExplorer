@@ -155,7 +155,7 @@ public class SimpleARPickUp : MonoBehaviour
 
     private void MoveItem()
     {
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
         {
             DropItem();
             return;
