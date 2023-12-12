@@ -1,14 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
-public class DoorDrager : MonoBehaviour
+public class DoorDragerAR : MonoBehaviour
 {
-    [FormerlySerializedAs("doorLayer")] [SerializeField] private LayerMask doorPortalLayer;
-    [SerializeField] private PlayerPhysicsMovement transForward;
+    [SerializeField] private LayerMask doorPortalLayer;
 
     [SerializeField] private float draggingForce = 100f;
     [SerializeField] private float pickupDistance = 3f;
@@ -19,14 +17,23 @@ public class DoorDrager : MonoBehaviour
     private Rigidbody doorBody;
     private float hitDistance = 0;
 
+    // Used for debugging
+    //[SerializeField] private TextMeshProUGUI FOV;
+    //[SerializeField] private TextMeshProUGUI farClip;
+    //[SerializeField] private TextMeshProUGUI closeClip;
+    //FOV.text = "FOV: " + GetComponent<Camera>().fieldOfView;
+    //farClip.text = "FarClip: " + GetComponent<Camera>().farClipPlane;
+    //closeClip.text = "CloseClip: " + GetComponent<Camera>().nearClipPlane;
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !holding)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !holding 
+            || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began) && !holding)
         {
             holding = false;
-            RayCastStep(transform.position, transForward.lookVector, pickupDistance,0);
+            RayCastStep(transform.position, transform.forward, pickupDistance,0);
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        else if (Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
         {
             holding = false;
         }
@@ -38,7 +45,7 @@ public class DoorDrager : MonoBehaviour
     {
         if (!holding) return;
 
-        Vector3 pullTo = RayCastStep(transform.position, transForward.lookVector, hitDistance, 0);
+        Vector3 pullTo = RayCastStep(transform.position, transform.forward, hitDistance, 0);
         
         // Add force to door in the direction that the player is pulling
         Vector3 doorWorldDragPos = doorTransform.TransformPoint(localHitDoor);
@@ -56,13 +63,13 @@ public class DoorDrager : MonoBehaviour
 
     private Vector3 RayCastStep(Vector3 origin, Vector3 direction, float distance, float totalDistance)
     {
+        //Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
         
-        // Cast rays if left mouse is down
+        // Cast rays if left mouse / touch is down
         RaycastHit hit;
         if (Physics.Raycast(origin, direction, out hit, distance, doorPortalLayer))
         {
             Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
-            
             print(hit.transform.gameObject.layer.ToString());
             print("NAME: " + hit.transform.gameObject.name + hit.transform.gameObject.GetHashCode());
             
@@ -71,7 +78,6 @@ public class DoorDrager : MonoBehaviour
                 GetDoorInformation(hit, totalDistance);
                 return (origin + direction * distance);
             }
-
             
             // Cast ray through portal in recursive step
             
@@ -101,7 +107,6 @@ public class DoorDrager : MonoBehaviour
         holding = true;
     }
 
-
     void OnDrawGizmos()
     {
         if (holding)
@@ -111,7 +116,7 @@ public class DoorDrager : MonoBehaviour
             Gizmos.DrawSphere(doorTransform.TransformPoint(localHitDoor), 0.5f);
 
             Gizmos.color = Color.green;
-            //Gizmos.DrawSphere(RayCastStep(transform.position, transForward.lookVector, hitDistance, 0), 0.5f);
+            Gizmos.DrawSphere(RayCastStep(transform.position, transform.forward, hitDistance, 0), 0.5f);
         }
     }
 }
