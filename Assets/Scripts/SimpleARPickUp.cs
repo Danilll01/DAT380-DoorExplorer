@@ -30,9 +30,6 @@ public class SimpleARPickUp : MonoBehaviour
     [FormerlySerializedAs("objectRotation")]
     [Header("Pick up helpers")] 
     [SerializeField] private ARRotation rotationObject;
-    [SerializeField] private TextMeshProUGUI FOV;
-    [SerializeField] private TextMeshProUGUI farClip;
-    [SerializeField] private TextMeshProUGUI closeClip;
 
     private bool hasPickedUpNew;
 
@@ -349,22 +346,16 @@ public class SimpleARPickUp : MonoBehaviour
         heldItem.layer = 2;
         
         hasPickedUpNew = true;
-        closeClip.text = "Touch: " + ((Input.touchCount > 0) ? Input.GetTouch(0).phase : "No");
 
     }
 
     private void DropItem()
     {
-        FOV.text = "PickedUpx: " + !hasPickedUpNew;
-        farClip.text = "RotationScript: " + rotationObject.HasRotatedObject();
-        closeClip.text = "Touch: " + ((Input.touchCount > 0) ? Input.GetTouch(0).phase : "No");
 
         if (hasPickedUpNew || rotationObject.HasRotatedObject()) { return; }
 
         if (Input.touchCount > 0 && !Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
-        {
-            return;
-        }
+        { return; }
         
         if (currentOutline != null)
         {

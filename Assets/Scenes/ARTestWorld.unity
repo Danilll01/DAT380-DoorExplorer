@@ -2789,9 +2789,6 @@ MonoBehaviour:
   carryForce: 40
   itemHolderDistance: 1
   rotationObject: {fileID: 1934091489}
-  FOV: {fileID: 1425355589}
-  farClip: {fileID: 998897126}
-  closeClip: {fileID: 1210186046}
 --- !u!114 &1934091488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2878,7 +2875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1946378773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3030,7 +3027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2112850409
 MonoBehaviour:
   m_ObjectHideFlags: 0
