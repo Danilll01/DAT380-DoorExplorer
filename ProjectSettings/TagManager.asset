@@ -7,7 +7,7 @@ TagManager:
   - CinemachineTarget
   - Portal
   - Item
-  - Button
+  - Interactable
   layers:
   - Default
   - TransparentFX

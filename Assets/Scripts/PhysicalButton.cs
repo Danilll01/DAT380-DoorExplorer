@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicalButton : MonoBehaviour
+// Implement the interface IInteractable
+public class PhysicalButton : MonoBehaviour, IInteractable
 {
     private bool animationIsPlaying = false;
     [SerializeField] private float animationTimer = 0f;
@@ -35,7 +36,7 @@ public class PhysicalButton : MonoBehaviour
         }
     }
 
-    public void PressButton()
+    public void Interact()
     {
         animationIsPlaying = true;
     }
