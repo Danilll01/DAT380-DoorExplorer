@@ -17,13 +17,10 @@ public class ARRotation : MonoBehaviour
     private Vector3 dampeningVector = Vector3.zero;
     private float totalDragDistance = 0;
 
-    private bool failSafeTouchEnd = false;
-
     // Update is called once per frame
     void Update()
     {
         if (rotationObject == null) { return; }
-        failSafeTouchEnd = true;
         
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using TMPro;
 using UnityEngine.Serialization;
 
 // The tag item should add the required components, like outline and rigidbody
@@ -29,6 +30,11 @@ public class SimpleARPickUp : MonoBehaviour
     [FormerlySerializedAs("objectRotation")]
     [Header("Pick up helpers")] 
     [SerializeField] private ARRotation rotationObject;
+    [SerializeField] private TextMeshProUGUI FOV;
+    [SerializeField] private TextMeshProUGUI farClip;
+    [SerializeField] private TextMeshProUGUI closeClip;
+
+    private bool hasPickedUpNew;
 
     private void Start()
     {
@@ -46,6 +52,12 @@ public class SimpleARPickUp : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began))
+        {
+            hasPickedUpNew = false;
+        }
+        
         MoveItemHolder();
         if (heldItem != null)
         {
@@ -279,10 +291,9 @@ public class SimpleARPickUp : MonoBehaviour
         if (hit.collider.tag == "Item")
         {
             SmartOutLine(hit.collider.gameObject);
-            if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
+            if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began))
             {
                 PickupItem(hit.collider.gameObject);
-                
             }
             return;
         }
@@ -336,11 +347,24 @@ public class SimpleARPickUp : MonoBehaviour
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
         heldItem.layer = 2;
+        
+        hasPickedUpNew = true;
+        closeClip.text = "Touch: " + ((Input.touchCount > 0) ? Input.GetTouch(0).phase : "No");
+
     }
 
     private void DropItem()
     {
-        if (rotationObject.HasRotatedObject()) { return; }
+        FOV.text = "PickedUpx: " + !hasPickedUpNew;
+        farClip.text = "RotationScript: " + rotationObject.HasRotatedObject();
+        closeClip.text = "Touch: " + ((Input.touchCount > 0) ? Input.GetTouch(0).phase : "No");
+
+        if (hasPickedUpNew || rotationObject.HasRotatedObject()) { return; }
+
+        if (Input.touchCount > 0 && !Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
+        {
+            return;
+        }
         
         if (currentOutline != null)
         {
