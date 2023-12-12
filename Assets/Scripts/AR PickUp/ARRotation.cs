@@ -25,8 +25,8 @@ public class ARRotation : MonoBehaviour
         {
             Vector2 coordinateDiff = Input.GetTouch(0).position - originalScreenPos;
             //modifierRot.eulerAngles = new Vector3(coordinateDiff.y/8, -coordinateDiff.x/8);
-            modifierRot = Quaternion.AngleAxis(coordinateDiff.y / 8, Vector3.right) *
-                          Quaternion.AngleAxis(-coordinateDiff.x / 8, Vector3.up);
+            modifierRot = Quaternion.AngleAxis(coordinateDiff.y / 8, rotationObject.right) *
+                          Quaternion.AngleAxis(-coordinateDiff.x / 8, rotationObject.up);
             transform.rotation =  modifierRot * originalRot;
             
         }
