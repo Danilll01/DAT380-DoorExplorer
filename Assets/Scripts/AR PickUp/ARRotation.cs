@@ -16,7 +16,7 @@ public class ARRotation : MonoBehaviour
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            originalRot = transform.rotation;
+            originalRot = rotationObject.rotation;
             modifierRot = Quaternion.identity;
             originalScreenPos = Input.GetTouch(0).position;
         }
@@ -25,9 +25,9 @@ public class ARRotation : MonoBehaviour
         {
             Vector2 coordinateDiff = Input.GetTouch(0).position - originalScreenPos;
             //modifierRot.eulerAngles = new Vector3(coordinateDiff.y/8, -coordinateDiff.x/8);
-            modifierRot = Quaternion.AngleAxis(coordinateDiff.y / 8, rotationObject.right) *
-                          Quaternion.AngleAxis(-coordinateDiff.x / 8, rotationObject.up);
-            transform.rotation =  modifierRot * originalRot;
+            modifierRot = Quaternion.AngleAxis(coordinateDiff.y / 8, transform.right) *
+                          Quaternion.AngleAxis(-coordinateDiff.x / 8, transform.up);
+            rotationObject.rotation =  modifierRot * originalRot;
             
         }
         
