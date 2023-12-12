@@ -381,3 +381,4 @@ MonoBehaviour:
   pickupDistance: 3
   carryForce: 40
   itemHolderDistance: 1
+  transForward: {fileID: 6611509305674398360}
