@@ -630,6 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationObject: {fileID: 1934091475}
+  dampening: 0
 --- !u!1001 &142909095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2496,7 +2497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fadf230d1919748a9aa21d40f74619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mockMovement: 0
+  mockMovement: 1
   flyCamera: {fileID: 1934091485}
   m_TrackingType: 0
   m_UpdateType: 0
@@ -2787,6 +2788,7 @@ MonoBehaviour:
   pickupDistance: 3
   carryForce: 40
   itemHolderDistance: 1
+  rotationObject: {fileID: 1934091489}
 --- !u!114 &1934091488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2854,7 +2856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb364c40a0be752468dd72db60ffb399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationObject: {fileID: 79508620}
+  rotationObject: {fileID: 0}
+  dampening: 0.8
 --- !u!1 &1946378772
 GameObject:
   m_ObjectHideFlags: 0

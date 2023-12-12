@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ARRotation : MonoBehaviour
 {
-    [SerializeField] private Transform rotationObject;
-    [SerializeField ][Range(0, 1)] private float dampening = 0.9f;
+    public Transform rotationObject = null;
+    [SerializeField] [Range(0, 1)] private float dampening = 0.9f;
     
     private Vector2 originalScreenPos = Vector2.zero;
     private Quaternion originalRot = Quaternion.identity;
@@ -20,7 +20,7 @@ public class ARRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rotationObject.Equals(null)) { return; }
+        if (rotationObject == null) { return; }
         
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
