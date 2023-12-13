@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class GlobalVariables
 {
-    public static RoomType selectedRoomType;
+    public static RoomType selectedRoomType = RoomType.Shed;
 }

@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class DoorSelector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Portal shedPortal;
+    [SerializeField] private Portal housePortal;
 
-    // Update is called once per frame
-    void Update()
+    public static RoomType selectedRoomType = RoomType.Shed;
+    
+    public Portal GetPortalScript()
     {
-        
+        switch (selectedRoomType)
+        {
+            case RoomType.Shed:
+                return shedPortal;
+            case RoomType.House:
+                return housePortal;
+            default:
+                return shedPortal;
+        }
     }
 }
