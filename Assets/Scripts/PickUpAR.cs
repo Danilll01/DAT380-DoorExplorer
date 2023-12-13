@@ -5,7 +5,7 @@ using System;
 
 // The tag item should add the required components, like outline and rigidbody
 
-public class PickUpAr : MonoBehaviour
+public class PickUpAR : MonoBehaviour
 {
     private GameObject heldItem;
     private Rigidbody heldItemRB;
@@ -27,6 +27,9 @@ public class PickUpAr : MonoBehaviour
     [SerializeField] private float pickupDistance = 10.0f;
     [SerializeField] private float carryForce = 400.0f;
     [SerializeField] private float itemHolderDistance = 2f;
+    
+    [Header("Pick up helpers")] 
+    [SerializeField] private ARRotation rotationObject;
 
 
     private void Start()
@@ -282,7 +285,7 @@ public class PickUpAr : MonoBehaviour
         SmartOutLine(null);
     }
 
-    protected void PickupItemCheck(GameObject hitGameObject)
+    private void PickupItemCheck(GameObject hitGameObject)
     {
         if (pickUpButtonClicked)
         {
@@ -292,7 +295,7 @@ public class PickUpAr : MonoBehaviour
         }
     }
 
-    protected bool DropItemCheck()
+    private bool DropItemCheck()
     {
         if (pickUpButtonClicked)
         {
@@ -345,8 +348,10 @@ public class PickUpAr : MonoBehaviour
     private void PickupItem(GameObject item)
     {
         currentOutline.enabled = false;
-        heldItem = item.transform.GetComponent<Collider>().gameObject;
+        heldItem = item;
         heldItemRB = heldItem.GetComponent<Rigidbody>();
+        
+        rotationObject.rotationObject = item.transform;
 
         heldItemRB.useGravity = false;
         heldItemRB.drag = 20.0f;
@@ -356,6 +361,9 @@ public class PickUpAr : MonoBehaviour
 
     private void DropItem()
     {
+        
+        if (rotationObject.HasRotatedObject()) { return; }
+        
         if (currentOutline != null)
         {
             currentOutline.enabled = false;
@@ -368,6 +376,7 @@ public class PickUpAr : MonoBehaviour
         heldItem.layer = 0;
         heldItem = null;
         heldItemRB = null;
+        rotationObject.rotationObject = null;
     }
 
 

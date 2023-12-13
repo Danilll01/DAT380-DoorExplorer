@@ -346,7 +346,6 @@ public class SimpleARPickUp : MonoBehaviour
         heldItem.layer = 2;
         
         hasPickedUpNew = true;
-
     }
 
     private void DropItem()
