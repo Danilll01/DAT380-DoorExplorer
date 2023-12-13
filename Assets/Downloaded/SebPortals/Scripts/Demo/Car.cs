@@ -15,7 +15,7 @@ public class Car : MonoBehaviour {
 
     void Update () {
         float moveDst = Time.deltaTime * speed;
-        transform.position += -transform.forward * Time.deltaTime * speed;
+        transform.position += transform.forward * Time.deltaTime * speed;
 
         if (Input.GetKeyDown (KeyCode.C)) {
             targetSpeed = (targetSpeed == 0) ? maxSpeed : 0;

@@ -429,6 +429,10 @@ namespace UnityEngine.InputSystem.XR
                 UnityEngine.XR.XRDevice.DisableAutoXRCameraTracking(cameraComponent, true);
             }
 #endif
+
+#if UNITY_ANDROID || UNITY_IOS
+            mockMovement = false;
+#endif
         }
 
         /// <summary>
@@ -630,7 +634,7 @@ namespace UnityEngine.InputSystem.XR
             return TryGetComponent(out cameraComponent) && cameraComponent.stereoEnabled;
         }
 
-        #region DEPRECATED
+#region DEPRECATED
 
         // Disable warnings that these fields are never assigned to. They are set during Unity deserialization and migrated.
         // ReSharper disable UnassignedField.Local
@@ -688,6 +692,6 @@ namespace UnityEngine.InputSystem.XR
 #pragma warning restore 0612
         }
 
-        #endregion
+#endregion
     }
 }

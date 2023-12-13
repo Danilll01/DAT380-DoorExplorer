@@ -154,11 +154,7 @@ public class PickUp : MonoBehaviour
 
     private void MoveItem()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            DropItem();
-            return;
-        }
+        if (DropItemCheck()) return;
 
         Portal portal = ClosestPortal(itemHolder.transform.position);
         float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
@@ -278,13 +274,28 @@ public class PickUp : MonoBehaviour
         if (hit.collider.tag == "Item")
         {
             SmartOutLine(hit.collider.gameObject);
-            if (Input.GetMouseButtonDown(0))
-            {
-                PickupItem(hit.collider.gameObject);
-            }
+            PickupItemCheck(hit.collider.gameObject);
             return;
         }
         SmartOutLine(null);
+    }
+
+    protected virtual void PickupItemCheck(GameObject hitGameObject)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PickupItem(hitGameObject);
+        }
+    }
+
+    protected bool DropItemCheck()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            DropItem();
+            return true;
+        }
+        return false;
     }
 
     private void SmartOutLine(GameObject itemHit)
