@@ -4028,11 +4028,6 @@ PrefabInstance:
       propertyPath: linkedPortal
       value: 
       objectReference: {fileID: 1496488321}
-    - target: {fileID: 8898165401905020454, guid: a43e6467fbf0c4a0184c3dbfa7688845,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7f05f5f6b48b1438092ee55ffcedeb9b, type: 2}
     - target: {fileID: 9086225349265423484, guid: a43e6467fbf0c4a0184c3dbfa7688845,
         type: 3}
       propertyPath: m_Mesh

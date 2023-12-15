@@ -1368,7 +1368,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 23
+  m_VersionIndex: 26
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1670,7 +1670,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -2905,7 +2905,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4070,6 +4070,7 @@ Transform:
   - {fileID: 2852385998071589839}
   - {fileID: 2538493299520657918}
   - {fileID: 8742972993396360463}
+  - {fileID: 7279793225878219903}
   m_Father: {fileID: 6268647401152757758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3838043934665815227
@@ -4319,7 +4320,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -4643,7 +4644,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -5879,7 +5880,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2108
+  m_VersionIndex: 2111
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6233,7 +6234,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6557,7 +6558,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 29
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6764,6 +6765,11 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7512904109496161758, guid: b2ed0d778dff14f4bba3a2deabb1139e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7f05f5f6b48b1438092ee55ffcedeb9b, type: 2}
     - target: {fileID: 8305708687406199819, guid: b2ed0d778dff14f4bba3a2deabb1139e,
         type: 3}
       propertyPath: m_Name
@@ -6782,7 +6788,7 @@ PrefabInstance:
     - target: {fileID: 8649196787678621361, guid: b2ed0d778dff14f4bba3a2deabb1139e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.178
+      value: 3.771
       objectReference: {fileID: 0}
     - target: {fileID: 8649196787678621361, guid: b2ed0d778dff14f4bba3a2deabb1139e,
         type: 3}
@@ -6935,6 +6941,80 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.6803699, y: 0.17931966, z: 1.0629168}
   m_Center: {x: -0.4843932, y: 0.0951126, z: 1.3074789}
+--- !u!1001 &3575155885969918297
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7568614409505241363}
+    m_Modifications:
+    - target: {fileID: 4675967010716365541, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_Name
+      value: Tombstone_1_L
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.048044
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4755821
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.207428
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ec88f21b9060844fba66270d5ed842ea, type: 3}
+--- !u!4 &7279793225878219903 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6096330217191007526, guid: ec88f21b9060844fba66270d5ed842ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 3575155885969918297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5928624319178219263
 PrefabInstance:
   m_ObjectHideFlags: 0
