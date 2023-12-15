@@ -10,7 +10,7 @@ public class DoorSelector : MonoBehaviour
     [SerializeField] private Transform shedDoorTransform;
     [SerializeField] private Transform houseDoorTransform;
 
-    public static RoomType selectedRoomType = RoomType.Shed;
+    public static RoomType selectedRoomType = RoomType.None;
     
     public Transform GetPortalTransform()
     {

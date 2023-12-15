@@ -22,6 +22,8 @@ public class PickUpAr : MonoBehaviour
     private Vector3 backupHolder;
     private bool lastHit = false;
     private bool pickUpButtonClicked = false;
+    private bool doorPlacingMode = false;
+    private ArObjectPlacer arObjectPlacer;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -32,6 +34,7 @@ public class PickUpAr : MonoBehaviour
     private void Start()
     {
         CreateItemHolder();
+        arObjectPlacer = GetComponent<ArObjectPlacer>();
     }
 
     private void CreateItemHolder()
@@ -45,6 +48,7 @@ public class PickUpAr : MonoBehaviour
 
     void Update()
     {
+        doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
         MoveItemHolder();
         if (heldItem != null)
         {
@@ -247,6 +251,13 @@ public class PickUpAr : MonoBehaviour
 
     private void SelectItem(Vector3 startPos, Vector3 direction, float length)
     {
+        if (doorPlacingMode && pickUpButtonClicked)
+        {
+            arObjectPlacer.SpawnDoor();
+            pickUpButtonClicked = false;
+            return;
+        }
+        
         RaycastHit hit = SendRaycast(startPos, direction, length);
         if (hit.collider == null)
         {
@@ -279,7 +290,6 @@ public class PickUpAr : MonoBehaviour
             PickupItemCheck(hit.collider.gameObject);
             return;
         }
-        
         if (hit.collider.tag == "Interactable")
         {
             SmartOutLine(hit.collider.gameObject);

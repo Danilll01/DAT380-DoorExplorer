@@ -2046,6 +2046,11 @@ PrefabInstance:
       objectReference: {fileID: 897477548}
     - target: {fileID: 6778339365870051525, guid: ee9038302ecfe4a3193e9098bdc75f9c,
         type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6778339365870051525, guid: ee9038302ecfe4a3193e9098bdc75f9c,
+        type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1934091488}
@@ -9374,7 +9379,7 @@ MonoBehaviour:
   m_PositionInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Position
+      m_Name: Main Camera - TPD - Position
       m_Type: 0
       m_ExpectedControlType: Vector3
       m_Id: b5c6dc41-4f39-4a55-9e36-60d618fd54e7
@@ -9387,7 +9392,7 @@ MonoBehaviour:
         m_Interactions: 
         m_Processors: 
         m_Groups: 
-        m_Action: Position
+        m_Action: Main Camera - TPD - Position
         m_Flags: 0
       - m_Name: 
         m_Id: 0c6d1ed7-ddc6-487b-a74c-c7af4d0f974d
@@ -9395,14 +9400,14 @@ MonoBehaviour:
         m_Interactions: 
         m_Processors: 
         m_Groups: 
-        m_Action: Position
+        m_Action: Main Camera - TPD - Position
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_RotationInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Rotation
+      m_Name: Main Camera - TPD - Rotation
       m_Type: 0
       m_ExpectedControlType: Quaternion
       m_Id: d7f7cef3-a5aa-45e1-bad2-f6277dda6107
@@ -9415,7 +9420,7 @@ MonoBehaviour:
         m_Interactions: 
         m_Processors: 
         m_Groups: 
-        m_Action: Rotation
+        m_Action: Main Camera - TPD - Rotation
         m_Flags: 0
       - m_Name: 
         m_Id: 3b947c09-407b-4950-986b-e5dc2bd389a5
@@ -9423,14 +9428,14 @@ MonoBehaviour:
         m_Interactions: 
         m_Processors: 
         m_Groups: 
-        m_Action: Rotation
+        m_Action: Main Camera - TPD - Rotation
         m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_TrackingStateInput:
     m_UseReference: 0
     m_Action:
-      m_Name: Tracking State
+      m_Name: Main Camera - TPD - Tracking State
       m_Type: 0
       m_ExpectedControlType: Integer
       m_Id: f9ce603f-b714-437e-adf4-e80efd49a8b0
