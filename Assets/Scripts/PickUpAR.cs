@@ -403,7 +403,7 @@ public class PickUpAr : MonoBehaviour
             //if (Vector3.Distance(Vector3.zero, transform.position) > maxDistanceFromCenter) return;
             doorFrameOutline.position = ray.point;
             // Set rotation to face the camera
-            doorFrameOutline.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
+            doorFrameOutline.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             
             if (pickUpButtonClicked)
             {

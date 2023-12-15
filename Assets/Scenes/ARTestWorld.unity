@@ -2024,6 +2024,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1950054836466428155, guid: ee9038302ecfe4a3193e9098bdc75f9c,
+        type: 3}
+      propertyPath: shedDoorTransform
+      value: 
+      objectReference: {fileID: 333646853}
+    - target: {fileID: 1950054836466428155, guid: ee9038302ecfe4a3193e9098bdc75f9c,
+        type: 3}
+      propertyPath: houseDoorTransform
+      value: 
+      objectReference: {fileID: 897477548}
+    - target: {fileID: 8218814834771960827, guid: ee9038302ecfe4a3193e9098bdc75f9c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1934091487}
+    - target: {fileID: 8218814834771960827, guid: ee9038302ecfe4a3193e9098bdc75f9c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PickupTouch
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3144,6 +3164,12 @@ MonoBehaviour:
   bakeKeys: []
   bakeValues: []
   forceOutlineOn: 1
+--- !u!4 &1419475887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8666857400540312080, guid: dc379e3023416214fa23aceed119b1c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1691880627}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1422593856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9734,6 +9760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043f99a2ff8b4da44bbed356f2794935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorFrameOutline: {fileID: 1419475887}
   maxDistanceFromCenter: 10
   pickupDistance: 3
   carryForce: 40
@@ -9753,9 +9780,6 @@ MonoBehaviour:
   arRaycastManager: {fileID: 0}
   arPointCloudManager: {fileID: 0}
   arCameraTransform: {fileID: 1934091475}
-  doorPrefab: {fileID: 17831304724337371, guid: 6443121534ea2524789f912bc7ed7ac3,
-    type: 3}
-  portalToLinkTo: {fileID: 0}
   doorSelector: {fileID: 988155793}
 --- !u!1 &1946378772
 GameObject:
