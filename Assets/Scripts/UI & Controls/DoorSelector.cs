@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DoorSelector : MonoBehaviour
 {
-    [SerializeField] private Portal shedPortal;
-    [SerializeField] private Portal housePortal;
-    
     [SerializeField] private Transform shedDoorTransform;
     [SerializeField] private Transform houseDoorTransform;
 

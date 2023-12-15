@@ -8,6 +8,8 @@ TagManager:
   - Portal
   - Item
   - Interactable
+  - Button
+  - Floor
   layers:
   - Default
   - TransparentFX

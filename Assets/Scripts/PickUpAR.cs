@@ -24,6 +24,9 @@ public class PickUpAr : MonoBehaviour
     private bool pickUpButtonClicked = false;
     private bool doorPlacingMode = false;
     private ArObjectPlacer arObjectPlacer;
+    [SerializeField] private Transform doorFrameOutline;
+    private Vector3 doorFrameOutlineOriginalPosition;
+    [SerializeField] private float maxDistanceFromCenter = 10f;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -35,6 +38,7 @@ public class PickUpAr : MonoBehaviour
     {
         CreateItemHolder();
         arObjectPlacer = GetComponent<ArObjectPlacer>();
+        doorFrameOutlineOriginalPosition = doorFrameOutline.position;
     }
 
     private void CreateItemHolder()
@@ -251,10 +255,9 @@ public class PickUpAr : MonoBehaviour
 
     private void SelectItem(Vector3 startPos, Vector3 direction, float length)
     {
-        if (doorPlacingMode && pickUpButtonClicked)
+        if (doorPlacingMode)
         {
-            arObjectPlacer.SpawnDoor();
-            pickUpButtonClicked = false;
+            HandleDoorPlacement(startPos, direction);
             return;
         }
         
@@ -391,6 +394,27 @@ public class PickUpAr : MonoBehaviour
         heldItemRB = null;
     }
 
+
+    private void HandleDoorPlacement(Vector3 startPos, Vector3 direction)
+    {
+        RaycastHit ray = SendRaycast(startPos, direction, 5f);
+        if (ray.collider != null && ray.collider.tag == "Floor")
+        {
+            //if (Vector3.Distance(Vector3.zero, transform.position) > maxDistanceFromCenter) return;
+            doorFrameOutline.position = ray.point;
+            // Set rotation to face the camera
+            doorFrameOutline.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
+            
+            if (pickUpButtonClicked)
+            {
+                doorFrameOutline.position = doorFrameOutlineOriginalPosition;
+                arObjectPlacer.SpawnDoor();
+                DoorSelector.selectedRoomType = RoomType.None;
+                pickUpButtonClicked = false;
+            }
+            
+        }
+    }
 
     public void PickupTouch()
     {
