@@ -6,19 +6,22 @@ public class DoorSelector : MonoBehaviour
 {
     [SerializeField] private Portal shedPortal;
     [SerializeField] private Portal housePortal;
+    
+    [SerializeField] private Transform shedDoorTransform;
+    [SerializeField] private Transform houseDoorTransform;
 
     public static RoomType selectedRoomType = RoomType.Shed;
     
-    public Portal GetPortalScript()
+    public Transform GetPortalTransform()
     {
         switch (selectedRoomType)
         {
             case RoomType.Shed:
-                return shedPortal;
+                return shedDoorTransform;
             case RoomType.House:
-                return housePortal;
+                return houseDoorTransform;
             default:
-                return shedPortal;
+                return shedDoorTransform;
         }
     }
 }

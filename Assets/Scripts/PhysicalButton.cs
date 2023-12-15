@@ -12,7 +12,14 @@ public class PhysicalButton : MonoBehaviour, IInteractable
     [SerializeField] private float animationDistance = 0.1f;
     [SerializeField] private GameObject mainDoorObject;
     
+    [SerializeField] private Transform doorTransform;
+    private Vector3 originalDoorPosition;
 
+    private void Start()
+    {
+        originalDoorPosition = doorTransform.position;
+    }
+    
     private void Update()
     {
         if (animationIsPlaying)
@@ -25,10 +32,11 @@ public class PhysicalButton : MonoBehaviour, IInteractable
             }
             else
             {
-                Portal portalScript = mainDoorObject.GetComponentInChildren<Portal>();
-                portalScript.linkedPortal.linkedPortal = null;
-                portalScript.linkedPortal = null;
-                Destroy(mainDoorObject);
+                //Portal portalScript = mainDoorObject.GetComponentInChildren<Portal>();
+                //portalScript.linkedPortal.linkedPortal = null;
+                //portalScript.linkedPortal = null;
+                //Destroy(mainDoorObject);
+                doorTransform.position = originalDoorPosition;
                 animationIsPlaying = false;
                 animationTimer = 0f;
                 transform.localPosition = Vector3.zero;

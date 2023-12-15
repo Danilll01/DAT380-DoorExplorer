@@ -22,15 +22,7 @@ public class ArObjectPlacer : MonoBehaviour
         // Cast a normal ray from the center of the screen
         if(Physics.Raycast(arCameraTransform.position, arCameraTransform.forward, out RaycastHit hit))
         {
-            // Spawn the door at the hit point
-            GameObject door = Instantiate(doorPrefab, hit.point, Quaternion.Euler(0, 180 + arCameraTransform.rotation.y, 0));
-            // Get the portal script from the door
-            Portal doorPortalScript = door.GetComponentInChildren<Portal>();
-            // Set the linked portal to the portal we want to link to
-            Portal framePortalScript = doorSelector.GetPortalScript();
-            doorPortalScript.linkedPortal = framePortalScript;
-            // Set the linked portal of the portal we want to link to to the portal we just spawned
-            framePortalScript.linkedPortal = doorPortalScript;
+            doorSelector.GetPortalTransform().position = hit.point;
         }
     }
 
