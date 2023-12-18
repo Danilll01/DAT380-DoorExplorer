@@ -431,7 +431,7 @@ namespace UnityEngine.InputSystem.XR
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
-            mockMovement = false;
+            //mockMovement = false;
 #endif
         }
 
