@@ -76,6 +76,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!54 &8012146406575785137
 Rigidbody:
   m_ObjectHideFlags: 0
