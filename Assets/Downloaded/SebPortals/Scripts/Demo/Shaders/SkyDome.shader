@@ -56,7 +56,7 @@
                 if (t < 0.5) {
                     return lerp(_ColorA, _ColorB,t*2);
                 }
-                 return lerp(_ColorB, _ColorC,(t-0.5)*2);
+                return lerp(_ColorB, _ColorC,(t-0.5)*2);
             }
             ENDCG
         }

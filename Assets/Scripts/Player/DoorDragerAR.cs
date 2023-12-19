@@ -70,8 +70,6 @@ public class DoorDragerAR : MonoBehaviour
         if (Physics.Raycast(origin, direction, out hit, distance, doorPortalLayer))
         {
             Debug.DrawRay(origin, direction*distance, Color.cyan, 0.1f);
-            print(hit.transform.gameObject.layer.ToString());
-            print("NAME: " + hit.transform.gameObject.name + hit.transform.gameObject.GetHashCode());
             
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Door"))
             {

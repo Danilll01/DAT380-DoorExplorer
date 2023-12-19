@@ -10,6 +10,9 @@ public class MainCamera : MonoBehaviour {
 
     void Awake () {
         portals = FindObjectsOfType<Portal> ();
+        
+        // Disable screen dimming
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
 
     private void OnEnable()
