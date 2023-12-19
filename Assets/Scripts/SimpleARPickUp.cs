@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using System;
-
+using TMPro;
+using UnityEngine.Serialization;
 
 // The tag item should add the required components, like outline and rigidbody
-
 public class SimpleARPickUp : MonoBehaviour
 {
     private GameObject heldItem;
@@ -27,6 +27,11 @@ public class SimpleARPickUp : MonoBehaviour
     [SerializeField] private float carryForce = 400.0f;
     [SerializeField] private float itemHolderDistance = 2f;
 
+    [FormerlySerializedAs("objectRotation")]
+    [Header("Pick up helpers")] 
+    [SerializeField] private ARRotation rotationObject;
+
+    private bool hasPickedUpNew;
 
     private void Start()
     {
@@ -44,6 +49,12 @@ public class SimpleARPickUp : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began))
+        {
+            hasPickedUpNew = false;
+        }
+        
         MoveItemHolder();
         if (heldItem != null)
         {
@@ -153,12 +164,12 @@ public class SimpleARPickUp : MonoBehaviour
 
     private void MoveItem()
     {
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Began))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
         {
             DropItem();
             return;
         }
-
+        
         Portal portal = ClosestPortal(itemHolder.transform.position);
         float portalShortcut = Vector3.Distance(itemHolder.transform.position, portal.transform.position)
         + Vector3.Distance(heldItem.transform.position, portal.linkedPortal.transform.position);
@@ -325,17 +336,26 @@ public class SimpleARPickUp : MonoBehaviour
     private void PickupItem(GameObject item)
     {
         currentOutline.enabled = false;
-        heldItem = item.transform.GetComponent<Collider>().gameObject;
+        heldItem = item;
+        rotationObject.rotationObject = item.transform;
         heldItemRB = heldItem.GetComponent<Rigidbody>();
 
         heldItemRB.useGravity = false;
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
         heldItem.layer = 2;
+        
+        hasPickedUpNew = true;
     }
 
     private void DropItem()
     {
+
+        if (hasPickedUpNew || rotationObject.HasRotatedObject()) { return; }
+
+        if (Input.touchCount > 0 && !Input.GetTouch(0).phase.Equals(TouchPhase.Ended))
+        { return; }
+        
         if (currentOutline != null)
         {
             currentOutline.enabled = false;
@@ -348,6 +368,7 @@ public class SimpleARPickUp : MonoBehaviour
         heldItem.layer = 0;
         heldItem = null;
         heldItemRB = null;
+        rotationObject.rotationObject = null;
     }
 
 }

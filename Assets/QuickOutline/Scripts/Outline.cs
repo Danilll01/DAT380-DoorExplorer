@@ -80,6 +80,8 @@ public class Outline : MonoBehaviour {
 
   private bool needsUpdate;
 
+  [SerializeField] private bool forceOutlineOn = false;
+
   void Awake() {
 
     // Cache renderers
@@ -97,7 +99,9 @@ public class Outline : MonoBehaviour {
 
     // Apply material properties immediately
     needsUpdate = true;
-    transform.GetComponent<Outline>().enabled = false;
+
+    if (!forceOutlineOn)
+        transform.GetComponent<Outline>().enabled = false;
   }
 
   void OnEnable() {
