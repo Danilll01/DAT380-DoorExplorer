@@ -429,7 +429,7 @@ Transform:
   m_GameObject: {fileID: 269331907}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.39, y: 3.2531087, z: -1.9160333}
+  m_LocalPosition: {x: -47.8, y: 3.2531087, z: -1.9160333}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -836,6 +836,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57b9885b89b6d4fbe92f77801ecc3671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &582302150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9018584562484355137, guid: fc3cfed5d408d1548b5ffce255e616d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1570923283369788442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae6e9fe0f5172d4ba6fc02230f9c334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!43 &786753777
@@ -8252,7 +8264,7 @@ PrefabInstance:
     - target: {fileID: 8666857400540312080, guid: dc379e3023416214fa23aceed119b1c5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.77
+      value: -55.18
       objectReference: {fileID: 0}
     - target: {fileID: 8666857400540312080, guid: dc379e3023416214fa23aceed119b1c5,
         type: 3}
@@ -8485,7 +8497,6 @@ GameObject:
   - component: {fileID: 1934091483}
   - component: {fileID: 1934091484}
   - component: {fileID: 1934091486}
-  - component: {fileID: 1934091487}
   - component: {fileID: 1934091489}
   - component: {fileID: 1934091490}
   m_Layer: 0
@@ -8843,24 +8854,6 @@ MonoBehaviour:
     m_Bits: 384
   draggingForce: 5
   pickupDistance: 3
---- !u!114 &1934091487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934091474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 043f99a2ff8b4da44bbed356f2794935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorFrameOutline: {fileID: 1419475887}
-  maxDistanceFromCenter: 10
-  pickupDistance: 3
-  carryForce: 40
-  itemHolderDistance: 1
-  rotationObject: {fileID: 0}
 --- !u!114 &1934091488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8876,7 +8869,7 @@ MonoBehaviour:
   arRaycastManager: {fileID: 0}
   arPointCloudManager: {fileID: 0}
   arCameraTransform: {fileID: 1934091475}
-  doorSelector: {fileID: 0}
+  doorSelector: {fileID: 582302150}
 --- !u!114 &1934091489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8903,7 +8896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043f99a2ff8b4da44bbed356f2794935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorFrameOutline: {fileID: 0}
+  doorFrameOutline: {fileID: 1419475887}
   maxDistanceFromCenter: 10
   pickupDistance: 3
   carryForce: 40
