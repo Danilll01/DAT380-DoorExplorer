@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: a1a58299feaab5b428c12643ff04e63b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ARTestWorld.unity
     guid: eb33ef4d78285b743b853c1bab7d3bff
   - enabled: 0
     path: Assets/Scenes/LukasIOS.unity
     guid: 0a04d0340cedb4aa6958f0a72d799a33
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/AR TEST 2.unity
     guid: 36c065876488f416d98540c7894b9ae6
   m_configObjects:
