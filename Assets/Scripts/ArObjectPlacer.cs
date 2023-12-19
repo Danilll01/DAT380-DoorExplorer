@@ -20,8 +20,8 @@ public class ArObjectPlacer : MonoBehaviour
         if(Physics.Raycast(arCameraTransform.position, arCameraTransform.forward, out RaycastHit hit))
         {
             Transform door = doorSelector.GetPortalTransform();
+            door.rotation = Quaternion.Euler(0, arCameraTransform.rotation.eulerAngles.y - 180, 0);
             door.position = hit.point;
-            door.rotation = Quaternion.Euler(0, arCameraTransform.rotation.eulerAngles.y, 0);
         }
     }
 

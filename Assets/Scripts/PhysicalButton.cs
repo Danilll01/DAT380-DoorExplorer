@@ -32,10 +32,6 @@ public class PhysicalButton : MonoBehaviour, IInteractable
             }
             else
             {
-                //Portal portalScript = mainDoorObject.GetComponentInChildren<Portal>();
-                //portalScript.linkedPortal.linkedPortal = null;
-                //portalScript.linkedPortal = null;
-                //Destroy(mainDoorObject);
                 doorTransform.position = originalDoorPosition;
                 animationIsPlaying = false;
                 animationTimer = 0f;

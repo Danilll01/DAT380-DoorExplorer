@@ -412,7 +412,11 @@ public class PickUpAr : MonoBehaviour
                 DoorSelector.selectedRoomType = RoomType.None;
                 pickUpButtonClicked = false;
             }
-            
+        }
+        else
+        {
+            doorFrameOutline.position = doorFrameOutlineOriginalPosition;
+            doorFrameOutline.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
