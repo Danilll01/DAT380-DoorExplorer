@@ -30,7 +30,6 @@ public class Remote : MonoBehaviour, IInteractable
             currentClip = 0;
         }else{
             videoPlayer.clip = videoClips[currentClip];
-            Debug.Log("Current Clip: " + currentClip);
             currentClip++;
         }
     }
