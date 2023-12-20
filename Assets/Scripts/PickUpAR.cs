@@ -55,7 +55,13 @@ public class PickUpAR : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pickUpButtonClicked = true;
+        }
+        
         doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
+        
         MoveItemHolder();
         if (heldItem != null)
         {
