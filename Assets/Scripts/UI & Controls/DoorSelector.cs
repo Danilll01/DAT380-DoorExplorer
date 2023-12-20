@@ -6,6 +6,7 @@ public class DoorSelector : MonoBehaviour
 {
     [SerializeField] private Transform shedDoorTransform;
     [SerializeField] private Transform houseDoorTransform;
+    [SerializeField] private Transform gravityDoorTransform;
 
     public static RoomType selectedRoomType = RoomType.None;
     
@@ -17,6 +18,8 @@ public class DoorSelector : MonoBehaviour
                 return shedDoorTransform;
             case RoomType.House:
                 return houseDoorTransform;
+            case RoomType.Gravity:
+                return gravityDoorTransform;
             default:
                 return shedDoorTransform;
         }
