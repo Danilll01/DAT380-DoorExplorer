@@ -22,6 +22,11 @@ public class PickUpAR : MonoBehaviour
     private Vector3 backupHolder;
     private bool lastHit = false;
     private bool pickUpButtonClicked = false;
+    private bool doorPlacingMode = false;
+    private ArObjectPlacer arObjectPlacer;
+    [SerializeField] private Transform doorFrameOutline;
+    private Vector3 doorFrameOutlineOriginalPosition;
+    [SerializeField] private float maxDistanceFromCenter = 10f;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -35,6 +40,8 @@ public class PickUpAR : MonoBehaviour
     private void Start()
     {
         CreateItemHolder();
+        arObjectPlacer = GetComponent<ArObjectPlacer>();
+        doorFrameOutlineOriginalPosition = doorFrameOutline.position;
     }
 
     private void CreateItemHolder()
@@ -52,6 +59,8 @@ public class PickUpAR : MonoBehaviour
         {
             pickUpButtonClicked = true;
         }
+        
+        doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
         
         MoveItemHolder();
         if (heldItem != null)
@@ -255,6 +264,12 @@ public class PickUpAR : MonoBehaviour
 
     private void SelectItem(Vector3 startPos, Vector3 direction, float length)
     {
+        if (doorPlacingMode)
+        {
+            HandleDoorPlacement(startPos, direction);
+            return;
+        }
+        
         RaycastHit hit = SendRaycast(startPos, direction, length);
         if (hit.collider == null)
         {
@@ -285,6 +300,16 @@ public class PickUpAR : MonoBehaviour
         {
             SmartOutLine(hit.collider.gameObject);
             PickupItemCheck(hit.collider.gameObject);
+            return;
+        }
+        if (hit.collider.tag == "Interactable")
+        {
+            SmartOutLine(hit.collider.gameObject);
+            if (pickUpButtonClicked)
+            {
+                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                pickUpButtonClicked = false;
+            }
             return;
         }
         SmartOutLine(null);
@@ -384,6 +409,31 @@ public class PickUpAR : MonoBehaviour
         rotationObject.rotationObject = null;
     }
 
+
+    private void HandleDoorPlacement(Vector3 startPos, Vector3 direction)
+    {
+        RaycastHit ray = SendRaycast(startPos, direction, 5f);
+        if (ray.collider != null && ray.collider.tag == "Floor")
+        {
+            //if (Vector3.Distance(Vector3.zero, transform.position) > maxDistanceFromCenter) return;
+            doorFrameOutline.position = ray.point;
+            // Set rotation to face the camera
+            doorFrameOutline.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            
+            if (pickUpButtonClicked)
+            {
+                doorFrameOutline.position = doorFrameOutlineOriginalPosition;
+                arObjectPlacer.SpawnDoor();
+                DoorSelector.selectedRoomType = RoomType.None;
+                pickUpButtonClicked = false;
+            }
+        }
+        else
+        {
+            doorFrameOutline.position = doorFrameOutlineOriginalPosition;
+            doorFrameOutline.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
 
     public void PickupTouch()
     {
