@@ -22,7 +22,9 @@ public class GravityManager : MonoBehaviour
         {
             if (gravityObject != null)
             {
-                gravityObject.AddForce(gravityDirection * 9.81f, ForceMode.Acceleration);
+                gravityObject.useGravity = false;
+                if (gravityDirection != Vector3.zero)
+                    gravityObject.AddForce(gravityDirection * 9.81f, ForceMode.Acceleration);
             }
         }
     }
