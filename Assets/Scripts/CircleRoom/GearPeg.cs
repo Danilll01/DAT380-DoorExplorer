@@ -30,6 +30,9 @@ public class GearPeg : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print("TJENA!!!!!!!!!!!!!!!!!!!!!!!!!!: " + other.gameObject.layer);
+       
+        if (other.GetType() != typeof(SphereCollider)) { return; }
+        
         if (hasDropped)
         { hasDropped = false; return;}
         
