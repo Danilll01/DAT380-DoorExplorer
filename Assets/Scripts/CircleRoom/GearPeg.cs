@@ -13,12 +13,12 @@ public class GearPeg : MonoBehaviour
     private int currentForce = 0;
     private float currentSpeed = 0f;
 
-    private int currentGear;
+    private bool hasGear = false;
+    private bool hasDropped = false;
     
     // Start is called before the first frame update
     void Start()
     {
-        currentGear = GetHashCode();
     }
 
     // Update is called once per frame
@@ -30,22 +30,55 @@ public class GearPeg : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         print("TJENA!!!!!!!!!!!!!!!!!!!!!!!!!!: " + other.gameObject.layer);
+        if (hasDropped)
+        { hasDropped = false; return;}
+        
         GearScript gearScript = other.GetComponent<GearScript>();
-        if (gearScript != null && currentGear != other.gameObject.GetHashCode())
+        if (gearScript != null && !hasGear)
         {
             print("Inne!!!!!!!!!!!!!!!!!!!");
-            currentGear = other.gameObject.GetHashCode();
+            
             Transform transform1 = other.transform;
-            transform1.parent = transform;
-            transform1.localPosition = Vector3.zero;
-            currentForce += gearScript.GetTurnForce();
-            other.transform.GetComponent<Rigidbody>().isKinematic = true;
+            Rigidbody gearBody = transform1.GetComponent<Rigidbody>();
 
+
+            hasGear = true;
+            transform1.parent = transform;
+            transform1.localPosition = Vector3.zero; 
+            currentForce += gearScript.GetTurnForce();
+            gearBody.isKinematic = true;
+            
             if (beforePeg != null || nextPeg != null)
             {
                 beforePeg.AddCurrentForce(currentForce);
                 nextPeg.SetNewSpeed(-currentSpeed);
             }
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        print("HEJDÅ");
+        GearScript gearScript = other.GetComponent<GearScript>();
+        if (gearScript != null && hasGear)
+        {
+            Transform transform1 = other.transform;
+            Rigidbody gearBody = transform1.GetComponent<Rigidbody>();
+            if (gearBody.isKinematic) { return; }
+            
+            print("HEJDÅ PÅ RIKTIGT DENNA GÅNG");
+            
+            if (beforePeg != null || nextPeg != null)
+            {
+                beforePeg.AddCurrentForce( -currentForce );
+                nextPeg.SetNewSpeed(0);
+            }
+                
+            transform1.parent = null;
+            currentForce -= gearScript.GetTurnForce();
+            hasGear = false;
+            hasDropped = true;
         }
     }
 
