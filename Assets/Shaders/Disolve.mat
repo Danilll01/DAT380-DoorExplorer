@@ -17,9 +17,8 @@ Material:
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: 2450
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -59,13 +58,18 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _cutOfHeight: 0
+    - _cutOfHeight: 0.06
+    - _glowStrength: 1
     - _glowThicness: 0
+    - _movementSpeed: 0.2
     - _noiseScale: 100
-    - _noiseStrength: 1
+    - _noiseStrength: 0.2
+    - _strenght: 1.76
+    - _testHeight: 0.09
+    - _testThicness: 0.12
     m_Colors:
-    - _baseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _glowColor: {r: 0, g: 0, b: 0, a: 0}
+    - _baseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _glowColor: {r: 0, g: 0.63664365, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8806520231717459673
 MonoBehaviour:
