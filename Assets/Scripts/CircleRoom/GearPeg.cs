@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -11,11 +12,13 @@ public class GearPeg : MonoBehaviour
 
     private int currentForce = 0;
     private float currentSpeed = 0f;
+
+    private int currentGear;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        currentGear = GetHashCode();
     }
 
     // Update is called once per frame
@@ -28,9 +31,10 @@ public class GearPeg : MonoBehaviour
     {
         print("TJENA!!!!!!!!!!!!!!!!!!!!!!!!!!: " + other.gameObject.layer);
         GearScript gearScript = other.GetComponent<GearScript>();
-        if (gearScript != null)
+        if (gearScript != null && currentGear != other.gameObject.GetHashCode())
         {
             print("Inne!!!!!!!!!!!!!!!!!!!");
+            currentGear = other.gameObject.GetHashCode();
             Transform transform1 = other.transform;
             transform1.parent = transform;
             transform1.localPosition = Vector3.zero;
@@ -42,7 +46,6 @@ public class GearPeg : MonoBehaviour
                 beforePeg.AddCurrentForce(currentForce);
                 nextPeg.SetNewSpeed(-currentSpeed);
             }
-            
         }
     }
 

@@ -24,9 +24,8 @@ public class PickUpAR : MonoBehaviour
     private bool pickUpButtonClicked = false;
     private bool doorPlacingMode = false;
     private ArObjectPlacer arObjectPlacer;
-    [SerializeField] private Transform doorFrameOutline;
     private Vector3 doorFrameOutlineOriginalPosition;
-    [SerializeField] private float maxDistanceFromCenter = 10f;
+    //[SerializeField] private float maxDistanceFromCenter = 10f;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -35,6 +34,7 @@ public class PickUpAR : MonoBehaviour
     
     [Header("Pick up helpers")] 
     [SerializeField] private ARRotation rotationObject;
+    [SerializeField] private Transform doorFrameOutline;
 
 
     private void Start()
@@ -55,7 +55,7 @@ public class PickUpAR : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || (heldItem != null && heldItemRB.isKinematic))
         {
             pickUpButtonClicked = true;
         }
@@ -384,6 +384,7 @@ public class PickUpAR : MonoBehaviour
         rotationObject.rotationObject = item.transform;
 
         heldItemRB.useGravity = false;
+        heldItemRB.isKinematic = false;
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
         heldItem.layer = 2;
