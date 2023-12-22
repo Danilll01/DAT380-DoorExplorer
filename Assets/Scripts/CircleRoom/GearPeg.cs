@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,6 +11,7 @@ public class GearPeg : MonoBehaviour
 {
     [SerializeField] private GearPeg nextPeg;
     [SerializeField] private GearPeg[] beforePegs;
+    [SerializeField] private GearPeg[] blockedPegs;
     [SerializeField] private PegType pegType = PegType.MIDDLE;
     
     private enum PegType
@@ -26,6 +28,7 @@ public class GearPeg : MonoBehaviour
     private int holdingHash = 0;
     private bool hasGear = false;
     private bool hasDropped = false;
+    private int isBlockedBy = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -52,7 +55,7 @@ public class GearPeg : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Return if it is not the specific type of collider we look for
-        if (other.GetType() != typeof(SphereCollider)) { return; }
+        if (other.GetType() != typeof(SphereCollider) || isBlockedBy > 0) { return; }
         
         // Return if the gear has been dropped right before
         if (hasDropped)
@@ -72,6 +75,8 @@ public class GearPeg : MonoBehaviour
             transform1.rotation = Quaternion.identity;
             currentForce += gearScript.GetTurnForce();
             gearBody.isKinematic = true;
+
+            ChangeBlockedPegs(1);
             
             if (beforePegs != null || nextPeg != null)
             {
@@ -106,6 +111,7 @@ public class GearPeg : MonoBehaviour
             hasGear = false;
             holdingHash = 0;
             hasDropped = true;
+            ChangeBlockedPegs(-1);
         }
     }
 
@@ -137,8 +143,23 @@ public class GearPeg : MonoBehaviour
         }
     }
 
+    private void SetBlockedStatus(int blocked)
+    {
+        isBlockedBy += blocked;
+        isBlockedBy = Mathf.Max(0, isBlockedBy);
+    }
+
     private void ReCalculateSpeed()
     {
         currentSpeed = Mathf.Clamp(startSpeed - currentForce * 2f, 0f, startSpeed);
+    }
+
+    private void ChangeBlockedPegs(int block)
+    {
+        if (blockedPegs == null) return;
+        foreach (GearPeg blockedPeg in blockedPegs)
+        {
+            blockedPeg.SetBlockedStatus(block);
+        }
     }
 }

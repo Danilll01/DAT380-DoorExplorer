@@ -699,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.609
+      value: -0.974
       objectReference: {fileID: 0}
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
@@ -709,7 +709,7 @@ PrefabInstance:
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.796
+      value: 5.388
       objectReference: {fileID: 0}
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
@@ -879,6 +879,8 @@ MonoBehaviour:
   nextPeg: {fileID: 1287874927}
   beforePegs:
   - {fileID: 1164035616}
+  blockedPegs:
+  - {fileID: 1486227802}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -1098,6 +1100,8 @@ MonoBehaviour:
   nextPeg: {fileID: 607215780}
   beforePegs:
   - {fileID: 642150343}
+  blockedPegs:
+  - {fileID: 1008132665}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -1858,6 +1862,9 @@ MonoBehaviour:
   nextPeg: {fileID: 1164035616}
   beforePegs:
   - {fileID: 407994908}
+  blockedPegs:
+  - {fileID: 1008132665}
+  - {fileID: 1997318840}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -1911,6 +1918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 0}
   beforePegs: []
+  blockedPegs: []
   pegType: 0
   currentForce: 0
   currentSpeed: 0
@@ -3782,6 +3790,9 @@ MonoBehaviour:
   nextPeg: {fileID: 1997318840}
   beforePegs:
   - {fileID: 642150343}
+  blockedPegs:
+  - {fileID: 407994908}
+  - {fileID: 607215780}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -4487,6 +4498,9 @@ MonoBehaviour:
   nextPeg: {fileID: 371611838}
   beforePegs:
   - {fileID: 607215780}
+  blockedPegs:
+  - {fileID: 1997318840}
+  - {fileID: 1486227802}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -5078,6 +5092,7 @@ MonoBehaviour:
   beforePegs:
   - {fileID: 371611838}
   - {fileID: 1486227802}
+  blockedPegs: []
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -5816,6 +5831,9 @@ MonoBehaviour:
   nextPeg: {fileID: 1287874927}
   beforePegs:
   - {fileID: 1997318840}
+  blockedPegs:
+  - {fileID: 1164035616}
+  - {fileID: 371611838}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -13098,6 +13116,9 @@ MonoBehaviour:
   nextPeg: {fileID: 1486227802}
   beforePegs:
   - {fileID: 1008132665}
+  blockedPegs:
+  - {fileID: 607215780}
+  - {fileID: 1164035616}
   pegType: 1
   currentForce: 0
   currentSpeed: 0
@@ -13152,6 +13173,7 @@ MonoBehaviour:
   nextPeg: {fileID: 0}
   beforePegs:
   - {fileID: 1287874927}
+  blockedPegs: []
   pegType: 2
   currentForce: 0
   currentSpeed: 0
@@ -13604,7 +13626,7 @@ PrefabInstance:
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.281
+      value: -0.455
       objectReference: {fileID: 0}
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
@@ -13614,7 +13636,7 @@ PrefabInstance:
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.673
+      value: 5.701
       objectReference: {fileID: 0}
     - target: {fileID: 3280017964665655396, guid: ff9d7ac97219fa447afc35cbf737edef,
         type: 3}
