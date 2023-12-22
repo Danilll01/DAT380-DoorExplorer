@@ -55,6 +55,7 @@ public class PickUpAR : MonoBehaviour
 
     void Update()
     {
+        // Checks for mouse clicks and if held object becomes kinematic (in this case the item should be dropped)
         if (Input.GetMouseButtonDown(0) || (heldItem != null && heldItemRB.isKinematic))
         {
             pickUpButtonClicked = true;
