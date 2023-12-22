@@ -19,8 +19,8 @@ public class GearPeg : MonoBehaviour
         END
     }
 
-    private int currentForce = 0;
-    private float currentSpeed = 0f;
+    [SerializeField]private int currentForce = 0;
+    [SerializeField]private float currentSpeed = 0f;
     private float startSpeed = 0;
 
     private bool hasGear = false;
@@ -109,13 +109,13 @@ public class GearPeg : MonoBehaviour
         
         if (pegType == PegType.MIDDLE)
         {
-            beforePeg.AddCurrentForce(currentForce, this);
+            beforePeg.AddCurrentForce(force, this);
         }
 
         if (pegType == PegType.START)
         {
             ReCalculateSpeed();
-            from.SetNewSpeed(currentSpeed);
+            from.SetNewSpeed(-currentSpeed);
         }
     }
 
@@ -130,6 +130,6 @@ public class GearPeg : MonoBehaviour
 
     private void ReCalculateSpeed()
     {
-        currentSpeed = startSpeed - currentForce * 2;
+        currentSpeed = Mathf.Clamp(startSpeed - currentForce * 2f, 0f, startSpeed);
     }
 }
