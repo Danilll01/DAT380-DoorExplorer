@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 public class GearPeg : MonoBehaviour
 {
     [SerializeField] private GearPeg nextPeg;
-    [SerializeField] private GearPeg beforePeg;
+    [SerializeField] private GearPeg[] beforePegs;
     [SerializeField] private PegType pegType = PegType.MIDDLE;
     
     private enum PegType
@@ -23,6 +23,7 @@ public class GearPeg : MonoBehaviour
     [SerializeField]private float currentSpeed = 0f;
     private float startSpeed = 0;
 
+    private int holdingHash = 0;
     private bool hasGear = false;
     private bool hasDropped = false;
     
@@ -65,14 +66,16 @@ public class GearPeg : MonoBehaviour
             Rigidbody gearBody = transform1.GetComponent<Rigidbody>();
             
             hasGear = true;
+            holdingHash = transform1.GetHashCode();
             transform1.parent = transform;
             transform1.localPosition = Vector3.zero; 
             currentForce += gearScript.GetTurnForce();
             gearBody.isKinematic = true;
             
-            if (beforePeg != null || nextPeg != null)
+            if (beforePegs != null || nextPeg != null)
             {
-                beforePeg.AddCurrentForce(currentForce, this);
+                foreach (GearPeg beforePeg in beforePegs)
+                { beforePeg.AddCurrentForce(currentForce, this); }
                 nextPeg.SetNewSpeed(-currentSpeed);
             }
             
@@ -82,23 +85,25 @@ public class GearPeg : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         GearScript gearScript = other.GetComponent<GearScript>();
-        if (gearScript != null && hasGear)
+        Transform transform1 = other.transform;
+        if (gearScript != null && hasGear && transform1.GetHashCode() == holdingHash)
         {
-            Transform transform1 = other.transform;
             Rigidbody gearBody = transform1.GetComponent<Rigidbody>();
             
             // We can not remove gear if it is supposed to be still
             if (gearBody.isKinematic) { return; }
             
-            if (beforePeg != null || nextPeg != null)
+            if (beforePegs != null || nextPeg != null)
             {
-                beforePeg.AddCurrentForce(-currentForce, this);
+                foreach (GearPeg beforePeg in beforePegs)
+                { beforePeg.AddCurrentForce(-currentForce, this); }
                 nextPeg.SetNewSpeed(0);
             }
                 
             transform1.parent = null;
             currentForce -= gearScript.GetTurnForce();
             hasGear = false;
+            holdingHash = 0;
             hasDropped = true;
         }
     }
@@ -107,9 +112,10 @@ public class GearPeg : MonoBehaviour
     {
         currentForce += force;
         
-        if (pegType == PegType.MIDDLE)
+        if (hasGear && pegType == PegType.MIDDLE)
         {
-            beforePeg.AddCurrentForce(force, this);
+            foreach (GearPeg beforePeg in beforePegs)
+            { beforePeg.AddCurrentForce(force, this); }
         }
 
         if (pegType == PegType.START)
@@ -121,7 +127,7 @@ public class GearPeg : MonoBehaviour
 
     private void SetNewSpeed(float speed)
     {
-        if (hasGear)
+        if (hasGear && pegType == PegType.MIDDLE)
         {
             currentSpeed = speed;
             nextPeg.SetNewSpeed(-currentSpeed);

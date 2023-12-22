@@ -972,8 +972,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 1287874927}
-  beforePeg: {fileID: 1164035616}
+  beforePegs:
+  - {fileID: 1164035616}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!1001 &372552501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1188,8 +1191,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 607215780}
-  beforePeg: {fileID: 642150343}
+  beforePegs:
+  - {fileID: 642150343}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!1001 &463981231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1809,8 +1815,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 1164035616}
-  beforePeg: {fileID: 407994908}
+  beforePegs:
+  - {fileID: 407994908}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!1 &642150341
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,8 +1869,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 0}
-  beforePeg: {fileID: 0}
+  beforePegs: []
   pegType: 0
+  currentForce: 0
+  currentSpeed: 0
 --- !u!136 &642150344
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3660,8 +3671,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 1997318840}
-  beforePeg: {fileID: 642150343}
+  beforePegs:
+  - {fileID: 642150343}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!43 &1024334766
 Mesh:
   m_ObjectHideFlags: 0
@@ -4362,8 +4376,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 371611838}
-  beforePeg: {fileID: 607215780}
+  beforePegs:
+  - {fileID: 607215780}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!43 &1166893305
 Mesh:
   m_ObjectHideFlags: 0
@@ -4949,8 +4966,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 1997497838}
-  beforePeg: {fileID: 0}
+  beforePegs:
+  - {fileID: 371611838}
+  - {fileID: 1486227802}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!1 &1419475885 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3826528249310697380, guid: dc379e3023416214fa23aceed119b1c5,
@@ -5616,8 +5637,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 1287874927}
-  beforePeg: {fileID: 1997318840}
+  beforePegs:
+  - {fileID: 1997318840}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!1001 &1501042838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13126,8 +13150,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 1486227802}
-  beforePeg: {fileID: 1008132665}
+  beforePegs:
+  - {fileID: 1008132665}
   pegType: 1
+  currentForce: 0
+  currentSpeed: 0
 --- !u!1 &1997497836
 GameObject:
   m_ObjectHideFlags: 0
@@ -13177,8 +13204,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 0}
-  beforePeg: {fileID: 0}
+  beforePegs:
+  - {fileID: 1287874927}
   pegType: 2
+  currentForce: 0
+  currentSpeed: 0
 --- !u!136 &1997497839
 CapsuleCollider:
   m_ObjectHideFlags: 0
