@@ -13835,7 +13835,7 @@ PrefabInstance:
     - target: {fileID: 306897624887702818, guid: 41a2a9c961b3867429877a81732cab69,
         type: 3}
       propertyPath: mockMovement
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2318760098059369966, guid: 41a2a9c961b3867429877a81732cab69,
         type: 3}
