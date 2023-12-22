@@ -68,7 +68,8 @@ public class GearPeg : MonoBehaviour
             hasGear = true;
             holdingHash = transform1.GetHashCode();
             transform1.parent = transform;
-            transform1.localPosition = Vector3.zero; 
+            transform1.localPosition = Vector3.zero;
+            transform1.rotation = Quaternion.identity;
             currentForce += gearScript.GetTurnForce();
             gearBody.isKinematic = true;
             
@@ -127,9 +128,11 @@ public class GearPeg : MonoBehaviour
 
     private void SetNewSpeed(float speed)
     {
-        if (hasGear && pegType == PegType.MIDDLE)
+        if (!hasGear) return;
+        currentSpeed = speed;
+
+        if (pegType == PegType.MIDDLE)
         {
-            currentSpeed = speed;
             nextPeg.SetNewSpeed(-currentSpeed);
         }
     }
