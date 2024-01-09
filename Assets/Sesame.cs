@@ -10,9 +10,8 @@ public class Sesame : MonoBehaviour
 
     [Header("What disapears after interaction")]
     [SerializeField] private bool itemDis = false;
-    [SerializeField] private bool itemHolderDis = false;
-    [SerializeField] private bool fadeOut = false;
-    [SerializeField] private float fadeOutTime = 1.0f;
+    [SerializeField] private bool holderDes = false;
+    [SerializeField] private float holderDesTime = 1.0f;
 
     [Header("Delay between spawns")]
     [SerializeField] private float delay = 3.0f;
@@ -30,7 +29,6 @@ public class Sesame : MonoBehaviour
         if (GetComponent<ParticleSystem>() != null)
         {
             particleSystem = GetComponent<ParticleSystem>();
-            particleSystem.Play();
         }
         if (GetComponent<BoxCollider>() != null)
         {
@@ -62,13 +60,11 @@ public class Sesame : MonoBehaviour
             item.SetActive(false);
         }
 
-        ThingStarts();
+        PlayParticles();
+        StartCoroutine(DelayedAction(delay));
 
-        if (itemHolderDis)
+        if (holderDes)
         {
-            Destroy(gameObject);
-        }
-        if(fadeOut){
             GetComponent<MeshRenderer>().enabled = false;
             StartCoroutine(FadeOut());
         }
@@ -76,23 +72,22 @@ public class Sesame : MonoBehaviour
 
     private void ThingStarts()
     {
-        if (coRoutineActive == false)
+        if (spawnItem != null)
         {
-            StartCoroutine(DelayedAction(delay));
-            if (spawnItem != null)
-            {
-
-                Instantiate(spawnItem, transform.position, transform.rotation);
-                particleSystem.Play();
-
-            }else{
-                particleSystem.Play();
-            }
+            Instantiate(spawnItem, transform.position, transform.rotation);
         }
     }
 
-    IEnumerator FadeOut(){
-        yield return new WaitForSeconds(fadeOutTime);
+    private void PlayParticles()
+    {
+        if(particleSystem != null){
+            particleSystem.Play();
+        }      
+    }
+
+    IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(holderDesTime);
         Destroy(gameObject);
     }
 
@@ -100,6 +95,7 @@ public class Sesame : MonoBehaviour
     {
         coRoutineActive = true;
         yield return new WaitForSeconds(delayTime);
+        ThingStarts();
         coRoutineActive = false;
     }
 

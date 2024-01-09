@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8440672680998540525}
   - component: {fileID: 2491913985042228769}
   - component: {fileID: 1443790338163606318}
+  - component: {fileID: 3084506993130137035}
   m_Layer: 0
   m_Name: locker_low
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 55.939865, y: -0, z: 12.886}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -4962,3 +4963,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &3084506993130137035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047441374776506425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f74ae6b043e4423c86dbd2057097b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
+  spawnItem: {fileID: 0}
+  itemDis: 0
+  holderDes: 0
+  holderDesTime: 1
+  delay: 3
+  multiplier: 1.5
