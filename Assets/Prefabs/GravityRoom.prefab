@@ -3930,8 +3930,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.1571865, y: 4.987349, z: 3.3532047}
-  m_Center: {x: 2.485036, y: 2.4836853, z: 1.5852451}
+  m_Size: {x: 5.1571865, y: 3.5777962, z: 4.194646}
+  m_Center: {x: 2.485036, y: 1.7789086, z: 2.0059657}
 --- !u!114 &1680748865083491694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7881,20 +7881,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2562179804435551718, guid: df2c1c332a7e0aa41a3f82ebf6456d87,
-        type: 3}
-      propertyPath: m_VersionIndex
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 6565486296737650606, guid: df2c1c332a7e0aa41a3f82ebf6456d87,
         type: 3}
       propertyPath: m_Name
       value: ValvePipe
-      objectReference: {fileID: 0}
-    - target: {fileID: 8855537245908269530, guid: df2c1c332a7e0aa41a3f82ebf6456d87,
-        type: 3}
-      propertyPath: m_VersionIndex
-      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

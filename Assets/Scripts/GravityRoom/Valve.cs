@@ -8,17 +8,25 @@ public class Valve : MonoBehaviour, IInteractable
     public bool isOpen = false;
     private float targetRotation = 0;
     [SerializeField] private float speed = 5;
-    
+    [SerializeField] private Collider blockingCollider;
+
+    private void Start()
+    {
+        blockingCollider.enabled = true;
+    }
+
     public void TurnValve()
     {
         targetRotation = 180;
         isOpen = true;
+        blockingCollider.enabled = false;
     }
     
     public void TurnValveBack()
     {
         targetRotation = 0;
         isOpen = false;
+        blockingCollider.enabled = true;
     }
 
     private void Update()
