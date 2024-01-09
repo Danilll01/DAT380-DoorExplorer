@@ -9,6 +9,8 @@ public class ARCameraTeleporter : PortalTraveller
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
+        //Quaternion fromToInDoor = Quaternion.FromToRotation(cameraOffset.)
+        
         // Starter
         cameraOffset.rotation = Quaternion.identity;
     

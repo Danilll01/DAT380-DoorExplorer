@@ -14,7 +14,7 @@ public class GearPeg : MonoBehaviour
     [SerializeField] private GearPeg[] beforePegs;
     [SerializeField] private GearPeg[] blockedPegs;
     [SerializeField] private PegType pegType = PegType.MIDDLE;
-    [SerializeField] private Vector3 nextRotationRelation;
+    [SerializeField] private Vector3 rotationRelation;
 
     [SerializeField] private TextMeshPro powerMeter;
     [SerializeField] private TextMeshPro statusIndicator;
@@ -87,7 +87,7 @@ public class GearPeg : MonoBehaviour
             {
                 foreach (GearPeg beforePeg in beforePegs)
                 { beforePeg.AddCurrentForce(currentForce, this); }
-                nextPeg.SetNewSpeed(-currentSpeed);
+                //nextPeg.SetNewSpeed(-currentSpeed);
             }
             
         }
@@ -133,7 +133,7 @@ public class GearPeg : MonoBehaviour
         if (pegType == PegType.START)
         {
             ReCalculateSpeed();
-            from.SetNewSpeed(-currentSpeed);
+            from.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles);
         }
     }
 
@@ -144,10 +144,11 @@ public class GearPeg : MonoBehaviour
 
         if (pegType == PegType.MIDDLE)
         {
-            nextPeg.SetNewSpeed(-currentSpeed);
+            nextPeg.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles);
             if (newRotation != default)
             {
-                transform.rotation = Quaternion.Euler(newRotation);
+                transform.rotation = Quaternion.Euler(newRotation + rotationRelation);
+                print("NY ROTATION!!!!!!!!!!!!!!!!!!");
             } 
         }
 
