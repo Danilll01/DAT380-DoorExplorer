@@ -1372,11 +1372,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1934091486}
-    - target: {fileID: 1995482694330892847, guid: fc3cfed5d408d1548b5ffce255e616d1,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickupTouch
-      objectReference: {fileID: 0}
     - target: {fileID: 2465686628390938084, guid: fc3cfed5d408d1548b5ffce255e616d1,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1492,11 +1487,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1934091486}
-    - target: {fileID: 8112750605685561900, guid: fc3cfed5d408d1548b5ffce255e616d1,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PickupTouch
-      objectReference: {fileID: 0}
     - target: {fileID: 9018584562484355137, guid: fc3cfed5d408d1548b5ffce255e616d1,
         type: 3}
       propertyPath: shedDoorTransform
