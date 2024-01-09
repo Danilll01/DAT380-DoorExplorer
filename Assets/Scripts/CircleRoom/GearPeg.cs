@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -13,6 +14,8 @@ public class GearPeg : MonoBehaviour
     [SerializeField] private GearPeg[] beforePegs;
     [SerializeField] private GearPeg[] blockedPegs;
     [SerializeField] private PegType pegType = PegType.MIDDLE;
+
+    [SerializeField] private TextMeshPro powerMeter;
     
     private enum PegType
     {
