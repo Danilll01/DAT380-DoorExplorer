@@ -14,8 +14,10 @@ public class GearPeg : MonoBehaviour
     [SerializeField] private GearPeg[] beforePegs;
     [SerializeField] private GearPeg[] blockedPegs;
     [SerializeField] private PegType pegType = PegType.MIDDLE;
+    [SerializeField] private Vector3 nextRotationRelation;
 
     [SerializeField] private TextMeshPro powerMeter;
+    [SerializeField] private TextMeshPro statusIndicator;
     
     private enum PegType
     {
@@ -24,8 +26,8 @@ public class GearPeg : MonoBehaviour
         END
     }
 
-    [SerializeField]private int currentForce = 0;
-    [SerializeField]private float currentSpeed = 0f;
+    [SerializeField] private int currentForce = 0;
+    [SerializeField] private float currentSpeed = 0f;
     private float startSpeed = 0;
 
     private int holdingHash = 0;
@@ -38,7 +40,7 @@ public class GearPeg : MonoBehaviour
     {
         if (pegType == PegType.START)
         {
-            startSpeed = 30;
+            startSpeed = 32;
             ReCalculateSpeed();
             hasGear = true;
         }
@@ -135,7 +137,7 @@ public class GearPeg : MonoBehaviour
         }
     }
 
-    private void SetNewSpeed(float speed)
+    private void SetNewSpeed(float speed, Vector3 newRotation = default)
     {
         if (!hasGear) return;
         currentSpeed = speed;
@@ -143,6 +145,16 @@ public class GearPeg : MonoBehaviour
         if (pegType == PegType.MIDDLE)
         {
             nextPeg.SetNewSpeed(-currentSpeed);
+            if (newRotation != default)
+            {
+                transform.rotation = Quaternion.Euler(newRotation);
+            } 
+        }
+
+        if (pegType == PegType.END)
+        {
+            print("Speed: " + speed);
+            statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
         }
     }
 
@@ -154,7 +166,8 @@ public class GearPeg : MonoBehaviour
 
     private void ReCalculateSpeed()
     {
-        currentSpeed = Mathf.Clamp(startSpeed - currentForce * 2f, 0f, startSpeed);
+        currentSpeed = currentForce <= 11 ? Mathf.Clamp(startSpeed - currentForce * 2f, 0f, startSpeed) : 0;
+        powerMeter.SetText("Power:\n" + currentForce + "/11");
     }
 
     private void ChangeBlockedPegs(int block)
