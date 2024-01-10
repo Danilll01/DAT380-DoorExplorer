@@ -9,8 +9,6 @@ public class ARCameraTeleporter : PortalTraveller
 
     public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
     {
-        Quaternion fromToInDoor = Quaternion.FromToRotation(cameraOffset.rotation.eulerAngles, fromPortal.rotation.eulerAngles);
-        
         // Starter
         cameraOffset.rotation = Quaternion.identity;
     
@@ -18,12 +16,12 @@ public class ARCameraTeleporter : PortalTraveller
         cameraOffset.position = pos - (transform.position - cameraOffset.position);
        
         // Rotate camera right
-        toPortal.rotation.ToAngleAxis(out float angle, out Vector3 axis);
-        cameraOffset.RotateAround(transform.position, axis, angle);
+        fromPortal.rotation.ToAngleAxis(out float angle, out Vector3 axis);
+        cameraOffset.RotateAround(transform.position, axis, -angle);
         
-        fromToInDoor.ToAngleAxis(out float angleOut, out Vector3 axisOut);
-        cameraOffset.RotateAround(transform.position, axisOut, angleOut);
-
-        //cameraOffset.rotation = Quaternion.Inverse(fromToInDoor);
+        //print("OffsetEuler: " + cameraOffset.rotation.eulerAngles);
+        //cameraOffset.rotation.ToAngleAxis(out float angleOffset, out Vector3 axisOffset);
+        
+        //print("OffsetAngleAxis: " + angleOffset + ", " + axisOffset);
     }
 }
