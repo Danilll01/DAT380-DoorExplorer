@@ -17943,9 +17943,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorOutline
       objectReference: {fileID: 0}
+    - target: {fileID: 5960324234916113753, guid: dc379e3023416214fa23aceed119b1c5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7469508232588359951, guid: dc379e3023416214fa23aceed119b1c5,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698357526450482290, guid: dc379e3023416214fa23aceed119b1c5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8416558912608725633, guid: dc379e3023416214fa23aceed119b1c5,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8666857400540312080, guid: dc379e3023416214fa23aceed119b1c5,
@@ -18875,7 +18890,6 @@ MonoBehaviour:
   arRaycastManager: {fileID: 0}
   arPointCloudManager: {fileID: 0}
   arCameraTransform: {fileID: 1934091475}
-  doorSelector: {fileID: 0}
 --- !u!1 &1946378772
 GameObject:
   m_ObjectHideFlags: 0
@@ -19158,8 +19172,8 @@ Transform:
   m_GameObject: {fileID: 2084945406}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.014966, y: -0, z: -0.000039}
-  m_LocalScale: {x: 0.01550194, y: 1, z: 0.0046727285}
+  m_LocalPosition: {x: 0.015703, y: -0, z: -0.000039}
+  m_LocalScale: {x: 0.015670396, y: 1, z: 0.0046727285}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1419475887}
