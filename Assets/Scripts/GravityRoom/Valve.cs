@@ -32,7 +32,7 @@ public class Valve : MonoBehaviour, IInteractable
     private void Update()
     {
         // Dont lerp if we are close enough
-        if (Math.Abs(transform.localRotation.x - targetRotation) < 0.5f)
+        if (Mathf.Abs(transform.localRotation.x - targetRotation) < 0.5f)
             return;
         transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(targetRotation, -90, 90), Time.deltaTime * speed);
     }

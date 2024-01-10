@@ -422,7 +422,7 @@ public class PickUpAR : MonoBehaviour
             doorFrameOutline.position = ray.point + rotation * doorFrameOffset;
             // Set rotation to face the camera
             doorFrameOutline.rotation = rotation;
-            
+
             if (pickUpButtonClicked)
             {
                 doorFrameOutline.position = doorFrameOutlineOriginalPosition;
