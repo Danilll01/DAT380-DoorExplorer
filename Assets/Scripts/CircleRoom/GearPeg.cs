@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -77,7 +76,7 @@ public class GearPeg : MonoBehaviour
             holdingHash = transform1.GetHashCode();
             transform1.parent = transform;
             transform1.localPosition = Vector3.zero;
-            transform1.rotation = Quaternion.identity;
+            transform1.localRotation = Quaternion.identity; //Quaternion.Euler(Vector3.zero);
             currentForce += gearScript.GetTurnForce();
             gearBody.isKinematic = true;
 
@@ -144,12 +143,14 @@ public class GearPeg : MonoBehaviour
 
         if (pegType == PegType.MIDDLE)
         {
-            nextPeg.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles);
-            if (newRotation != default)
+            print("NewRot: " + newRotation + ", Speed:" + speed);
+            if (newRotation != default && Mathf.Abs(speed) > 0)
             {
-                transform.rotation = Quaternion.Euler(newRotation + rotationRelation);
-                print("NY ROTATION!!!!!!!!!!!!!!!!!!");
+                transform.rotation = Quaternion.Euler(-newRotation + rotationRelation);
+                print("NY ROTATION!!!!!!!!!!!!!!!!!!" + newRotation);
             } 
+            
+            nextPeg.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles);
         }
 
         if (pegType == PegType.END)
