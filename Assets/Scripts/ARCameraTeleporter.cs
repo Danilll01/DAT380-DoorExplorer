@@ -20,7 +20,10 @@ public class ARCameraTeleporter : PortalTraveller
         // Rotate camera right
         toPortal.rotation.ToAngleAxis(out float angle, out Vector3 axis);
         cameraOffset.RotateAround(transform.position, axis, angle);
+        
+        fromToInDoor.ToAngleAxis(out float angleOut, out Vector3 axisOut);
+        cameraOffset.RotateAround(transform.position, axisOut, angleOut);
 
-        cameraOffset.rotation = Quaternion.Inverse(fromToInDoor);
+        //cameraOffset.rotation = Quaternion.Inverse(fromToInDoor);
     }
 }
