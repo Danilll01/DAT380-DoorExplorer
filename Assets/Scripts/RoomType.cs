@@ -7,5 +7,5 @@ public enum RoomType
     None,
     Shed,
     House,
-    
+    Gravity,
 }
