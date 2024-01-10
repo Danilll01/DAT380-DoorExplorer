@@ -112,7 +112,7 @@ public class PickUpAR : MonoBehaviour
         if (ContingencyPlan())
         {
             itemHolder.transform.position = backupHolder;
-            Debug.Log("ContingencyPlan");
+            //Debug.Log("ContingencyPlan");
             lastHit = false;
             return;
         }
@@ -138,7 +138,7 @@ public class PickUpAR : MonoBehaviour
             backupHolder = itemHolder.transform.position;
             if (!lastHit)
             {
-                Debug.Log("Missed");
+                //Debug.Log("Missed");
             }
             lastHit = true;
             return;
