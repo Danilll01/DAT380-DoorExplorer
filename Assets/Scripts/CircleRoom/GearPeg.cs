@@ -145,14 +145,11 @@ public class GearPeg : MonoBehaviour
 
         if (pegType == PegType.MIDDLE)
         {
-            print("NewRot: " + newRotation + ", Speed:" + speed);
-            
             nextPeg.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles, ignoreExtraMeshNext);
         }
 
         if (pegType == PegType.END)
         {
-            print("Speed: " + speed);
             statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
         }
     }
@@ -162,7 +159,6 @@ public class GearPeg : MonoBehaviour
         if (newRotation != default && Mathf.Abs(speed) > 0)
         {
             transform.rotation = Quaternion.Euler(-newRotation + rotationRelation);
-            print("NY ROTATION!!!!!!!!!!!!!!!!!!" + newRotation);
         }
     }
 
