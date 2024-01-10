@@ -9,39 +9,85 @@ public class Remote : MonoBehaviour, IInteractable
     [SerializeField] private GameObject videoGameObject;
     [SerializeField] private GameObject pictureGameObject;
     [SerializeField] private VideoClip[] videoClips;
+    [SerializeField] private Material[] materials;
     private VideoPlayer videoPlayer;
+    private int currentMaterial = 0; 
     private int currentClip = 0;
+    private bool onlyPictures = false;
 
     // Start is called before the first frame update
     void Awake()
     {
-        videoPlayer = videoGameObject.GetComponent<VideoPlayer>();
+        if (videoGameObject != null)
+        {
+            videoPlayer = videoGameObject.GetComponent<VideoPlayer>();
+        }
+        else
+        {
+            onlyPictures = true;
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SwapVideo()
     {
-        
-    }
-
-    private void SwapVideo(){
-        if(currentClip == videoClips.Length - 1){
+        if (currentClip == videoClips.Length - 1)
+        {
             videoPlayer.clip = videoClips[currentClip];
             currentClip = 0;
-        }else{
+        }
+        else
+        {
             videoPlayer.clip = videoClips[currentClip];
             currentClip++;
         }
     }
 
-    public void Interact()
+    private void SwapMaterial()
     {
-        if(pictureGameObject.activeSelf){
+        if (currentMaterial == materials.Length - 1)
+        {
+            pictureGameObject.GetComponent<MeshRenderer>().material = materials[currentMaterial];
+            currentMaterial = 0;
+        }
+        else
+        {
+            pictureGameObject.GetComponent<MeshRenderer>().material = materials[currentMaterial];
+            currentMaterial++;
+        }
+    }
+
+    private void HandleVideo()
+    {
+        if (pictureGameObject.activeSelf)
+        {
             pictureGameObject.SetActive(false);
             videoGameObject.SetActive(true);
             SwapVideo();
-        }else{
+        }
+        else
+        {
             SwapVideo();
+        }
+    }
+
+    private void HandlePicture()
+    {
+        if(pictureGameObject.GetComponent<MeshRenderer>() != null)
+        {
+            SwapMaterial();
+        }
+    }
+
+    public void Interact()
+    {
+        if (onlyPictures)
+        {
+            HandlePicture();
+        }
+        else
+        {
+            HandleVideo();
         }
     }
 }

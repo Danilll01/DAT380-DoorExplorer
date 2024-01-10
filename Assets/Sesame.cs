@@ -12,9 +12,7 @@ public class Sesame : MonoBehaviour
     [SerializeField] private bool itemDis = false;
     [SerializeField] private bool holderDes = false;
     [SerializeField] private float holderDesTime = 1.0f;
-
-    [Header("Delay between spawns")]
-    [SerializeField] private float delay = 3.0f;
+    [SerializeField] private float delaySpawn = 3.0f;
 
     [Header("Trigger collider size multiplier")]
     [SerializeField] private float multiplier = 1.5f;
@@ -60,8 +58,11 @@ public class Sesame : MonoBehaviour
             item.SetActive(false);
         }
 
-        PlayParticles();
-        StartCoroutine(DelayedAction(delay));
+        if (!coRoutineActive)
+        {
+            PlayParticles();
+            StartCoroutine(DelayedAction(delaySpawn));
+        }
 
         if (holderDes)
         {
@@ -70,8 +71,9 @@ public class Sesame : MonoBehaviour
         }
     }
 
-    private void ThingStarts()
+    private void SpawnItem()
     {
+        Debug.Log("Spawns Item");
         if (spawnItem != null)
         {
             Instantiate(spawnItem, transform.position, transform.rotation);
@@ -95,7 +97,7 @@ public class Sesame : MonoBehaviour
     {
         coRoutineActive = true;
         yield return new WaitForSeconds(delayTime);
-        ThingStarts();
+        SpawnItem();
         coRoutineActive = false;
     }
 
