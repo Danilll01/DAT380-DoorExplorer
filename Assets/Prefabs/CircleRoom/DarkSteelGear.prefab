@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 2234593971535043016}
   - component: {fileID: 785787199774684526}
   - component: {fileID: 8569888445765977646}
+  - component: {fileID: 5849951263712424600}
   m_Layer: 14
   m_Name: DarkSteelGear
   m_TagString: Item
@@ -274,3 +275,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnForce: 2
+--- !u!114 &5849951263712424600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6640597185953800248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a657e3e5efa94ad39b8b5dcb5eda8a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphicsObject: {fileID: 575338158109898896}
+  teleport: 1
+  hasTeleported: 0
+  force: 10
