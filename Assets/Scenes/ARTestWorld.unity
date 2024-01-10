@@ -19760,7 +19760,7 @@ PrefabInstance:
     - target: {fileID: 5456076875663778301, guid: cd26168a9b24a234b96e88db0c52921c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.58
+      value: -51.4
       objectReference: {fileID: 0}
     - target: {fileID: 5456076875663778301, guid: cd26168a9b24a234b96e88db0c52921c,
         type: 3}
@@ -19770,7 +19770,7 @@ PrefabInstance:
     - target: {fileID: 5456076875663778301, guid: cd26168a9b24a234b96e88db0c52921c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9.02
+      value: 77.1
       objectReference: {fileID: 0}
     - target: {fileID: 5456076875663778301, guid: cd26168a9b24a234b96e88db0c52921c,
         type: 3}
@@ -20033,6 +20033,11 @@ PrefabInstance:
       propertyPath: doorFrameOutline
       value: 
       objectReference: {fileID: 1419475887}
+    - target: {fileID: 9144546496474042772, guid: 41a2a9c961b3867429877a81732cab69,
+        type: 3}
+      propertyPath: doorFrameOffset.x
+      value: -0.12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
