@@ -14,6 +14,7 @@ public class GearPeg : MonoBehaviour
     [SerializeField] private GearPeg[] blockedPegs;
     [SerializeField] private PegType pegType = PegType.MIDDLE;
     [SerializeField] private Vector3 rotationRelation;
+    [SerializeField] private bool ignoreExtraMeshNext = false;
 
     [SerializeField] private TextMeshPro powerMeter;
     [SerializeField] private TextMeshPro statusIndicator;
@@ -136,27 +137,32 @@ public class GearPeg : MonoBehaviour
         }
     }
 
-    private void SetNewSpeed(float speed, Vector3 newRotation = default)
+    private void SetNewSpeed(float speed, Vector3 newRotation = default, bool ignoreExtraRotation = false)
     {
         if (!hasGear) return;
         currentSpeed = speed;
+        MeshGear(speed, ignoreExtraRotation ? Vector3.zero : newRotation);
 
         if (pegType == PegType.MIDDLE)
         {
             print("NewRot: " + newRotation + ", Speed:" + speed);
-            if (newRotation != default && Mathf.Abs(speed) > 0)
-            {
-                transform.rotation = Quaternion.Euler(-newRotation + rotationRelation);
-                print("NY ROTATION!!!!!!!!!!!!!!!!!!" + newRotation);
-            } 
             
-            nextPeg.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles);
+            nextPeg.SetNewSpeed(-currentSpeed, transform.rotation.eulerAngles, ignoreExtraMeshNext);
         }
 
         if (pegType == PegType.END)
         {
             print("Speed: " + speed);
             statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
+        }
+    }
+
+    private void MeshGear(float speed, Vector3 newRotation)
+    {
+        if (newRotation != default && Mathf.Abs(speed) > 0)
+        {
+            transform.rotation = Quaternion.Euler(-newRotation + rotationRelation);
+            print("NY ROTATION!!!!!!!!!!!!!!!!!!" + newRotation);
         }
     }
 

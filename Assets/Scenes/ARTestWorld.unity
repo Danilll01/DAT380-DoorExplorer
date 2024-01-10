@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -907,6 +907,7 @@ MonoBehaviour:
   - {fileID: 1486227802}
   pegType: 1
   rotationRelation: {x: 0, y: 9.33, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -1137,6 +1138,7 @@ MonoBehaviour:
   - {fileID: 1008132665}
   pegType: 1
   rotationRelation: {x: 0, y: -4, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -1921,6 +1923,7 @@ MonoBehaviour:
   - {fileID: 1997318840}
   pegType: 1
   rotationRelation: {x: 0, y: -8.25, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -1978,6 +1981,7 @@ MonoBehaviour:
   blockedPegs: []
   pegType: 0
   rotationRelation: {x: 0, y: 0, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 593639180}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -3925,6 +3929,7 @@ MonoBehaviour:
   - {fileID: 607215780}
   pegType: 1
   rotationRelation: {x: 0, y: 8.3, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -4817,6 +4822,7 @@ MonoBehaviour:
   - {fileID: 1486227802}
   pegType: 1
   rotationRelation: {x: 0, y: -8.24, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -5424,6 +5430,7 @@ MonoBehaviour:
   blockedPegs: []
   pegType: 1
   rotationRelation: {x: 0, y: 11.3, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -6186,6 +6193,7 @@ MonoBehaviour:
   - {fileID: 371611838}
   pegType: 1
   rotationRelation: {x: 0, y: 9.05, z: 0}
+  ignoreExtraMeshNext: 1
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -13532,6 +13540,7 @@ MonoBehaviour:
   - {fileID: 1164035616}
   pegType: 1
   rotationRelation: {x: 0, y: 8.57, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 0}
   currentForce: 0
@@ -13590,6 +13599,7 @@ MonoBehaviour:
   blockedPegs: []
   pegType: 2
   rotationRelation: {x: 0, y: 0, z: 0}
+  ignoreExtraMeshNext: 0
   powerMeter: {fileID: 0}
   statusIndicator: {fileID: 1236134850}
   currentForce: 0
