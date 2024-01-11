@@ -11454,12 +11454,12 @@ PrefabInstance:
     - target: {fileID: 1244227495798031549, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1244227495798031549, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 2134404354528665423, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
@@ -11591,6 +11591,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2137076240}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: endHeight
+      value: -1.745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: startHeight
+      value: -2.257
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: animationTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: animationChange
+      value: 0.78
+      objectReference: {fileID: 0}
     - target: {fileID: 8170466351037483352, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_Mesh
