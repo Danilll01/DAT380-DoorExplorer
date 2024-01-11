@@ -73,9 +73,15 @@ public class SelfPropellingCar : MonoBehaviour
                 forceDir = Vector3.zero;
             }
             
-            rb.AddForceAtPosition(forceDir * pushForce * Mathf.Abs(angle), transform.position + transform.forward * 1f);
+            rb.AddForceAtPosition(forceDir * pushForce, transform.position + transform.forward * 2f);
             
             transform.position += transform.forward * (Time.fixedDeltaTime * speed/2f);
         }
+    }
+    
+    public void SetPushForward(bool value)
+    {
+        forcePushForward = value;
+        timer = 0.5f;
     }
 }
