@@ -9081,7 +9081,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 32
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12035,7 +12035,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 974
+  m_VersionIndex: 980
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15233,7 +15233,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 974
+  m_VersionIndex: 980
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15526,7 +15526,7 @@ GameObject:
   - component: {fileID: 7385259073874983574}
   - component: {fileID: 3697557606655798223}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: WinPeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15633,8 +15633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextPeg: {fileID: 0}
-  beforePegs:
-  - {fileID: 0}
+  beforePegs: []
   blockedPegs: []
   pegType: 1
   rotationRelation: {x: 0, y: 0, z: 0}
@@ -16437,14 +16436,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5757811986764947249}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -2.257, z: 1.329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9015278425924662829}
   m_Father: {fileID: 3332332328838165093}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &7664547531935820660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16457,9 +16456,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07c68ce1ebf58ba4b8feac47287a6b6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHeight: 0
-  endHeight: 0
-  animationTime: 7
+  startHeight: -2.257
+  endHeight: -1.745
+  animationTime: 4
+  animationChange: 0.78
+  winPeg: {fileID: 2943675091836193941}
+  peg1: {fileID: 9143453439305500533}
+  peg2: {fileID: 6301272060302714669}
 --- !u!1 &6319983564604901661
 GameObject:
   m_ObjectHideFlags: 0
@@ -19323,7 +19326,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 974
+  m_VersionIndex: 980
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -29297,7 +29300,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 26
+  m_VersionIndex: 32
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -53390,7 +53393,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 32
+  m_VersionIndex: 38
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
