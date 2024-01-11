@@ -141,7 +141,7 @@ public class GearPeg : MonoBehaviour
     {
         if (!hasGear) return;
         currentSpeed = speed;
-        MeshGear(speed, ignoreExtraRotation ? Vector3.zero : newRotation);
+        MeshGear(speed, newRotation, ignoreExtraRotation);
 
         if (pegType == PegType.MIDDLE)
         {
@@ -154,11 +154,11 @@ public class GearPeg : MonoBehaviour
         }
     }
 
-    private void MeshGear(float speed, Vector3 newRotation)
+    private void MeshGear(float speed, Vector3 newRotation, bool ignoreExtraRotation)
     {
         if (newRotation != default && Mathf.Abs(speed) > 0)
         {
-            transform.rotation = Quaternion.Euler(-newRotation + rotationRelation);
+            transform.rotation = Quaternion.Euler(-newRotation + (ignoreExtraRotation ? Vector3.zero : rotationRelation));
         }
     }
 

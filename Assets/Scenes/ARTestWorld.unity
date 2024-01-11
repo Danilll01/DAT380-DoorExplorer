@@ -12094,21 +12094,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 589423019}
-    - target: {fileID: 3178380816324337978, guid: 2c84f97558718924ab5bf6c63ccb3f17,
-        type: 3}
-      propertyPath: m_VersionIndex
-      value: 14
-      objectReference: {fileID: 0}
     - target: {fileID: 3205618476502238228, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 602282012}
-    - target: {fileID: 3205618476502238228, guid: 2c84f97558718924ab5bf6c63ccb3f17,
-        type: 3}
-      propertyPath: m_VersionIndex
-      value: 14
-      objectReference: {fileID: 0}
     - target: {fileID: 3317354376199829283, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_Mesh
