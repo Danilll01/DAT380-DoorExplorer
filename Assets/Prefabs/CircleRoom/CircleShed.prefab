@@ -9081,7 +9081,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 23
+  m_VersionIndex: 26
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12035,7 +12035,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 971
+  m_VersionIndex: 974
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15233,7 +15233,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 971
+  m_VersionIndex: 974
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -15848,6 +15848,7 @@ Transform:
   - {fileID: 2981939053743143756}
   - {fileID: 208921701888202196}
   - {fileID: 1280944190820620794}
+  - {fileID: 7371023129388929917}
   m_Father: {fileID: 3332332328838165093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4433623824496391182
@@ -19144,7 +19145,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 971
+  m_VersionIndex: 974
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -29010,7 +29011,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 23
+  m_VersionIndex: 26
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -53103,7 +53104,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 29
+  m_VersionIndex: 32
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -56216,6 +56217,80 @@ Transform:
   - {fileID: 6800188327429118736}
   m_Father: {fileID: 5240250658348705813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &398636602379178034
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5842090924478887715}
+    m_Modifications:
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.875
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120038440994721484, guid: aa3eace0c5a869c4989b969cf03dc760,
+        type: 3}
+      propertyPath: m_Name
+      value: GoldenGear
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa3eace0c5a869c4989b969cf03dc760, type: 3}
+--- !u!4 &7371023129388929917 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7188624181551809359, guid: aa3eace0c5a869c4989b969cf03dc760,
+    type: 3}
+  m_PrefabInstance: {fileID: 398636602379178034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &942025368863180801
 PrefabInstance:
   m_ObjectHideFlags: 0
