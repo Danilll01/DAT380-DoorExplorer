@@ -307,8 +307,8 @@ MonoBehaviour:
   _movementSpeed: 10
   _boostedSpeed: 50
   _boostSpeed: 304
-  _moveUp: 32
-  _moveDown: 306
+  _moveUp: 101
+  _moveDown: 113
   _enableSpeedAcceleration: 1
   _speedAccelerationFactor: 1.5
   _initPositonButton: 114
@@ -573,6 +573,7 @@ MonoBehaviour:
   carryForce: 40
   itemHolderDistance: 1
   rotationObject: {fileID: 1120302831936162407}
+  doorFrameOutline: {fileID: 0}
 --- !u!1 &6766752244189107448
 GameObject:
   m_ObjectHideFlags: 0
