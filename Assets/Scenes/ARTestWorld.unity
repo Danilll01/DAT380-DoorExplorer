@@ -787,21 +787,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5847980492249172178, guid: 34f720f461efe124e83acb153506791d,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5847980492249172178, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5847980492249172178, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5847980492249172178, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.04
       objectReference: {fileID: 0}
@@ -855,31 +840,6 @@ PrefabInstance:
       propertyPath: linkedPortal
       value: 
       objectReference: {fileID: 1093894319}
-    - target: {fileID: 8505134084738088283, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505134084738088283, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_BackGroundColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505134084738088283, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505134084738088283, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8505134084738088283, guid: 34f720f461efe124e83acb153506791d,
-        type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11695,25 +11655,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 306897624887702818, guid: 41a2a9c961b3867429877a81732cab69,
-        type: 3}
-      propertyPath: mockMovement
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2318760098059369966, guid: 41a2a9c961b3867429877a81732cab69,
         type: 3}
       propertyPath: m_Name
       value: XR Origin
-      objectReference: {fileID: 0}
-    - target: {fileID: 3551806779359822949, guid: 41a2a9c961b3867429877a81732cab69,
-        type: 3}
-      propertyPath: _moveUp
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 3551806779359822949, guid: 41a2a9c961b3867429877a81732cab69,
-        type: 3}
-      propertyPath: _moveDown
-      value: 113
       objectReference: {fileID: 0}
     - target: {fileID: 7077546327303332162, guid: 41a2a9c961b3867429877a81732cab69,
         type: 3}
