@@ -149,7 +149,10 @@ public class GearPeg : MonoBehaviour
 
         if (pegType == PegType.END)
         {
-            statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
+            if (statusIndicator != null)
+            {
+                statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
+            }
         }
     }
 
