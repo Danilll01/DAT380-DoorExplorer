@@ -24,7 +24,9 @@ public class PickUpAR : MonoBehaviour
     private bool pickUpButtonClicked = false;
     private bool doorPlacingMode = false;
     private ArObjectPlacer arObjectPlacer;
+    [SerializeField] private Transform doorFrameOutline;
     private Vector3 doorFrameOutlineOriginalPosition;
+    [SerializeField] private Vector3 doorFrameOffset = new Vector3(0.1f, 0, 0);
     //[SerializeField] private float maxDistanceFromCenter = 10f;
 
     [Header("Pick Up Settings")]
@@ -34,7 +36,6 @@ public class PickUpAR : MonoBehaviour
     
     [Header("Pick up helpers")] 
     [SerializeField] private ARRotation rotationObject;
-    [SerializeField] private Transform doorFrameOutline;
 
 
     private void Start()
@@ -425,10 +426,12 @@ public class PickUpAR : MonoBehaviour
         RaycastHit ray = SendRaycast(startPos, direction, 5f);
         if (ray.collider != null && ray.collider.tag == "Floor")
         {
+            Quaternion rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            
             //if (Vector3.Distance(Vector3.zero, transform.position) > maxDistanceFromCenter) return;
-            doorFrameOutline.position = ray.point;
+            doorFrameOutline.position = ray.point + rotation * doorFrameOffset;
             // Set rotation to face the camera
-            doorFrameOutline.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            doorFrameOutline.rotation = rotation;
             
             if (pickUpButtonClicked)
             {

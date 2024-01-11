@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Lukas Rum/textures/tiled_floor_001_4k.gltf/tiled_floor_001.bin.meta
+guid: 001ce7db8b9eb4f6e8c86b8ff5b74cf7
+========
 guid: baf6267a292e3ee42a8724bf37a32782
 folderAsset: yes
+>>>>>>>> main:Assets/Downloaded/Unity-URP-GlassShader-master.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

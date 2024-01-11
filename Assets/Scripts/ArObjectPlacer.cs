@@ -11,15 +11,13 @@ public class ArObjectPlacer : MonoBehaviour
     [SerializeField] private ARRaycastManager arRaycastManager;
     [SerializeField] private ARPointCloudManager arPointCloudManager;
     [SerializeField] private Transform arCameraTransform;
-
-    [SerializeField] private DoorSelector doorSelector;
     
     public void SpawnDoor()
     {
         // Cast a normal ray from the center of the screen
         if(Physics.Raycast(arCameraTransform.position, arCameraTransform.forward, out RaycastHit hit))
         {
-            Transform door = doorSelector.GetPortalTransform();
+            Transform door = DoorSelector.GetPortalTransform();
             door.rotation = Quaternion.Euler(0, arCameraTransform.rotation.eulerAngles.y - 180, 0);
             door.position = hit.point;
         }

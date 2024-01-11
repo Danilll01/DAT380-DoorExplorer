@@ -13,6 +13,8 @@ public class CanvasOverlay : MonoBehaviour
     private GameObject portrait;
     private GameObject settingsL;
     private GameObject settingsP;
+    private GameObject tutorialL;
+    private GameObject tutorialP;
 
 
     // Start is called before the first frame update
@@ -28,9 +30,14 @@ public class CanvasOverlay : MonoBehaviour
         portrait = transform.Find("Portrait").gameObject;
         settingsL = landScape.transform.Find("SettingsMenu").gameObject;
         settingsP = portrait.transform.Find("SettingsMenu").gameObject;
+        tutorialL = landScape.transform.Find("Tutorial").gameObject;
+        tutorialP = portrait.transform.Find("Tutorial").gameObject;
 
         settingsL.SetActive(false);
         settingsP.SetActive(false);
+
+        tutorialL.SetActive(true);
+        tutorialP.SetActive(true);
     }
 
     // Update is called once per frame
@@ -69,6 +76,17 @@ public class CanvasOverlay : MonoBehaviour
                     child.gameObject.SetActive(false);
                 }
             }
+            else if(child == tutorialL.transform || child == tutorialP.transform)
+            {
+                if(tutorialL.activeSelf || tutorialP.activeSelf)
+                {
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
             else
             {
                 child.gameObject.SetActive(true);
@@ -92,6 +110,26 @@ public class CanvasOverlay : MonoBehaviour
         {
             settingsP.SetActive(true);
         }
+    }
+
+    public void OpenTutorial()
+    {
+        if(isLandscape)
+        {
+            settingsL.SetActive(false);
+            tutorialL.SetActive(true);
+        }
+        else
+        {
+            settingsP.SetActive(false);
+            tutorialP.SetActive(true);
+        }
+    }
+
+    public void CloseTutorial()
+    {
+        tutorialL.SetActive(false);
+        tutorialP.SetActive(false);
     }
 
     public void ResetGame()
