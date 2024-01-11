@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TunnelButton : MonoBehaviour
+public class BallButton : MonoBehaviour
 {
-    [SerializeField] private MechanicalHinge recordPlayerHinge;
     private bool animationIsPlaying = false;
     [SerializeField] private float animationTimer = 0f;
     [SerializeField] private float animationDuration = 0.5f;
@@ -23,7 +21,7 @@ public class TunnelButton : MonoBehaviour
             }
             else
             {
-                recordPlayerHinge.Open();
+                // Do something
                 animationIsPlaying = false;
                 animationTimer = 0f;
             }
@@ -32,10 +30,9 @@ public class TunnelButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        SelfPropellingCar car = other.GetComponent<SelfPropellingCar>();
-        if (car != null)
+        // Check if circle collider
+        if (other.GetType() == typeof(SphereCollider))
         {
-            car.SetPushForward(false);
             animationIsPlaying = true;
         }
     }

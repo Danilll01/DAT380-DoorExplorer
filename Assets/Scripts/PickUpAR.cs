@@ -56,10 +56,12 @@ public class PickUpAR : MonoBehaviour
 
     void Update()
     {
+        #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             pickUpButtonClicked = true;
         }
+        #endif
         
         doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
         
