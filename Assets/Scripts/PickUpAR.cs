@@ -32,7 +32,7 @@ public class PickUpAR : MonoBehaviour
     [SerializeField] private Transform doorFrameOutline;
     private Vector3 doorFrameOutlineOriginalPosition;
     [SerializeField] private Vector3 doorFrameOffset = new Vector3(0.1f, 0, 0);
-    [SerializeField] private float maxDistanceFromCenter = 10f;
+    //[SerializeField] private float maxDistanceFromCenter = 10f;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -61,12 +61,19 @@ public class PickUpAR : MonoBehaviour
 
     void Update()
     {
-        #if UNITY_EDITOR
+        // Checks for mouse clicks and if held object becomes kinematic (in this case the item should be dropped)
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
             pickUpButtonClicked = true;
         }
-        #endif
+#endif
+        
+        // Check if held item has been set to kinematic
+        if (heldItem != null && heldItemRB.isKinematic)
+        {
+            pickUpButtonClicked = true;
+        }
         
         doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
         
@@ -119,7 +126,7 @@ public class PickUpAR : MonoBehaviour
         if (ContingencyPlan())
         {
             itemHolder.transform.position = backupHolder;
-            Debug.Log("ContingencyPlan");
+            //Debug.Log("ContingencyPlan");
             lastHit = false;
             return;
         }
@@ -145,7 +152,7 @@ public class PickUpAR : MonoBehaviour
             backupHolder = itemHolder.transform.position;
             if (!lastHit)
             {
-                Debug.Log("Missed");
+                //Debug.Log("Missed");
             }
             lastHit = true;
             return;
@@ -277,7 +284,7 @@ public class PickUpAR : MonoBehaviour
             HandleDoorPlacement(startPos, direction);
             return;
         }
-
+        
         RaycastHit hit = SendRaycast(startPos, direction, length);
         if (hit.collider == null)
         {
@@ -392,6 +399,7 @@ public class PickUpAR : MonoBehaviour
         rotationObject.rotationObject = item.transform;
 
         heldItemRB.useGravity = false;
+        heldItemRB.isKinematic = false;
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
         heldItem.layer = 2;
@@ -429,7 +437,7 @@ public class PickUpAR : MonoBehaviour
             doorFrameOutline.position = ray.point + rotation * doorFrameOffset;
             // Set rotation to face the camera
             doorFrameOutline.rotation = rotation;
-
+            
             if (pickUpButtonClicked)
             {
                 doorFrameOutline.position = doorFrameOutlineOriginalPosition;

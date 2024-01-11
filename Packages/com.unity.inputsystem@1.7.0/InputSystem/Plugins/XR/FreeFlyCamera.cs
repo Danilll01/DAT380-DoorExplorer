@@ -180,22 +180,22 @@ public class FreeFlyCamera : MonoBehaviour
                 currentSpeed = _boostedSpeed;
 
             if (Input.GetKey(KeyCode.W))
-                deltaPosition += transform.forward;
+                deltaPosition += mockRotation * Vector3.forward; //transform.forward;
 
             if (Input.GetKey(KeyCode.S))
-                deltaPosition -= transform.forward;
+                deltaPosition -= mockRotation * Vector3.forward;
 
             if (Input.GetKey(KeyCode.A))
-                deltaPosition -= transform.right;
+                deltaPosition -= mockRotation * Vector3.right; //x transform.right;
 
             if (Input.GetKey(KeyCode.D))
-                deltaPosition += transform.right;
+                deltaPosition += mockRotation * Vector3.right; //transform.right;
 
             if (Input.GetKey(_moveUp))
-                deltaPosition += transform.up;
+                deltaPosition += mockRotation * Vector3.up; //transform.up;
 
             if (Input.GetKey(_moveDown))
-                deltaPosition -= transform.up;
+                deltaPosition -= mockRotation * Vector3.up;
 
             // Calc acceleration
             CalculateCurrentIncrease(deltaPosition != Vector3.zero);
