@@ -390,7 +390,7 @@ public class PickUpAR : MonoBehaviour
         heldItem.layer = 2;
     }
 
-    private void DropItem()
+    public void DropItem()
     {
         
         if (rotationObject.HasRotatedObject()) { return; }
