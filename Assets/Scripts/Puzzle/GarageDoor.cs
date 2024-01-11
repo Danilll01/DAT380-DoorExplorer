@@ -10,6 +10,9 @@ public class GarageDoor : MonoBehaviour
     [SerializeField] private float endPosition = 1f;
     [SerializeField] private float animationTime = 1f;
     [SerializeField] private float animationChange = 0.5f;
+
+    [SerializeField] private Transform openingPeg;
+    private bool hasOpened = false;
     
     private void Start()
     {
@@ -20,10 +23,16 @@ public class GarageDoor : MonoBehaviour
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.T)) StartCoroutine(OpenDoor());
+        if (openingPeg.childCount > 0 && !hasOpened)
+        {
+            Open();
+        }
     }
     
     private IEnumerator OpenDoor()
-    {   
+    {
+        hasOpened = true; 
+            
         float timer = 0;
         while (timer < animationTime)
         {
