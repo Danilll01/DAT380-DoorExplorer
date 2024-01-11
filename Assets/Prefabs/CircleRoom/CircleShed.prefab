@@ -16421,6 +16421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244227495798031549}
+  - component: {fileID: 7664547531935820660}
   m_Layer: 0
   m_Name: FinalGearRotater
   m_TagString: Untagged
@@ -16444,6 +16445,21 @@ Transform:
   - {fileID: 9015278425924662829}
   m_Father: {fileID: 3332332328838165093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7664547531935820660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757811986764947249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c68ce1ebf58ba4b8feac47287a6b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startHeight: 0
+  endHeight: 0
+  animationTime: 0
 --- !u!1 &6319983564604901661
 GameObject:
   m_ObjectHideFlags: 0
