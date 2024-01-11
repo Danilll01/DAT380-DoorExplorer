@@ -600,6 +600,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1982458754}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &361110254 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9143453439305500533, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+    type: 3}
+  m_PrefabInstance: {fileID: 8952942956135669178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &405771956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73fd49be39c2c4b44bc7d9dbf968c60d,
@@ -3621,6 +3627,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &1169975509 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6301272060302714669, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+    type: 3}
+  m_PrefabInstance: {fileID: 8952942956135669178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1210186044
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,6 +4573,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1544784285 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2943675091836193941, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+    type: 3}
+  m_PrefabInstance: {fileID: 8952942956135669178}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1552677119
 Mesh:
   m_ObjectHideFlags: 0
@@ -11501,6 +11519,11 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 29
       objectReference: {fileID: 0}
+    - target: {fileID: 3315711498468327045, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: m_Name
+      value: WinPeg
+      objectReference: {fileID: 0}
     - target: {fileID: 3697557606655798223, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: beforePegs.Array.size
@@ -11591,6 +11614,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2137076240}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: peg1
+      value: 
+      objectReference: {fileID: 361110254}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: peg2
+      value: 
+      objectReference: {fileID: 1169975509}
+    - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: winPeg
+      value: 
+      objectReference: {fileID: 1544784285}
     - target: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: endHeight

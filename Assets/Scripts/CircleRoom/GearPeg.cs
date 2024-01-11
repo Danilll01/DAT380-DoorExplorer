@@ -63,8 +63,7 @@ public class GearPeg : MonoBehaviour
         if (other.GetType() != typeof(SphereCollider) || isBlockedBy > 0) { return; }
         
         // Return if the gear has been dropped right before
-        if (hasDropped)
-        { hasDropped = false; return;}
+        if (hasDropped) { hasDropped = false; return;}
         
         GearScript gearScript = other.GetComponent<GearScript>();
         if (gearScript != null && !hasGear)
@@ -103,7 +102,7 @@ public class GearPeg : MonoBehaviour
             
             // We can not remove gear if it is supposed to be still
             if (gearBody.isKinematic) { return; }
-            print("Before and next: " + beforePegs + ", " + nextPeg);
+            
             if (beforePegs.Length != 0 || nextPeg != null)
             {
                 foreach (GearPeg beforePeg in beforePegs)

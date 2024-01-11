@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
@@ -9,28 +10,42 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private float endHeight;
     [SerializeField] private float animationTime = 7f;
     [SerializeField] [Range(0,1)] private float animationChange = 0.8f;
+
+    [SerializeField] private Transform winPeg;
+    
+    [SerializeField] Transform peg1;
+    [SerializeField] Transform peg2;
+    private Quaternion lastPeg1Rotation;
+    private Quaternion lastPeg2Rotation;
     
     // Start is called before the first frame update
     void Start()
     {
         startHeight = transform.localPosition.y;
+        lastPeg1Rotation = peg1.rotation;
+        lastPeg2Rotation = peg2.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        
+        if (Math.Abs(transform.localRotation.eulerAngles.y - (180)) < 0.1)
         {
-            if (Math.Abs(transform.localRotation.eulerAngles.y - (180)) < 0.1)
+            if (peg1.rotation != lastPeg1Rotation && peg2.rotation != lastPeg2Rotation && winPeg.childCount == 1)
             {
+                print("WIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 StartCoroutine(OutAnimation());
             }
-            
-            if (Math.Abs(transform.localRotation.eulerAngles.y) < 0.1 || Math.Abs(transform.localRotation.eulerAngles.y - (360)) < 0.1)
+        }
+        
+        if (Math.Abs(transform.localRotation.eulerAngles.y) < 0.1 || Math.Abs(transform.localRotation.eulerAngles.y - (360)) < 0.1)
+        {
+            if (winPeg.childCount == 0)
             {
                 StartCoroutine(InAnimation());
             }
-        } 
+        }
     }
 
     private IEnumerator OutAnimation()
