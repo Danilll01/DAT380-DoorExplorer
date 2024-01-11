@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &90276016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8217940640224010945, guid: 41a2a9c961b3867429877a81732cab69,
+    type: 3}
+  m_PrefabInstance: {fileID: 5707815147632167127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &142909095
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14024,7 +14036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!198 &1639330834
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -21892,6 +21904,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8217940640224010945, guid: 41a2a9c961b3867429877a81732cab69,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9144546496474042772, guid: 41a2a9c961b3867429877a81732cab69,
+        type: 3}
+      propertyPath: arRaycastManager
+      value: 
+      objectReference: {fileID: 90276016}
     - target: {fileID: 9144546496474042772, guid: 41a2a9c961b3867429877a81732cab69,
         type: 3}
       propertyPath: doorFrameOutline
@@ -21902,7 +21924,8 @@ PrefabInstance:
       propertyPath: doorFrameOffset.x
       value: -0.12
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3315863792046741951, guid: 41a2a9c961b3867429877a81732cab69, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
