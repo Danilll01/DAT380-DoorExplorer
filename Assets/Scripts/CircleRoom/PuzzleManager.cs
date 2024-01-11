@@ -20,12 +20,12 @@ public class PuzzleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            if (Math.Abs(transform.rotation.eulerAngles.y - (-180)) < 0.001)
+            if (Math.Abs(transform.localRotation.eulerAngles.y - (-180)) < 0.001)
             {
                 StartCoroutine(OutAnimation());
             }
             
-            if (Math.Abs(transform.rotation.eulerAngles.y - (0)) < 0.001)
+            if (Math.Abs(transform.localRotation.eulerAngles.y - (0)) < 0.001)
             {
                 StartCoroutine(InAnimation());
             }
@@ -37,7 +37,7 @@ public class PuzzleManager : MonoBehaviour
         float timer = 0;
         while (timer < animationTime)
         {
-            transform.rotation = Quaternion.Euler(0, Mathf.SmoothStep(-180, 0, timer / animationTime), 0);
+            transform.localRotation = Quaternion.Euler(0, Mathf.SmoothStep(-180, 0, timer / animationTime), 0);
             
             //transform.position = new Vector3(transform.position.x, Mathf.SmoothStep())
             yield return null;
@@ -49,7 +49,7 @@ public class PuzzleManager : MonoBehaviour
         float timer = 0;
         while (timer < animationTime)
         {
-            transform.rotation = Quaternion.Euler(0, Mathf.SmoothStep(0, -180, timer / animationTime), 0);
+            transform.localRotation = Quaternion.Euler(0, Mathf.SmoothStep(0, -180, timer / animationTime), 0);
             
             //transform.position = new Vector3(transform.position.x, Mathf.SmoothStep())
             yield return null;

@@ -16459,7 +16459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHeight: 0
   endHeight: 0
-  animationTime: 0
+  animationTime: 7
 --- !u!1 &6319983564604901661
 GameObject:
   m_ObjectHideFlags: 0
