@@ -103,8 +103,8 @@ public class GearPeg : MonoBehaviour
             
             // We can not remove gear if it is supposed to be still
             if (gearBody.isKinematic) { return; }
-            
-            if (beforePegs != null || nextPeg != null)
+            print("Before and next: " + beforePegs + ", " + nextPeg);
+            if (beforePegs.Length != 0 || nextPeg != null)
             {
                 foreach (GearPeg beforePeg in beforePegs)
                 { beforePeg.AddCurrentForce(-currentForce, this); }
