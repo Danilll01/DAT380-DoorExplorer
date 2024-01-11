@@ -170,7 +170,11 @@ public class GearPeg : MonoBehaviour
     private void ReCalculateSpeed()
     {
         currentSpeed = currentForce <= 11 ? Mathf.Clamp(startSpeed - currentForce * 2f, 0f, startSpeed) : 0;
-        powerMeter.SetText("Power:\n" + currentForce + "/11");
+
+        if (powerMeter != null)
+        {
+            powerMeter.SetText("Power:\n" + currentForce + "/11");
+        }
     }
 
     private void ChangeBlockedPegs(int block)
