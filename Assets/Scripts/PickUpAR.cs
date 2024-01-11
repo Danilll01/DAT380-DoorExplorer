@@ -342,7 +342,7 @@ public class PickUpAR : MonoBehaviour
 
     private bool DropItemCheck()
     {
-        if (pickUpButtonClicked)
+        if (pickUpButtonClicked || Vector3.Distance(heldItem.transform.position, transform.position) > 5)
         {
             print("Dropping item");
             DropItem();
