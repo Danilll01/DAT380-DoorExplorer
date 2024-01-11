@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shedDoorTransform: {fileID: 0}
   houseDoorTransform: {fileID: 0}
+  gravityDoorTransform: {fileID: 0}
 --- !u!1001 &985836150741063351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,12 +296,12 @@ PrefabInstance:
     - target: {fileID: 6525866702220269529, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: roomType
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6533477330923752784, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Name
-      value: HouseButton (1)
+      value: GravityButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

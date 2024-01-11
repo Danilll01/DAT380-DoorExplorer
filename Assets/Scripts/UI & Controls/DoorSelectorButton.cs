@@ -31,7 +31,13 @@ public class DoorSelectorButton : MonoBehaviour
 
     private void Update()
     {
-        if(roomType != DoorSelector.selectedRoomType)
+        if (roomType != DoorSelector.selectedRoomType)
+        {
             GetComponent<Image>().color = unselectedColor;
+        }
+        else
+        {
+            GetComponent<Image>().color = selectedColor;
+        }
     }
 }
