@@ -321,13 +321,20 @@ public class Portal : MonoBehaviour {
     }
 
     void OnTriggerEnter (Collider other) {
-        var traveller = other.GetComponent<PortalTraveller> ();
+        
+        //GearScript gearScript = other.GetComponent<GearScript>();
+        if (other.GetType() != typeof(SphereCollider) && other.transform.GetComponent<GearScript>()) { return; }
+        
+        var traveller = other.GetComponent<PortalTraveller>();
         if (traveller) {
             OnTravellerEnterPortal (traveller);
         }
     }
 
     void OnTriggerExit (Collider other) {
+
+        if (other.GetType() != typeof(SphereCollider) && other.transform.GetComponent<GearScript>()) { return; }
+        
         var traveller = other.GetComponent<PortalTraveller> ();
         if (traveller && trackedTravellers.Contains (traveller)) {
             traveller.ExitPortalThreshold ();
