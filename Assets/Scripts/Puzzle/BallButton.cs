@@ -31,10 +31,6 @@ public class BallButton : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if circle collider
-        if (other.GetType() == typeof(SphereCollider))
-        {
-            animationIsPlaying = true;
-        }
+        animationIsPlaying = true;
     }
 }
