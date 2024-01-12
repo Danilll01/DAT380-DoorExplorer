@@ -33,6 +33,7 @@ public class PickUpAR : MonoBehaviour
     private Vector3 doorFrameOutlineOriginalPosition;
     [SerializeField] private Vector3 doorFrameOffset = new Vector3(0.1f, 0, 0);
     //[SerializeField] private float maxDistanceFromCenter = 10f;
+    private LayerMask heldItemLayerMask;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -411,6 +412,7 @@ public class PickUpAR : MonoBehaviour
         heldItemRB.isKinematic = false;
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
+        heldItemLayerMask = heldItem.layer;
         heldItem.layer = 2;
     }
 
@@ -432,7 +434,7 @@ public class PickUpAR : MonoBehaviour
         heldItemRB.useGravity = true;
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
-        heldItem.layer = 0;
+        heldItem.layer = heldItemLayerMask;
         heldItem = null;
         heldItemRB = null;
         rotationObject.rotationObject = null;
