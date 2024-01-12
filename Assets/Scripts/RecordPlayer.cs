@@ -7,11 +7,13 @@ public class RecordPlayer : MonoBehaviour
 {
     private AudioSource audioSource;
     private GameObject currentDisc;
+    [SerializeField] private bool acceptDiscs = true;
     [SerializeField] private Transform snapPoint;
     [SerializeField] private PickUpAR pickUpAr;
     [SerializeField] private bool callMethod = false;
     [SerializeField] private AudioClip[] audioClipList;
     [SerializeField] private GameObject[] discList;
+    [SerializeField] private Safe safe;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +34,7 @@ public class RecordPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (InList(collider.gameObject))
+        if (acceptDiscs && InList(collider.gameObject))
         {
             currentDisc = collider.gameObject;
             Rigidbody rb = currentDisc.GetComponent<Rigidbody>();
@@ -54,7 +56,7 @@ public class RecordPlayer : MonoBehaviour
 
             if (callMethod)
             {
-                //
+                safe.CompleteRecordPuzzle();
             }
         }
     }
@@ -86,6 +88,10 @@ public class RecordPlayer : MonoBehaviour
     {
         audioSource.Pause();
         currentDisc = null;
+    }
+    
+    public void SetAcceptDiscs(bool accept) {
+        acceptDiscs = accept;
     }
 
     /* private void OnTriggerExit(Collider collider)

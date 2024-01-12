@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 
 // The tag item should add the required components, like outline and rigidbody
@@ -24,6 +27,8 @@ public class PickUpAR : MonoBehaviour
     private bool pickUpButtonClicked = false;
     private bool doorPlacingMode = false;
     private ArObjectPlacer arObjectPlacer;
+    [SerializeField] private ARRaycastManager arRaycastManager;
+    [SerializeField] private Transform floor;
     [SerializeField] private Transform doorFrameOutline;
     private Vector3 doorFrameOutlineOriginalPosition;
     [SerializeField] private Vector3 doorFrameOffset = new Vector3(0.1f, 0, 0);
@@ -317,7 +322,11 @@ public class PickUpAR : MonoBehaviour
             SmartOutLine(hit.collider.gameObject);
             if (pickUpButtonClicked)
             {
-                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.Interact();
+                }
                 pickUpButtonClicked = false;
             }
             return;
@@ -337,7 +346,7 @@ public class PickUpAR : MonoBehaviour
 
     private bool DropItemCheck()
     {
-        if (pickUpButtonClicked)
+        if (pickUpButtonClicked || Vector3.Distance(heldItem.transform.position, transform.position) > 5)
         {
             print("Dropping item");
             DropItem();
@@ -450,6 +459,22 @@ public class PickUpAR : MonoBehaviour
             doorFrameOutline.position = doorFrameOutlineOriginalPosition;
             doorFrameOutline.rotation = Quaternion.Euler(0, 0, 0);
         }
+    }
+
+    private void HandleFloorPlacement()
+    {
+        
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        if (arRaycastManager.Raycast(screenCenter, hits, TrackableType.FeaturePoint))
+        {
+            Pose hitPose = hits[0].pose;
+            
+            // Calculate the y differance between the floor and the camera
+            float yDiff = hitPose.position.y - floor.position.y;
+            transform.parent.position -= new Vector3(0, yDiff, 0);
+        }
+        
     }
 
     public void PickupTouch()

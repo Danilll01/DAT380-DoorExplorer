@@ -36,8 +36,8 @@ public class CanvasOverlay : MonoBehaviour
         settingsL.SetActive(false);
         settingsP.SetActive(false);
 
-        tutorialL.SetActive(true);
-        tutorialP.SetActive(true);
+        //tutorialL.SetActive(true);
+        //tutorialP.SetActive(true);
     }
 
     // Update is called once per frame

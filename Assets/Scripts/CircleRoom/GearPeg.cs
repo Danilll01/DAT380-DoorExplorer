@@ -23,7 +23,8 @@ public class GearPeg : MonoBehaviour
     {
         START,
         MIDDLE,
-        END
+        END,
+        FINALPUZZLE
     }
 
     [SerializeField] private int currentForce = 0;
@@ -49,12 +50,25 @@ public class GearPeg : MonoBehaviour
         {
             hasGear = true;
         }
+
+        if (pegType == PegType.FINALPUZZLE)
+        {
+            currentSpeed = -32;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up, currentSpeed * Time.deltaTime);
+        if (pegType != PegType.FINALPUZZLE)
+        {
+            transform.Rotate(Vector3.up, currentSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Rotate(transform.parent.up, currentSpeed * Time.deltaTime);
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -103,10 +117,14 @@ public class GearPeg : MonoBehaviour
             // We can not remove gear if it is supposed to be still
             if (gearBody.isKinematic) { return; }
             
-            if (beforePegs.Length != 0 || nextPeg != null)
+            if (beforePegs.Length != 0)
             {
                 foreach (GearPeg beforePeg in beforePegs)
                 { beforePeg.AddCurrentForce(-currentForce, this); }
+            }
+
+            if (nextPeg != null)
+            {
                 nextPeg.SetNewSpeed(0);
             }
                 
@@ -149,13 +167,16 @@ public class GearPeg : MonoBehaviour
 
         if (pegType == PegType.END)
         {
-            statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
+            if (statusIndicator != null)
+            {
+                statusIndicator.SetText(Mathf.Abs(speed) > 0 ? "Status:\nSpinning" : "Status:\nOffline");
+            }
         }
     }
 
     private void MeshGear(float speed, Vector3 newRotation, bool ignoreExtraRotation)
     {
-        if (newRotation != default && Mathf.Abs(speed) > 0)
+        if (newRotation != default && Mathf.Abs(speed) > 0 && pegType != PegType.FINALPUZZLE)
         {
             transform.rotation = Quaternion.Euler(-newRotation + (ignoreExtraRotation ? Vector3.zero : rotationRelation));
         }
@@ -170,7 +191,11 @@ public class GearPeg : MonoBehaviour
     private void ReCalculateSpeed()
     {
         currentSpeed = currentForce <= 11 ? Mathf.Clamp(startSpeed - currentForce * 2f, 0f, startSpeed) : 0;
-        powerMeter.SetText("Power:\n" + currentForce + "/11");
+
+        if (powerMeter != null)
+        {
+            powerMeter.SetText("Power:\n" + currentForce + "/11");
+        }
     }
 
     private void ChangeBlockedPegs(int block)

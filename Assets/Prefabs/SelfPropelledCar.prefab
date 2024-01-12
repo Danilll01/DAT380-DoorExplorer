@@ -906,6 +906,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   maxDriveTime: 4
+  forcePushForward: 0
+  puzzleButtonPosition: {fileID: 0}
+  pushForce: 0.14
 --- !u!114 &3385225201433284105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,3 +927,4 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
