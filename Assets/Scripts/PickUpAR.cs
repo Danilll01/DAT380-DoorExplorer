@@ -471,7 +471,7 @@ public class PickUpAR : MonoBehaviour
             Pose hitPose = hits[0].pose;
             
             // Calculate the y differance between the floor and the camera
-            float yDiff = hitPose.position.y - floor.position.y;
+            float yDiff = hitPose.position.y;
             transform.parent.position -= new Vector3(0, yDiff, 0);
         }
     }
