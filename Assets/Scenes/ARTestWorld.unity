@@ -4636,8 +4636,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 13.163593, y: 3.4487073, z: 21.993841}
-  m_Center: {x: -1.5817981, y: -1.7243537, z: 5.996921}
+  m_Size: {x: 42.780327, y: 3.4487073, z: 38.471966}
+  m_Center: {x: -0.7761398, y: -1.7243537, z: 11.831425}
 --- !u!4 &933300880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73fd49be39c2c4b44bc7d9dbf968c60d,
@@ -7675,7 +7675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!198 &1639330834
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -15867,6 +15867,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1949773837}
+    - target: {fileID: 8868241703098417208, guid: 26e9e1c58e3cc194cba570e8f14c8705,
+        type: 3}
+      propertyPath: spawnItem
+      value: 
+      objectReference: {fileID: 2000220708}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16202,7 +16207,7 @@ PrefabInstance:
     - target: {fileID: 4274823928998513090, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.41
+      value: -2.95
       objectReference: {fileID: 0}
     - target: {fileID: 4274823928998513090, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
@@ -16212,7 +16217,7 @@ PrefabInstance:
     - target: {fileID: 4274823928998513090, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.45
+      value: 0.14
       objectReference: {fileID: 0}
     - target: {fileID: 4274823928998513090, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
