@@ -346,7 +346,7 @@ public class PickUpAR : MonoBehaviour
 
     private bool DropItemCheck()
     {
-        if (pickUpButtonClicked || Vector3.Distance(heldItem.transform.position, transform.position) > 5)
+        if (pickUpButtonClicked) //|| Vector3.Distance(heldItem.transform.position, transform.position) > 5
         {
             print("Dropping item");
             DropItem();
@@ -461,7 +461,7 @@ public class PickUpAR : MonoBehaviour
         }
     }
 
-    private void HandleFloorPlacement()
+    public void HandleFloorPlacement()
     {
         
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
@@ -474,7 +474,6 @@ public class PickUpAR : MonoBehaviour
             float yDiff = hitPose.position.y - floor.position.y;
             transform.parent.position -= new Vector3(0, yDiff, 0);
         }
-        
     }
 
     public void PickupTouch()
