@@ -60,12 +60,10 @@ public class SelfPropellingCar : MonoBehaviour
             print("Angle: " + angle);
             if (angle < -5.0F)
             {
-                print("turn left");
                 forceDir = -transform.right;
             }
             else if (angle > 5.0F)
             {
-                print("turn right");
                 forceDir = transform.right;
             }
             else
@@ -75,7 +73,7 @@ public class SelfPropellingCar : MonoBehaviour
             
             rb.AddForceAtPosition(forceDir * pushForce, transform.position + transform.forward * 2f);
             
-            transform.position += transform.forward * (Time.fixedDeltaTime * speed/2f);
+            transform.position += transform.forward * (Time.fixedDeltaTime * speed / 2f);
         }
     }
     
