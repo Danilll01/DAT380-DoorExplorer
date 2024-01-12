@@ -38,21 +38,18 @@ public class PuzzleManager : MonoBehaviour
         
         if (Math.Abs(transform.localRotation.eulerAngles.y - (180)) < 0.1)
         {
-            if (peg1.rotation != lastPeg1Rotation && peg2.rotation != lastPeg2Rotation && winPeg.childCount == 1)
+            if (peg1.rotation != lastPeg1Rotation)
+            { hinge1.OnlyOpen(); } 
+            else { hinge1.OnlyClose(); }
+
+            if (peg2.rotation != lastPeg2Rotation)
+            { hinge2.OnlyOpen(); } 
+            else { hinge2.OnlyClose(); }
+            
+            if (Button1Pressed && Button2Pressed && winPeg.childCount == 1)
             {
-                hinge1.OnlyOpen();
-                hinge2.OnlyOpen();
-                print("ButtonPressed: " + Button1Pressed);
-                if (Button1Pressed && Button2Pressed)
-                {
-                    print("WIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                    StartCoroutine(OutAnimation());
-                }
-            }
-            else
-            {
-                hinge1.OnlyClose();
-                hinge2.OnlyClose();
+                print("WIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                StartCoroutine(OutAnimation());
             }
         }
         
