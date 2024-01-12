@@ -322,7 +322,11 @@ public class PickUpAR : MonoBehaviour
             SmartOutLine(hit.collider.gameObject);
             if (pickUpButtonClicked)
             {
-                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.Interact();
+                }
                 pickUpButtonClicked = false;
             }
             return;
@@ -342,7 +346,7 @@ public class PickUpAR : MonoBehaviour
 
     private bool DropItemCheck()
     {
-        if (pickUpButtonClicked)
+        if (pickUpButtonClicked || Vector3.Distance(heldItem.transform.position, transform.position) > 5)
         {
             print("Dropping item");
             DropItem();
