@@ -463,7 +463,6 @@ public class PickUpAR : MonoBehaviour
 
     public void HandleFloorPlacement()
     {
-        
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         if (arRaycastManager.Raycast(screenCenter, hits, TrackableType.FeaturePoint))

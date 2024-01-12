@@ -140,10 +140,12 @@ public class CanvasOverlay : MonoBehaviour
         if(isLandscape)
         {
             settingsL.SetActive(false);
+            settingsP.SetActive(false);
             tutorialL.SetActive(true);
         }
         else
         {
+            settingsL.SetActive(false);
             settingsP.SetActive(false);
             tutorialP.SetActive(true);
         }
@@ -154,10 +156,12 @@ public class CanvasOverlay : MonoBehaviour
         if(isLandscape)
         {
             settingsL.SetActive(false);
+            settingsP.SetActive(false);
             calibrationMenuL.SetActive(true);
         }
         else
         {
+            settingsL.SetActive(false);
             settingsP.SetActive(false);
             calibrationMenuP.SetActive(true);
         }
