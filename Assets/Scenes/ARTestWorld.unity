@@ -2216,12 +2216,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &510542943 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7929516599888458960, guid: ed64589b5efa1ae40902d3dd9f1290bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 8426654279062735151}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &530678181
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6360,21 +6354,31 @@ PrefabInstance:
     - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
         type: 3}
       propertyPath: discList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
         type: 3}
       propertyPath: discList.Array.data[0]
       value: 
+      objectReference: {fileID: 1422593857}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: discList.Array.data[1]
+      value: 
       objectReference: {fileID: 242184080}
     - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
         type: 3}
       propertyPath: audioClipList.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
         type: 3}
       propertyPath: audioClipList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 14562ea0dee322c44b9caed656cb714f, type: 3}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: audioClipList.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 6c9429b7be7704946aa795f2081911be, type: 3}
     - target: {fileID: 8348631286841890837, guid: bf34f323f04a2054aac810c13a80c0ce,
@@ -6387,6 +6391,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf34f323f04a2054aac810c13a80c0ce, type: 3}
+--- !u!1 &1422593857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3438546470955853972, guid: bf34f323f04a2054aac810c13a80c0ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 1422593856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1423624768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16288,12 +16298,12 @@ PrefabInstance:
         type: 3}
       propertyPath: discList.Array.data[0]
       value: 
-      objectReference: {fileID: 242184080}
+      objectReference: {fileID: 1422593857}
     - target: {fileID: 4560060734165610170, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
       propertyPath: discList.Array.data[1]
       value: 
-      objectReference: {fileID: 510542943}
+      objectReference: {fileID: 242184080}
     - target: {fileID: 4560060734165610170, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
       propertyPath: audioClipList.Array.size
@@ -16303,10 +16313,15 @@ PrefabInstance:
         type: 3}
       propertyPath: audioClipList.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 6c9429b7be7704946aa795f2081911be, type: 3}
+      objectReference: {fileID: 8300000, guid: 14562ea0dee322c44b9caed656cb714f, type: 3}
     - target: {fileID: 4560060734165610170, guid: ed64589b5efa1ae40902d3dd9f1290bd,
         type: 3}
       propertyPath: audioClipList.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c9429b7be7704946aa795f2081911be, type: 3}
+    - target: {fileID: 4560060734165610170, guid: ed64589b5efa1ae40902d3dd9f1290bd,
+        type: 3}
+      propertyPath: audioClipList.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 6c9429b7be7704946aa795f2081911be, type: 3}
     - target: {fileID: 4712719113132799814, guid: ed64589b5efa1ae40902d3dd9f1290bd,
