@@ -48,7 +48,7 @@ public class RecordPlayer : MonoBehaviour
 
             if (audioClipList[index] != null)
             {
-                audioSource.PlayOneShot(audioClipList[index],1);
+                audioSource.clip = audioClipList[index];
                 audioSource.Play();
             }
 
