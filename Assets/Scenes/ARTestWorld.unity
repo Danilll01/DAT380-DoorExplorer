@@ -16161,26 +16161,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1934091490}
-    - target: {fileID: 3260898221745777536, guid: fc3cfed5d408d1548b5ffce255e616d1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 3427540413000544639, guid: fc3cfed5d408d1548b5ffce255e616d1,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1934091490}
-    - target: {fileID: 4786707403470452455, guid: fc3cfed5d408d1548b5ffce255e616d1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007579436429518713, guid: fc3cfed5d408d1548b5ffce255e616d1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.6
-      objectReference: {fileID: 0}
     - target: {fileID: 7488640809695251583, guid: fc3cfed5d408d1548b5ffce255e616d1,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -16196,11 +16181,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1934091490}
-    - target: {fileID: 8374506696618916784, guid: fc3cfed5d408d1548b5ffce255e616d1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
