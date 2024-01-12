@@ -6,31 +6,89 @@ using UnityEngine;
 public class RecordPlayer : MonoBehaviour
 {
     private AudioSource audioSource;
-    private Record playingFrom;
+    private GameObject currentDisc;
     [SerializeField] private Transform snapPoint;
-    
+    [SerializeField] private PickUpAR pickUpAr;
+    [SerializeField] private bool callMethod = false;
+    [SerializeField] private AudioClip[] audioClipList;
+    [SerializeField] private GameObject[] discList;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnTriggerEnter(Collider collider)
+    void Update()
     {
-        Record record = collider.GetComponent<Record>();
-        if (record != null)
+        if (currentDisc != null)
         {
-            collider.transform.position = snapPoint.position;
-            
-            AudioClip audioClip = record.GetAudioClip();
-            //print("Playing" + audioClip.name);
-            audioSource.clip = audioClip;
-            audioSource.Play();
-            playingFrom = record;
+            if (Vector3.Distance(currentDisc.transform.position, snapPoint.position) > 0.07f)
+            {
+                RecordRemoved();
+            }
         }
     }
 
-    private void OnTriggerExit(Collider collider)
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (InList(collider.gameObject))
+        {
+            currentDisc = collider.gameObject;
+            Rigidbody rb = currentDisc.GetComponent<Rigidbody>();
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            currentDisc.transform.rotation = Quaternion.identity;
+
+            pickUpAr.DropItem();
+            currentDisc.transform.position = snapPoint.position;
+
+            int index = IndexOfDisc(currentDisc);
+
+            if (audioClipList[index] != null)
+            {
+                audioSource.clip = audioClipList[index];
+                audioSource.Play();
+            }
+
+            if (callMethod)
+            {
+                //
+            }
+        }
+    }
+    private bool InList(GameObject check)
+    {
+        for (int i = 0; i < discList.Length; i++)
+        {
+            if (discList[i] == check)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int IndexOfDisc(GameObject check)
+    {
+        for (int i = 0; i < discList.Length; i++)
+        {
+            if (discList[i] == check)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void RecordRemoved()
+    {
+        audioSource.Pause();
+        currentDisc = null;
+    }
+
+    /* private void OnTriggerExit(Collider collider)
     {
         Record record = collider.GetComponent<Record>();
         if (playingFrom == record)
@@ -55,5 +113,5 @@ public class RecordPlayer : MonoBehaviour
                 audioSource.UnPause();
             }
         }
-    }
+    } */
 }
