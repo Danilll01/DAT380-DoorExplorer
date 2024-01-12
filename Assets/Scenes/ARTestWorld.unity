@@ -1018,6 +1018,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &242184080 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3910131028139133078, guid: bf34f323f04a2054aac810c13a80c0ce,
+    type: 3}
+  m_PrefabInstance: {fileID: 1422593856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &247563554
 GameObject:
   m_ObjectHideFlags: 0
@@ -13657,6 +13663,41 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -12.2479
       objectReference: {fileID: 0}
+    - target: {fileID: 2317674038571641776, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156587634956206110, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.51574135
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156587634956206110, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.4848777
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156587634956206110, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.8154373
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156587634956206110, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.03630352
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156587634956206110, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.27778572
+      objectReference: {fileID: 0}
+    - target: {fileID: 3156587634956206110, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.14393044
+      objectReference: {fileID: 0}
     - target: {fileID: 4299576811505370342, guid: bf34f323f04a2054aac810c13a80c0ce,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13737,6 +13778,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.654
       objectReference: {fileID: 0}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: pickUpAr
+      value: 
+      objectReference: {fileID: 1934091490}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: discList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: discList.Array.data[0]
+      value: 
+      objectReference: {fileID: 242184080}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: audioClipList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063326668145936442, guid: bf34f323f04a2054aac810c13a80c0ce,
+        type: 3}
+      propertyPath: audioClipList.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c9429b7be7704946aa795f2081911be, type: 3}
     - target: {fileID: 8348631286841890837, guid: bf34f323f04a2054aac810c13a80c0ce,
         type: 3}
       propertyPath: m_Name
