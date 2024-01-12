@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class DoorSelector : MonoBehaviour
 {
-    [SerializeField] private static Transform shedDoorTransform;
-    [SerializeField] private static Transform houseDoorTransform;
-    [SerializeField] private static Transform gravityDoorTransform;
+    private static Transform shedDoorTransform;
+    private static Transform houseDoorTransform;
+    private static Transform gravityDoorTransform;
+    private static Transform kuggenDoorTransform;
+    private static Transform skyIslandDoorTransform;
 
     public static RoomType selectedRoomType = RoomType.None;
     
@@ -15,6 +17,8 @@ public class DoorSelector : MonoBehaviour
         shedDoorTransform = transform.GetChild(0);
         houseDoorTransform = transform.GetChild(1);
         gravityDoorTransform = transform.GetChild(2);
+        kuggenDoorTransform = transform.GetChild(3);
+        skyIslandDoorTransform = transform.GetChild(4);
     }
     
     public static Transform GetPortalTransform()
@@ -28,6 +32,10 @@ public class DoorSelector : MonoBehaviour
                 return houseDoorTransform;
             case RoomType.Gravity:
                 return gravityDoorTransform;
+            case RoomType.Kuggen:
+                return kuggenDoorTransform;
+            case RoomType.SkyIsland:
+                return skyIslandDoorTransform;
             default:
                 return shedDoorTransform;
         }
