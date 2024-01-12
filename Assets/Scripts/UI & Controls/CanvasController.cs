@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 using UnityEngine.XR.Management;
 
 public class CanvasOverlay : MonoBehaviour
@@ -15,6 +16,11 @@ public class CanvasOverlay : MonoBehaviour
     private GameObject settingsP;
     private GameObject tutorialL;
     private GameObject tutorialP;
+    private GameObject calibrationMenuP;
+    private GameObject calibrationMenuL;
+
+    [SerializeField] private GameObject menuButtonsL;
+    [SerializeField] private GameObject menuButtonsP;
 
 
     // Start is called before the first frame update
@@ -32,12 +38,18 @@ public class CanvasOverlay : MonoBehaviour
         settingsP = portrait.transform.Find("SettingsMenu").gameObject;
         tutorialL = landScape.transform.Find("Tutorial").gameObject;
         tutorialP = portrait.transform.Find("Tutorial").gameObject;
+        calibrationMenuP = portrait.transform.Find("Calibration-P").gameObject;
+        calibrationMenuL = landScape.transform.Find("Calibration-L").gameObject;
 
         settingsL.SetActive(false);
         settingsP.SetActive(false);
+        calibrationMenuP.SetActive(false);
+        calibrationMenuL.SetActive(false);
 
-        //tutorialL.SetActive(true);
-        //tutorialP.SetActive(true);
+#if UNITY_EDITOR
+        tutorialL.SetActive(true);
+        tutorialP.SetActive(true);
+#endif
     }
 
     // Update is called once per frame
@@ -87,6 +99,17 @@ public class CanvasOverlay : MonoBehaviour
                     child.gameObject.SetActive(false);
                 }
             }
+            else if(child == calibrationMenuL.transform || child == calibrationMenuP.transform)
+            {
+                if(calibrationMenuL.activeSelf || calibrationMenuP.activeSelf)
+                {
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
             else
             {
                 child.gameObject.SetActive(true);
@@ -117,15 +140,39 @@ public class CanvasOverlay : MonoBehaviour
         if(isLandscape)
         {
             settingsL.SetActive(false);
+            settingsP.SetActive(false);
             tutorialL.SetActive(true);
         }
         else
         {
+            settingsL.SetActive(false);
             settingsP.SetActive(false);
             tutorialP.SetActive(true);
         }
     }
 
+    public void OpenCalibration()
+    {
+        if(isLandscape)
+        {
+            settingsL.SetActive(false);
+            settingsP.SetActive(false);
+            calibrationMenuL.SetActive(true);
+        }
+        else
+        {
+            settingsL.SetActive(false);
+            settingsP.SetActive(false);
+            calibrationMenuP.SetActive(true);
+        }
+    }
+    
+    public void CloseCalibration()
+    {
+        calibrationMenuP.SetActive(false);
+        calibrationMenuL.SetActive(false);
+    }
+    
     public void CloseTutorial()
     {
         tutorialL.SetActive(false);

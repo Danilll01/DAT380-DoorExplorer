@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3426083288907312715}
   - component: {fileID: 9211624858217888137}
   - component: {fileID: 2802260394111944922}
+  - component: {fileID: 7418531375848252220}
   - component: {fileID: 8217940640224010945}
   m_Layer: 0
   m_Name: XR Origin
@@ -74,13 +75,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2318760098059369966}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_AnchorPrefab: {fileID: 0}
---- !u!114 &8217940640224010945
+--- !u!114 &7418531375848252220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,6 +89,20 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2318760098059369966}
   m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PointCloudPrefab: {fileID: 7201175628642595680, guid: 1ee2cd3799e6a864a9110f9e48b47d3c,
+    type: 3}
+--- !u!114 &8217940640224010945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318760098059369966}
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
   m_Name: 
@@ -114,9 +129,10 @@ GameObject:
   - component: {fileID: 2597219878587053294}
   - component: {fileID: 7406552077273907307}
   - component: {fileID: 1534678762216481975}
-  - component: {fileID: 3315863792046741951}
   - component: {fileID: 1120302831936162407}
   - component: {fileID: 9144546496474042772}
+  - component: {fileID: 838613398196611686}
+  - component: {fileID: 7525014462500942265}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -172,7 +188,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.04
-  far clip plane: 20
+  far clip plane: 27
   field of view: 90
   orthographic: 0
   orthographic size: 5
@@ -527,22 +543,6 @@ MonoBehaviour:
     m_Bits: 384
   draggingForce: 5
   pickupDistance: 3
---- !u!114 &3315863792046741951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2967024311422731765}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135415c20db9e00418d20f2213df90cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickupDistance: 3
-  carryForce: 40
-  itemHolderDistance: 1
-  rotationObject: {fileID: 1120302831936162407}
 --- !u!114 &1120302831936162407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,11 +569,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043f99a2ff8b4da44bbed356f2794935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arRaycastManager: {fileID: 8217940640224010945}
+  floor: {fileID: 0}
+  doorFrameOutline: {fileID: 0}
+  doorFrameOffset: {x: -0.12, y: 0, z: 0}
   pickupDistance: 3
   carryForce: 40
   itemHolderDistance: 1
   rotationObject: {fileID: 1120302831936162407}
-  doorFrameOutline: {fileID: 0}
+--- !u!114 &838613398196611686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967024311422731765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da812ca6e36b2141b65f41f0b681467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arRaycastManager: {fileID: 0}
+  arPointCloudManager: {fileID: 0}
+  arCameraTransform: {fileID: 7677279551182389105}
+--- !u!114 &7525014462500942265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967024311422731765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da812ca6e36b2141b65f41f0b681467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arRaycastManager: {fileID: 0}
+  arPointCloudManager: {fileID: 0}
+  arCameraTransform: {fileID: 7677279551182389105}
 --- !u!1 &6766752244189107448
 GameObject:
   m_ObjectHideFlags: 0

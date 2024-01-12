@@ -33,6 +33,7 @@ public class PickUpAR : MonoBehaviour
     private Vector3 doorFrameOutlineOriginalPosition;
     [SerializeField] private Vector3 doorFrameOffset = new Vector3(0.1f, 0, 0);
     //[SerializeField] private float maxDistanceFromCenter = 10f;
+    private LayerMask heldItemLayerMask;
 
     [Header("Pick Up Settings")]
     [SerializeField] private float pickupDistance = 10.0f;
@@ -75,7 +76,12 @@ public class PickUpAR : MonoBehaviour
             pickUpButtonClicked = true;
         }
         
+        // Check if the player is in door placing mode
         doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
+        if (!doorPlacingMode && doorFrameOutline.position != doorFrameOutlineOriginalPosition)
+        {
+            doorFrameOutline.position = doorFrameOutlineOriginalPosition;
+        }
         
         MoveItemHolder();
         if (heldItem != null)
@@ -346,7 +352,7 @@ public class PickUpAR : MonoBehaviour
 
     private bool DropItemCheck()
     {
-        if (pickUpButtonClicked || Vector3.Distance(heldItem.transform.position, transform.position) > 5)
+        if (pickUpButtonClicked) //|| Vector3.Distance(heldItem.transform.position, transform.position) > 5
         {
             print("Dropping item");
             DropItem();
@@ -406,6 +412,7 @@ public class PickUpAR : MonoBehaviour
         heldItemRB.isKinematic = false;
         heldItemRB.drag = 20.0f;
         heldItemRB.constraints = RigidbodyConstraints.FreezeRotation;
+        heldItemLayerMask = heldItem.layer;
         heldItem.layer = 2;
     }
 
@@ -427,7 +434,7 @@ public class PickUpAR : MonoBehaviour
         heldItemRB.useGravity = true;
         heldItemRB.drag = 1.0f;
         heldItemRB.constraints = RigidbodyConstraints.None;
-        heldItem.layer = 0;
+        heldItem.layer = heldItemLayerMask;
         heldItem = null;
         heldItemRB = null;
         rotationObject.rotationObject = null;
@@ -461,9 +468,8 @@ public class PickUpAR : MonoBehaviour
         }
     }
 
-    private void HandleFloorPlacement()
+    public void HandleFloorPlacement()
     {
-        
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
         if (arRaycastManager.Raycast(screenCenter, hits, TrackableType.FeaturePoint))
@@ -471,10 +477,9 @@ public class PickUpAR : MonoBehaviour
             Pose hitPose = hits[0].pose;
             
             // Calculate the y differance between the floor and the camera
-            float yDiff = hitPose.position.y - floor.position.y;
+            float yDiff = hitPose.position.y;
             transform.parent.position -= new Vector3(0, yDiff, 0);
         }
-        
     }
 
     public void PickupTouch()
