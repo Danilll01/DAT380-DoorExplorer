@@ -8,4 +8,6 @@ public enum RoomType
     Shed,
     House,
     Gravity,
+    Kuggen,
+    SkyIsland
 }

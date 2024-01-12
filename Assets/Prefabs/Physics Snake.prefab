@@ -66,7 +66,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25088987799853400}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -158,6 +158,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &743150111396889690
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +286,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102254433519081161}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -343,6 +344,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!114 &1585427425158348361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,7 +673,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868499925484469751}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -763,6 +765,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &3434655329684917756
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +915,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3909040541719240695}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1004,6 +1007,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &4055908693526642947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1406,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7525329124182059847}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1494,6 +1498,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &8015760118484429450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,7 +1565,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8015760118484429450}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1652,6 +1657,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &8094191609001719399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,7 +1724,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8094191609001719399}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1810,6 +1816,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &8099237575693831513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,7 +1883,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8099237575693831513}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1968,6 +1975,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &8145647012885555316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,7 +2208,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8529641825211155989}
   serializedVersion: 4
-  m_Mass: 0.05
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2292,6 +2300,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &8694460755202465782
 GameObject:
   m_ObjectHideFlags: 0

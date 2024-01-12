@@ -8,6 +8,7 @@ public class BallButton : MonoBehaviour
     [SerializeField] private float animationTimer = 0f;
     [SerializeField] private float animationDuration = 0.5f;
     [SerializeField] private float animationDistance = 0.1f;
+    [SerializeField] private Safe safe;
     
     private void Update()
     {
@@ -21,7 +22,7 @@ public class BallButton : MonoBehaviour
             }
             else
             {
-                // Do something
+                safe.CompleteBallPuzzle();
                 animationIsPlaying = false;
                 animationTimer = 0f;
             }
