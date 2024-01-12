@@ -322,7 +322,11 @@ public class PickUpAR : MonoBehaviour
             SmartOutLine(hit.collider.gameObject);
             if (pickUpButtonClicked)
             {
-                hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                IInteractable interactable = hit.collider.gameObject.GetComponent<IInteractable>();
+                if (interactable != null)
+                {
+                    interactable.Interact();
+                }
                 pickUpButtonClicked = false;
             }
             return;

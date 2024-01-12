@@ -7790,6 +7790,31 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1578812172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7851511411659664156, guid: 34f720f461efe124e83acb153506791d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2028814670}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1578812177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578812172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+  forceOutlineOn: 0
 --- !u!1 &1594516302 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2967024311422731765, guid: 41a2a9c961b3867429877a81732cab69,
@@ -15393,10 +15418,19 @@ PrefabInstance:
       propertyPath: linkedPortal
       value: 
       objectReference: {fileID: 375879671}
+    - target: {fileID: 7851511411659664156, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7851511411659664156, guid: 34f720f461efe124e83acb153506791d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1578812177}
   m_SourcePrefab: {fileID: 100100000, guid: 34f720f461efe124e83acb153506791d, type: 3}
 --- !u!1001 &2063438436
 PrefabInstance:
