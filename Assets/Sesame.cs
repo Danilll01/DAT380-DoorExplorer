@@ -76,7 +76,9 @@ public class Sesame : MonoBehaviour
         Debug.Log("Spawns Item");
         if (spawnItem != null)
         {
-            Instantiate(spawnItem, transform.position, transform.rotation);
+            //Instantiate(spawnItem, transform.position, transform.rotation);
+            spawnItem.transform.position = transform.position;
+            spawnItem.transform.rotation = transform.rotation;
         }
     }
 

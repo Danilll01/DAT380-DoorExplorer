@@ -6635,6 +6635,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 320
       objectReference: {fileID: 0}
+    - target: {fileID: 3081376662447821578, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: m_Name
+      value: KuggenButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096266023901661571, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: roomType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3441955408458246528, guid: f83c8fe5d5af83249b82d5756f3635a2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6792,6 +6802,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ButtonGroup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270690484926012391, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: m_Name
+      value: SkyIslandButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286723749983764846, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: roomType
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6434654870149894601, guid: f83c8fe5d5af83249b82d5756f3635a2,
         type: 3}
@@ -6986,6 +7006,16 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3081376662447821578, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: m_Name
+      value: KuggenButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3096266023901661571, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: roomType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3441955408458246528, guid: f83c8fe5d5af83249b82d5756f3635a2,
         type: 3}
       propertyPath: m_Pivot.x
@@ -7148,6 +7178,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6270690484926012391, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: m_Name
+      value: SkyIslandButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6286723749983764846, guid: f83c8fe5d5af83249b82d5756f3635a2,
+        type: 3}
+      propertyPath: roomType
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6434654870149894601, guid: f83c8fe5d5af83249b82d5756f3635a2,
         type: 3}
