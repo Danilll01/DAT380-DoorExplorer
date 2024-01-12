@@ -16,8 +16,12 @@ public class ARCameraTeleporter : PortalTraveller
         cameraOffset.position = pos - (transform.position - cameraOffset.position);
        
         // Rotate camera right
-        toPortal.rotation.ToAngleAxis(out float angle, out Vector3 axis);
-        cameraOffset.RotateAround(transform.position, axis, angle);
-
+        fromPortal.rotation.ToAngleAxis(out float angle, out Vector3 axis);
+        cameraOffset.RotateAround(transform.position, axis, -angle);
+        
+        //print("OffsetEuler: " + cameraOffset.rotation.eulerAngles);
+        //cameraOffset.rotation.ToAngleAxis(out float angleOffset, out Vector3 axisOffset);
+        
+        //print("OffsetAngleAxis: " + angleOffset + ", " + axisOffset);
     }
 }
