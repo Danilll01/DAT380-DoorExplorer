@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6462789510210053273}
+  - component: {fileID: 2114848005999354192}
   m_Layer: 0
   m_Name: PhysicalButton
   m_TagString: Untagged
@@ -26,13 +27,30 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.1062, y: 0.155, z: 0.0234}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.14999999, y: 0.14999999, z: 0.14999999}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2591442298839512523}
   - {fileID: 1958246878513800174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &2114848005999354192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5979549392963681827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d406c1bdd1d114dba8c11263fe5991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTimer: 0
+  animationDuration: 0.5
+  animationDistance: 0.1
+  puzzleManager: {fileID: 0}
+  buttonNumber: 0
 --- !u!1 &6302472849960844784
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,12 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] [Range(0,1)] private float animationChange = 0.8f;
 
     [SerializeField] private Transform winPeg;
+
+    [SerializeField] private MechanicalHinge hinge1;
+    [SerializeField] private MechanicalHinge hinge2;
+    
+    private bool Button1Pressed = false;
+    private bool Button2Pressed = false;
     
     [SerializeField] Transform peg1;
     [SerializeField] Transform peg2;
@@ -34,8 +40,19 @@ public class PuzzleManager : MonoBehaviour
         {
             if (peg1.rotation != lastPeg1Rotation && peg2.rotation != lastPeg2Rotation && winPeg.childCount == 1)
             {
-                print("WIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                StartCoroutine(OutAnimation());
+                hinge1.OnlyOpen();
+                hinge2.OnlyOpen();
+                print("ButtonPressed: " + Button1Pressed);
+                if (Button1Pressed && Button2Pressed)
+                {
+                    print("WIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    StartCoroutine(OutAnimation());
+                }
+            }
+            else
+            {
+                hinge1.OnlyClose();
+                hinge2.OnlyClose();
             }
         }
         
@@ -79,6 +96,22 @@ public class PuzzleManager : MonoBehaviour
             //print("ANIMATION: " + Mathf.SmoothStep(startHeight, endHeight, laterAnimationLerp));
             timer += Time.deltaTime;
             yield return null;
+        }
+    }
+
+    public void PressButton(int buttonNumber)
+    {
+        switch (buttonNumber)
+        {
+            case 1:
+                Button1Pressed = true;
+                break;
+            case 2:
+                Button2Pressed = true;
+                break;
+            default:
+                Debug.LogError("Button number not found");
+                break;
         }
     }
 }

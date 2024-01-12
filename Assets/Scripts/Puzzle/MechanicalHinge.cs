@@ -66,4 +66,14 @@ public class MechanicalHinge : MonoBehaviour
             isOpen = true;
         }
     }
+    public void OnlyOpen()
+    {
+        currentAngle = endAngle;
+        isOpen = true;
+    }
+    public void OnlyClose()
+    {
+        currentAngle = startAngle;
+        isOpen = false;
+    }
 }
