@@ -72850,6 +72850,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: record player puzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 8791110651973359539, guid: 10c53976a3162da42a5c58684ac5cdc4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
