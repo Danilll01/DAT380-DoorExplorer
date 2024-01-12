@@ -88,7 +88,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2318760098059369966}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 1120302831936162407}
   - component: {fileID: 9144546496474042772}
   - component: {fileID: 838613398196611686}
+  - component: {fileID: 7525014462500942265}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -577,6 +578,21 @@ MonoBehaviour:
   itemHolderDistance: 1
   rotationObject: {fileID: 1120302831936162407}
 --- !u!114 &838613398196611686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2967024311422731765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da812ca6e36b2141b65f41f0b681467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arRaycastManager: {fileID: 0}
+  arPointCloudManager: {fileID: 0}
+  arCameraTransform: {fileID: 7677279551182389105}
+--- !u!114 &7525014462500942265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
