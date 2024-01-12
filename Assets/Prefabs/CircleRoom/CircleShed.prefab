@@ -33387,8 +33387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95c1da8ff92c6434694dd5afa1734e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOpen: 1
-  speed: 5
+  isOpen: 0
+  speed: 1
   endAngle: {x: 0, y: -1, z: -168.26}
   startAngle: {x: 0, y: -1, z: 0}
   currentAngle: {x: 0, y: 0, z: 0}
@@ -34749,8 +34749,8 @@ MonoBehaviour:
   animationTime: 4
   animationChange: 0.78
   winPeg: {fileID: 2943675091836193941}
-  hinge1: {fileID: 0}
-  hinge2: {fileID: 0}
+  hinge1: {fileID: 5599906341541034963}
+  hinge2: {fileID: 1501648590768905332}
   peg1: {fileID: 9143453439305500533}
   peg2: {fileID: 6301272060302714669}
 --- !u!1 &6319983564604901661
@@ -38535,10 +38535,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
-  speed: 5
-  endAngle: {x: 0, y: 0, z: 90}
+  speed: 1
+  endAngle: {x: 0, y: 179, z: 10.715}
   startAngle: {x: 0, y: 179, z: 180}
-  currentAngle: {x: 0, y: 179, z: 10.715}
+  currentAngle: {x: 0, y: 0, z: 0}
 --- !u!1 &7384571161742696222
 GameObject:
   m_ObjectHideFlags: 0
@@ -77108,6 +77108,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2114848005999354192, guid: 759a8117bd11eee4a8f88392d81ea811,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114848005999354192, guid: 759a8117bd11eee4a8f88392d81ea811,
+        type: 3}
       propertyPath: buttonNumber
       value: 2
       objectReference: {fileID: 0}
@@ -77119,7 +77124,7 @@ PrefabInstance:
     - target: {fileID: 5979549392963681827, guid: 759a8117bd11eee4a8f88392d81ea811,
         type: 3}
       propertyPath: m_Name
-      value: PhysicalButton (1)
+      value: PhysicalButton2
       objectReference: {fileID: 0}
     - target: {fileID: 6462789510210053273, guid: 759a8117bd11eee4a8f88392d81ea811,
         type: 3}
@@ -77186,11 +77191,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8075470805955234696, guid: 759a8117bd11eee4a8f88392d81ea811,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4655061230875830874, guid: 759a8117bd11eee4a8f88392d81ea811, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8075470805955234696, guid: 759a8117bd11eee4a8f88392d81ea811,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1527967655953187567}
   m_SourcePrefab: {fileID: 100100000, guid: 759a8117bd11eee4a8f88392d81ea811, type: 3}
+--- !u!1 &798086076446563178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8075470805955234696, guid: 759a8117bd11eee4a8f88392d81ea811,
+    type: 3}
+  m_PrefabInstance: {fileID: 8863799742706454754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1527967655953187567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798086076446563178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d406c1bdd1d114dba8c11263fe5991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTimer: 0
+  animationDuration: 0.5
+  animationDistance: 0.1
+  puzzleManager: {fileID: 7664547531935820660}
+  buttonNumber: 2
 --- !u!4 &2500335853617247355 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6462789510210053273, guid: 759a8117bd11eee4a8f88392d81ea811,
@@ -77207,6 +77245,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2114848005999354192, guid: 759a8117bd11eee4a8f88392d81ea811,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2114848005999354192, guid: 759a8117bd11eee4a8f88392d81ea811,
+        type: 3}
       propertyPath: buttonNumber
       value: 1
       objectReference: {fileID: 0}
@@ -77218,7 +77261,7 @@ PrefabInstance:
     - target: {fileID: 5979549392963681827, guid: 759a8117bd11eee4a8f88392d81ea811,
         type: 3}
       propertyPath: m_Name
-      value: PhysicalButton
+      value: PhysicalButton1
       objectReference: {fileID: 0}
     - target: {fileID: 6462789510210053273, guid: 759a8117bd11eee4a8f88392d81ea811,
         type: 3}
@@ -77270,11 +77313,44 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8075470805955234696, guid: 759a8117bd11eee4a8f88392d81ea811,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4655061230875830874, guid: 759a8117bd11eee4a8f88392d81ea811, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8075470805955234696, guid: 759a8117bd11eee4a8f88392d81ea811,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3497821945201632862}
   m_SourcePrefab: {fileID: 100100000, guid: 759a8117bd11eee4a8f88392d81ea811, type: 3}
+--- !u!1 &897684869558410102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8075470805955234696, guid: 759a8117bd11eee4a8f88392d81ea811,
+    type: 3}
+  m_PrefabInstance: {fileID: 8963537959198019838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3497821945201632862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897684869558410102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d406c1bdd1d114dba8c11263fe5991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTimer: 0
+  animationDuration: 0.5
+  animationDistance: 0.1
+  puzzleManager: {fileID: 7664547531935820660}
+  buttonNumber: 1
 --- !u!4 &2725964860336288871 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6462789510210053273, guid: 759a8117bd11eee4a8f88392d81ea811,

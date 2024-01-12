@@ -3386,6 +3386,29 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &586048331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 897684869558410102, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+    type: 3}
+  m_PrefabInstance: {fileID: 8952942956135669178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &586048338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586048331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d406c1bdd1d114dba8c11263fe5991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTimer: 0
+  animationDuration: 0.5
+  animationDistance: 0.1
+  puzzleManager: {fileID: 979256620}
+  buttonNumber: 1
 --- !u!4 &605191351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 73fd49be39c2c4b44bc7d9dbf968c60d,
@@ -4758,6 +4781,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1501042838}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &979256620 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7664547531935820660, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+    type: 3}
+  m_PrefabInstance: {fileID: 8952942956135669178}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c68ce1ebf58ba4b8feac47287a6b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990040885
 GameObject:
   m_ObjectHideFlags: 0
@@ -15514,6 +15549,29 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73fd49be39c2c4b44bc7d9dbf968c60d, type: 3}
+--- !u!1 &1990055775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 798086076446563178, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+    type: 3}
+  m_PrefabInstance: {fileID: 8952942956135669178}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1990055782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990055775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d406c1bdd1d114dba8c11263fe5991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationTimer: 0
+  animationDuration: 0.5
+  animationDistance: 0.1
+  puzzleManager: {fileID: 979256620}
+  buttonNumber: 2
 --- !u!1001 &2028814670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17396,11 +17454,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircleShed
       objectReference: {fileID: 0}
+    - target: {fileID: 7006916325145751982, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7344134276986753308, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 781797315}
+    - target: {fileID: 7375763594538873266, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7484012454352634255, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       propertyPath: m_Mesh
@@ -17446,7 +17514,9 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 781797315}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4395227152143989412, guid: 2c84f97558718924ab5bf6c63ccb3f17, type: 3}
+    - {fileID: 4294344293582928568, guid: 2c84f97558718924ab5bf6c63ccb3f17, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -17458,6 +17528,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 897684869558410102, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 586048338}
     - targetCorrespondingSourceObject: {fileID: 6391832658756510531, guid: 2c84f97558718924ab5bf6c63ccb3f17,
         type: 3}
       insertIndex: -1
@@ -17466,6 +17540,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 798086076446563178, guid: 2c84f97558718924ab5bf6c63ccb3f17,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1990055782}
   m_SourcePrefab: {fileID: 100100000, guid: 2c84f97558718924ab5bf6c63ccb3f17, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
