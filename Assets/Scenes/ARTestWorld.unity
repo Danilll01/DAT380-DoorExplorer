@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -477,6 +477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &161294281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4501484723086980375, guid: a43e6467fbf0c4a0184c3dbfa7688845,
+    type: 3}
+  m_PrefabInstance: {fileID: 530678181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &161676595
 Mesh:
   m_ObjectHideFlags: 0
@@ -15877,6 +15883,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1949773837}
+    - target: {fileID: 8868241703098417208, guid: 26e9e1c58e3cc194cba570e8f14c8705,
+        type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 161294281}
     - target: {fileID: 8868241703098417208, guid: 26e9e1c58e3cc194cba570e8f14c8705,
         type: 3}
       propertyPath: spawnItem

@@ -75,7 +75,12 @@ public class PickUpAR : MonoBehaviour
             pickUpButtonClicked = true;
         }
         
+        // Check if the player is in door placing mode
         doorPlacingMode = DoorSelector.selectedRoomType != RoomType.None; 
+        if (!doorPlacingMode && doorFrameOutline.position != doorFrameOutlineOriginalPosition)
+        {
+            doorFrameOutline.position = doorFrameOutlineOriginalPosition;
+        }
         
         MoveItemHolder();
         if (heldItem != null)
