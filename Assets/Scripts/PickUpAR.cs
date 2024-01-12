@@ -392,6 +392,10 @@ public class PickUpAR : MonoBehaviour
 
     public void DropItem()
     {
+
+        if(heldItem == null){
+            return;
+        }
         
         if (rotationObject.HasRotatedObject()) { return; }
         

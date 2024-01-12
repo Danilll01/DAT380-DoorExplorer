@@ -35,6 +35,12 @@ public class RecordPlayer : MonoBehaviour
         if (InList(collider.gameObject))
         {
             currentDisc = collider.gameObject;
+            Rigidbody rb = currentDisc.GetComponent<Rigidbody>();
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            currentDisc.transform.rotation = Quaternion.identity;
+
             pickUpAr.DropItem();
             currentDisc.transform.position = snapPoint.position;
 
@@ -42,7 +48,7 @@ public class RecordPlayer : MonoBehaviour
 
             if (audioClipList[index] != null)
             {
-                audioSource.clip = audioClipList[index];
+                audioSource.PlayOneShot(audioClipList[index],1);
                 audioSource.Play();
             }
 
@@ -52,7 +58,6 @@ public class RecordPlayer : MonoBehaviour
             }
         }
     }
-
     private bool InList(GameObject check)
     {
         for (int i = 0; i < discList.Length; i++)
