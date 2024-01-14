@@ -45,10 +45,13 @@ public class CanvasOverlay : MonoBehaviour
         settingsP.SetActive(false);
         calibrationMenuP.SetActive(false);
         calibrationMenuL.SetActive(false);
-
-#if UNITY_EDITOR
+        
         tutorialL.SetActive(true);
         tutorialP.SetActive(true);
+
+#if UNITY_EDITOR
+        tutorialL.SetActive(false);
+        tutorialP.SetActive(false);
 #endif
     }
 

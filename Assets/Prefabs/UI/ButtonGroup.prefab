@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3441955408458246528}
-  - component: {fileID: 6232797009823085477}
   m_Layer: 5
   m_Name: ButtonGroup
   m_TagString: Untagged
@@ -41,21 +40,6 @@ RectTransform:
   m_AnchoredPosition: {x: 11, y: 309}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6232797009823085477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6248112027217601407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ae6e9fe0f5172d4ba6fc02230f9c334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shedDoorTransform: {fileID: 0}
-  houseDoorTransform: {fileID: 0}
-  gravityDoorTransform: {fileID: 0}
 --- !u!1001 &985836150741063351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64,6 +48,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3441955408458246528}
     m_Modifications:
+    - target: {fileID: 4501006824088643924, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a4158f5239954469a3cdd3c014d4458,
+        type: 3}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -102,7 +92,7 @@ PrefabInstance:
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
@@ -167,12 +157,43 @@ PrefabInstance:
     - target: {fileID: 6525866702220269529, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: roomType
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6533477330923752784, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Name
-      value: HouseButton (3)
+      value: SkyIslandButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ad7a8f2d62cb41a7a17b01e77b04d2c,
+        type: 3}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -193,6 +214,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3441955408458246528}
     m_Modifications:
+    - target: {fileID: 4501006824088643924, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 530a7922e02fc4fbfbe23b153c361b39,
+        type: 3}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -231,7 +258,7 @@ PrefabInstance:
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
@@ -303,6 +330,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: GravityButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ad7a8f2d62cb41a7a17b01e77b04d2c,
+        type: 3}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -322,6 +380,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3441955408458246528}
     m_Modifications:
+    - target: {fileID: 4501006824088643924, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bdacd490b4d974716ba58b700e8b6238,
+        type: 3}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -360,7 +424,7 @@ PrefabInstance:
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
@@ -432,6 +496,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: HouseButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ad7a8f2d62cb41a7a17b01e77b04d2c,
+        type: 3}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -451,6 +546,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3441955408458246528}
     m_Modifications:
+    - target: {fileID: 4501006824088643924, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: db646b1cf158b4e7a8d839f49fc1e30d,
+        type: 3}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -489,7 +590,7 @@ PrefabInstance:
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
@@ -534,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -78
+      value: -77.99999
       objectReference: {fileID: 0}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
@@ -551,6 +652,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6525866702220269529, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: roomType
@@ -560,6 +666,37 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShedButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ad7a8f2d62cb41a7a17b01e77b04d2c,
+        type: 3}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -580,6 +717,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3441955408458246528}
     m_Modifications:
+    - target: {fileID: 4501006824088643924, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 02d21c84e1cda471888f3d917320578a,
+        type: 3}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Pivot.x
@@ -618,7 +761,7 @@ PrefabInstance:
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 4965874359245659006, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
@@ -683,12 +826,43 @@ PrefabInstance:
     - target: {fileID: 6525866702220269529, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: roomType
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6533477330923752784, guid: 2024ba1379fca9246b554cc326af05b8,
         type: 3}
       propertyPath: m_Name
-      value: HouseButton (2)
+      value: KuggenButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ad7a8f2d62cb41a7a17b01e77b04d2c,
+        type: 3}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7803685423914271275, guid: 2024ba1379fca9246b554cc326af05b8,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
