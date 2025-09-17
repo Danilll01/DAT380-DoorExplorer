@@ -1,9 +1,6 @@
 # Door Explorer
 Door explorer is an AR game in which you as the player explore different rooms to try and solve a puzzle. The main puzzle is placed in the real world while the doors let you explore virutal worlds to find the items needed to clear the puzzle.
 
-## Game design document
-A report on how the game works and important functions can be found [here](https://github.com/Danilll01/Kandidatarbete2023/releases).
-
 ## The real world puzzle
 ![image](https://github.com/Danilll01/DAT380-DoorExplorer/assets/59963570/817d4eed-2574-46a3-93ca-8d85a90f0b11)
 To solve the real world puzzle, different items needs to be picked up from the rooms existing in the game. After the items from the rooms have been used to solve the puzzle, the safe will open and give the player a reward for beating the game. 
